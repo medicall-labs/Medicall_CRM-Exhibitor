@@ -1,124 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:lottie/lottie.dart';
+import 'package:medicall_exhibitor/Constants/app_color.dart';
+import 'package:medicall_exhibitor/Constants/spacing.dart';
+import 'package:medicall_exhibitor/Constants/styles.dart';
 
-class HomePage extends StatefulWidget {
+class EventOverview extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _EventOverviewState createState() => _EventOverviewState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _EventOverviewState extends State<EventOverview> {
+  var UserDetails = GetStorage().read("local_store") != ''
+      ? GetStorage().read("local_store")
+      : '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          // title: FlutterLogo(colors: Colors.green, size: 25),
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              color: Colors.grey,
-              onPressed: () {}),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.menu), color: Colors.grey, onPressed: () {})
-          ],
-        ),
-        body: buildBody());
-  }
-
-  ListView buildBody() {
-    return ListView(
-      shrinkWrap: true,
-      children: <Widget>[
-        SizedBox(height: 40),
-        buildInstructionRow(),
-        SizedBox(height: 10),
-        buildGridView(),
-      ],
-    );
-  }
-
-  Container buildGridView() {
-    return Container(
-      padding: EdgeInsets.only(left: 10, right: 10),
-      child: GridView.count(
-        crossAxisCount: 2,
-        crossAxisSpacing: 2,
-        mainAxisSpacing: 4,
-        shrinkWrap: true,
-        primary: false,
-        childAspectRatio: 1 / 1.2,
-        children: <Widget>[
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.lightBlueAccent,
-          ),
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.lightBlueAccent,
-          ),
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.lightBlueAccent,
-          ),
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.lightBlueAccent,
-          ),
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.lightBlueAccent,
-          ),
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.lightBlueAccent,
-          ),
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.lightBlueAccent,
-          ),
-          Container(
-            width: 100,
-            height: 100,
-            color: Colors.lightBlueAccent,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container buildInstructionRow() {
-    return Container(
-      padding: EdgeInsets.only(left: 25, right: 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            'MY COACHES',
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 12,
-              fontFamily: 'Quicksand',
-              fontWeight: FontWeight.bold,
+        backgroundColor: AppColor.bgColor,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                AppSpaces.verticalSpace40,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Hello, \n${UserDetails['data']['name'].toString()}',
+                        style: AppTextStyles.header2,
+                      ),
+                      // Lottie.asset(
+                      //     'assets/lottie/profile.json',
+                      //     fit: BoxFit.cover,
+                      //   ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: GridView.count(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 2,
+                      mainAxisSpacing: 4,
+                      shrinkWrap: true,
+                      primary: false,
+                      childAspectRatio: 1 / 1.2,
+                      children: <Widget>[]),
+                ),
+              ],
             ),
           ),
-          Text(
-            'VIEW PAST SESSIONS',
-            style: TextStyle(
-              color: Colors.green,
-              fontSize: 12,
-              fontFamily: 'Quicksand',
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

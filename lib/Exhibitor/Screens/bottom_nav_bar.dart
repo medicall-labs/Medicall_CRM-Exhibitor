@@ -19,7 +19,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     Placeholder(
       child: Center(child: Text('Products')),
     ),
-   HomePage(),
+   EventOverview(),
     Placeholder(
       child: Center(child: Text('History')),
     ),

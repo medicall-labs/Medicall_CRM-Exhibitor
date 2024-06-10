@@ -37,8 +37,9 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     _timer = Timer.periodic(Duration(seconds: 3), (timer) {
       if (mounted) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => LoginPage()));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) =>
+                UserDetails != null ? BottomNavBar() : LoginPage()));
       }
     });
   }

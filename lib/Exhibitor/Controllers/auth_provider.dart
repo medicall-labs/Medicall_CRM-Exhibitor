@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:medicall_exhibitor/Exhibitor/Screens/bottom_nav_bar.dart';
 import 'package:medicall_exhibitor/Exhibitor/Screens/register_event.dart';
+import 'package:provider/provider.dart';
 
 import '../../Constants/api_collection.dart';
 import 'local_data.dart';
@@ -27,7 +28,7 @@ class AuthenticationProvider extends ChangeNotifier {
     required String mobileNumber,
     required String password,
     required bool otp,
-    BuildContext? context,
+    required BuildContext context,
   }) async {
     _isLoading = true;
     notifyListeners();
@@ -56,14 +57,9 @@ class AuthenticationProvider extends ChangeNotifier {
         GetStorage().write("local_store", result);
         _isLoading = false;
         _resMessage = "Login successfull!";
+        Provider.of<LocalDataProvider>(context, listen: false)
+            .changeEventID(result['current_event_id']);
         notifyListeners();
-        print(result);
-
-        ///Save users data and then navigate to homepage
-        final eventId = result['current_event_id'];
-        final token = result['token'];
-        LocalDataProvider().saveToken(token);
-        LocalDataProvider().saveEventId(eventId);
         if (result["current_event"] == "Registered") {
           Get.offAll(() => BottomNavBar());
         } else {
@@ -71,7 +67,6 @@ class AuthenticationProvider extends ChangeNotifier {
         }
       } else {
         _resMessage = result['message'];
-        print(result);
         _isLoading = false;
         notifyListeners();
       }
@@ -83,7 +78,6 @@ class AuthenticationProvider extends ChangeNotifier {
       _isLoading = false;
       _resMessage = "Please try again`";
       notifyListeners();
-
       print(":::: $e");
     }
   }

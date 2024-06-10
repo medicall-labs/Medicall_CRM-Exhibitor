@@ -174,6 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                   });
                   return customButton(
                     text: 'Sign in',
+                    buttonHeight: 50,
                     backgroundColor: AppColor.secondary,
                     tap: () {
                       if (isOtpRequested) {
