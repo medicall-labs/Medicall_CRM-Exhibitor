@@ -13,25 +13,25 @@ class PieChart extends StatelessWidget {
       OrdinalData(
           domain: 'Scheduled',
           measure: insights['scheduled_count'],
-          color: Colors.purple[300]),
+          color: Color(0xff3abfaf)),
       OrdinalData(
           domain: 'Rescheduled',
           measure: insights['rescheduled_count'],
-          color: Colors.orange[300]),
+          color: Color(0xffbf3a4a)),
       // OrdinalData(
       //     domain: 'Confirmed Count', measure: 9, color: Colors.purple[300]),
       OrdinalData(
           domain: 'No Show',
           measure: insights['lapsed_count'],
-          color: Colors.yellow[300]),
+          color: Color(0xff6c3abf)),
       OrdinalData(
           domain: 'Cancelled',
           measure: insights['cancelled_count'],
-          color: Colors.pink[300]),
+          color: Color(0xff3abf6c)),
       OrdinalData(
           domain: 'Completed',
           measure: insights['completed_count'],
-          color: Colors.green[300]),
+          color: Color(0xff8dbf3a)),
     ];
     return AspectRatio(
       aspectRatio: 1,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:medicall_exhibitor/Constants/app_color.dart';
 import 'package:medicall_exhibitor/Constants/spacing.dart';
 import 'package:medicall_exhibitor/Constants/styles.dart';
@@ -16,9 +15,6 @@ class EventOverview extends StatefulWidget {
 }
 
 class _EventOverviewState extends State<EventOverview> {
-  var UserDetails = GetStorage().read("local_store") != ''
-      ? GetStorage().read("local_store")
-      : '';
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +180,7 @@ class _EventOverviewState extends State<EventOverview> {
                                                 Container(
                                                   height: 10,
                                                   width: 10,
-                                                  color: Colors.purple[300],
+                                                  color: Color(0xff3abfaf),
                                                 ),
                                                 AppSpaces.horizontalSpace5,
                                                 Text(
@@ -199,7 +195,7 @@ class _EventOverviewState extends State<EventOverview> {
                                                 Container(
                                                   height: 10,
                                                   width: 10,
-                                                  color: Colors.green[300],
+                                                  color: Color(0xff8dbf3a),
                                                 ),
                                                 AppSpaces.horizontalSpace5,
                                                 Text(
@@ -214,7 +210,7 @@ class _EventOverviewState extends State<EventOverview> {
                                                 Container(
                                                   height: 10,
                                                   width: 10,
-                                                  color: Colors.orange[300],
+                                                  color: Color(0xffbf3a4a),
                                                 ),
                                                 AppSpaces.horizontalSpace5,
                                                 Text(
@@ -229,7 +225,7 @@ class _EventOverviewState extends State<EventOverview> {
                                                 Container(
                                                   height: 10,
                                                   width: 10,
-                                                  color: Colors.yellow[300],
+                                                  color: Color(0xff6c3abf),
                                                 ),
                                                 AppSpaces.horizontalSpace5,
                                                 Text(
@@ -244,7 +240,7 @@ class _EventOverviewState extends State<EventOverview> {
                                                 Container(
                                                   height: 10,
                                                   width: 10,
-                                                  color: Colors.pink[300],
+                                                  color:  Color(0xff3abf6c),
                                                 ),
                                                 AppSpaces.horizontalSpace5,
                                                 Text(
