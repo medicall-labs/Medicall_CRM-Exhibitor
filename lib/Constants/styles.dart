@@ -10,7 +10,7 @@ class AppTextStyles {
   static final TextStyle header2 = GoogleFonts.lato(
       fontWeight: FontWeight.bold, fontSize: 25, color: Colors.black);
   static final TextStyle header3 = GoogleFonts.lato(
-      fontWeight: FontWeight.w500, fontSize: 25, color: AppColor.secondary);
+      fontWeight: FontWeight.w500, fontSize: 25, color: AppColor.primary);
 
   static final TextStyle label = GoogleFonts.lato(
       fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black);
@@ -19,6 +19,8 @@ class AppTextStyles {
       GoogleFonts.lato(fontSize: 12, color: AppColor.black);
   static final TextStyle label3 =
       GoogleFonts.lato(fontSize: 18, color: Colors.black);
+  static final TextStyle label4 =
+  GoogleFonts.lato(fontSize: 20, color: AppColor.secondary,fontWeight: FontWeight.bold);
 
   static final TextStyle textBody =
       GoogleFonts.lato(fontSize: 16, color: AppColor.black);

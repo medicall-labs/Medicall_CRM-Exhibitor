@@ -16,7 +16,7 @@ class DashboardProvider extends ChangeNotifier {
   dashboardData(eventId) async {
     try {
       var dashboardResponse = await RemoteService().getDataFromApi(
-          'https://crm.medicall.in/api/dashboard?event_id=$eventId');
+          '${requestBaseUrl}/dashboard?event_id=$eventId');
       if (dashboardResponse["status"] == 'success') {
         return dashboardResponse;
       }

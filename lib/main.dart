@@ -5,6 +5,7 @@ import 'package:medicall_exhibitor/Exhibitor/Controllers/local_data.dart';
 import 'package:provider/provider.dart';
 import 'Exhibitor/Controllers/auth_provider.dart';
 import 'Exhibitor/Controllers/dashboard_provider.dart';
+import 'Exhibitor/Controllers/event_provider.dart';
 import 'splash_screen.dart';
 
 void main() {
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
         ChangeNotifierProvider(create: (context) => LocalDataProvider()),
         ChangeNotifierProvider(create: (context) => DashboardProvider()),
+        ChangeNotifierProvider(create: (context) => EventProvider()),
       ],
       child: GetMaterialApp(
         title: 'Medicall Exhibitor',

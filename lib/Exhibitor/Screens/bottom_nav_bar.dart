@@ -63,7 +63,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 });
               },
               icon: Icon(
-                Icons.app_registration_outlined,
+                Icons.event,
                 size: 30,
                 color:
                 currentIndex == 0 ? AppColor.primary : Colors.grey.shade400,
@@ -76,7 +76,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 });
               },
               icon: Icon(
-                Icons.shopping_cart_outlined,
+                Icons.app_registration_outlined,
                 size: 30,
                 color:
                 currentIndex == 1 ? AppColor.primary : Colors.grey.shade400,
@@ -92,7 +92,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 });
               },
               icon: Icon(
-                Icons.history,
+                Icons.shopping_cart_outlined,
                 size: 30,
                 color:
                 currentIndex == 3 ? AppColor.primary : Colors.grey.shade400,
@@ -105,7 +105,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 });
               },
               icon: Icon(
-                Icons.event,
+                Icons.history,
                 size: 30,
                 color:
                 currentIndex == 4 ? AppColor.primary : Colors.grey.shade400,
