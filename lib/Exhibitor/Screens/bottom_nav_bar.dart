@@ -3,6 +3,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:medicall_exhibitor/Constants/app_color.dart';
 import 'package:medicall_exhibitor/Exhibitor/Screens/Event%20Overview/event_overview.dart';
 
+import 'Appointments/my_appointments.dart';
+
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
 
@@ -12,14 +14,12 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int currentIndex = 2;
-  List screens =  [
-    Placeholder(
-      child: Center(child: Text('Appointments')),
-    ),
+  List screens = [
+    Appointment(),
     Placeholder(
       child: Center(child: Text('Products')),
     ),
-   EventOverview(),
+    EventOverview(),
     Placeholder(
       child: Center(child: Text('History')),
     ),
@@ -66,7 +66,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 Icons.event,
                 size: 30,
                 color:
-                currentIndex == 0 ? AppColor.primary : Colors.grey.shade400,
+                    currentIndex == 0 ? AppColor.primary : Colors.grey.shade400,
               ),
             ),
             IconButton(
@@ -79,7 +79,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 Icons.app_registration_outlined,
                 size: 30,
                 color:
-                currentIndex == 1 ? AppColor.primary : Colors.grey.shade400,
+                    currentIndex == 1 ? AppColor.primary : Colors.grey.shade400,
               ),
             ),
             const SizedBox(
@@ -95,7 +95,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 Icons.shopping_cart_outlined,
                 size: 30,
                 color:
-                currentIndex == 3 ? AppColor.primary : Colors.grey.shade400,
+                    currentIndex == 3 ? AppColor.primary : Colors.grey.shade400,
               ),
             ),
             IconButton(
@@ -108,7 +108,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 Icons.history,
                 size: 30,
                 color:
-                currentIndex == 4 ? AppColor.primary : Colors.grey.shade400,
+                    currentIndex == 4 ? AppColor.primary : Colors.grey.shade400,
               ),
             ),
           ],

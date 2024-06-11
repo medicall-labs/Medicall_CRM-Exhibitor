@@ -3,6 +3,7 @@ import 'package:medicall_exhibitor/Constants/app_color.dart';
 import 'package:get/get.dart';
 import 'package:medicall_exhibitor/Exhibitor/Controllers/local_data.dart';
 import 'package:provider/provider.dart';
+import 'Exhibitor/Controllers/appointment_provider.dart';
 import 'Exhibitor/Controllers/auth_provider.dart';
 import 'Exhibitor/Controllers/dashboard_provider.dart';
 import 'Exhibitor/Controllers/event_provider.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => LocalDataProvider()),
         ChangeNotifierProvider(create: (context) => DashboardProvider()),
         ChangeNotifierProvider(create: (context) => EventProvider()),
+        ChangeNotifierProvider(create: (context) => AppointmentProvider()),
       ],
       child: GetMaterialApp(
         title: 'Medicall Exhibitor',

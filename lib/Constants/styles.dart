@@ -22,12 +22,19 @@ class AppTextStyles {
   static final TextStyle label4 =
   GoogleFonts.lato(fontSize: 20, color: AppColor.secondary,fontWeight: FontWeight.bold);
 
+  static final TextStyle label5 =
+  GoogleFonts.lato(fontSize: 14, color: AppColor.grey);
+
+  static final TextStyle whitelabel =
+  GoogleFonts.lato(fontSize: 14, color: AppColor.white);
+
   static final TextStyle textBody =
       GoogleFonts.lato(fontSize: 16, color: AppColor.black);
   static final TextStyle textBody2 =
       GoogleFonts.lato(fontSize: 14, color: AppColor.black);
   static final TextStyle textBody3 =
       GoogleFonts.lato(fontSize: 12, color: AppColor.black);
+
 
   static final TextStyle validation =
       GoogleFonts.lato(fontSize: 12, color: Colors.red);
