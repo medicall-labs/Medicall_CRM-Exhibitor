@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Constants/app_color.dart';
 import '../../../Constants/spacing.dart';
 import '../../../Constants/styles.dart';
+import '../../../Utils/Widgets/shimmer.dart';
 import '../../Controllers/history_provider.dart';
 import '../../Controllers/local_data.dart';
+import 'history_summary.dart';
 
 class MyHistory extends StatefulWidget {
   const MyHistory({super.key});
@@ -38,7 +41,30 @@ class _MyHistoryState extends State<MyHistory> {
                         .historyData(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return Column(
+                          children: [
+                            Skeleton(height: 40),
+                            AppSpaces.verticalSpace20,
+                            AppSpaces.verticalSpace10,
+                            Skeleton(height: 50),
+                            AppSpaces.verticalSpace15,
+                            Skeleton(height: 50),
+                            AppSpaces.verticalSpace15,
+                            Skeleton(height: 50),
+                            AppSpaces.verticalSpace15,
+                            Skeleton(height: 50),
+                            AppSpaces.verticalSpace15,
+                            Skeleton(height: 50),
+                            AppSpaces.verticalSpace15,
+                            Skeleton(height: 50),
+                            AppSpaces.verticalSpace15,
+                            Skeleton(height: 50),
+                            AppSpaces.verticalSpace15,
+                            Skeleton(height: 50),
+                            AppSpaces.verticalSpace15,
+                            Skeleton(height: 50),
+                          ],
+                        );
                       } else if (snapshot.hasError) {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       } else {
@@ -60,11 +86,16 @@ class _MyHistoryState extends State<MyHistory> {
                                     MediaQuery.of(context).size.height - 150,
                                 child: ListView.builder(
                                   shrinkWrap: true,
-                                  physics:BouncingScrollPhysics(),
+                                  physics: BouncingScrollPhysics(),
                                   itemCount: myHistory.length,
                                   itemBuilder: (context, index) {
                                     return GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Get.to(HistorySummary(
+                                          historyEventId: myHistory[index]
+                                              ['event_id'],
+                                        ));
+                                      },
                                       child: Card(
                                         elevation: 5,
                                         margin: EdgeInsets.only(
