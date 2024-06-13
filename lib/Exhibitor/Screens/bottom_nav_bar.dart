@@ -4,6 +4,7 @@ import 'package:medicall_exhibitor/Constants/app_color.dart';
 import 'package:medicall_exhibitor/Exhibitor/Screens/Event%20Overview/event_overview.dart';
 
 import 'Appointments/my_appointments.dart';
+import 'My_History/history.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -15,17 +16,15 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int currentIndex = 2;
   List screens = [
-    Appointment(),
     Placeholder(
       child: Center(child: Text('Products')),
     ),
+    Appointment(),
     EventOverview(),
     Placeholder(
       child: Center(child: Text('History')),
     ),
-    Placeholder(
-      child: Center(child: Text('Dashboard')),
-    ),
+    MyHistory(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
           });
         },
         shape: const CircleBorder(),
-        backgroundColor: AppColor.primary,
+        backgroundColor:
+            currentIndex == 2 ? AppColor.primary : Colors.grey.shade400,
         child: const Icon(
           Icons.grid_view_outlined,
           color: Colors.white,

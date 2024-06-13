@@ -4,6 +4,7 @@ import 'package:medicall_exhibitor/Constants/styles.dart';
 import 'package:provider/provider.dart';
 import '../../../Constants/app_color.dart';
 import '../../../Constants/spacing.dart';
+import '../../../Utils/Widgets/shimmer.dart';
 import '../../Controllers/appointment_provider.dart';
 import '../../Controllers/local_data.dart';
 
@@ -24,10 +25,33 @@ class _AppointmentState extends State<Appointment> {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             child: FutureBuilder(
               future: Provider.of<AppointmentProvider>(context, listen: false)
-                  .eventData(localData.eventId),
+                  .appointmentData(localData.eventId),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppSpaces.verticalSpace40,
+                        Skeleton(height: 40),
+                        AppSpaces.verticalSpace10,
+                        Skeleton(height: 40),
+                        AppSpaces.verticalSpace20,
+                        Skeleton(height: 100),
+                        AppSpaces.verticalSpace15,
+                        Skeleton(height: 100),
+                        AppSpaces.verticalSpace15,
+                        Skeleton(height: 100),
+                        AppSpaces.verticalSpace15,
+                        Skeleton(height: 100),
+                        AppSpaces.verticalSpace15,
+                        Skeleton(height: 100),
+                        AppSpaces.verticalSpace15,
+                        Skeleton(height: 100),
+                      ],
+                    ),
+                  );
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else {
@@ -59,7 +83,7 @@ class _AppointmentState extends State<Appointment> {
                             itemCount: appointments.length,
                             itemBuilder: (context, index) {
                               List<String> parts = appointments[index]
-                              ['scheduled_on']
+                                      ['scheduled_on']
                                   .split(',');
                               return Card(
                                 elevation: 5,
@@ -69,7 +93,7 @@ class _AppointmentState extends State<Appointment> {
                                   decoration: BoxDecoration(
                                     color: AppColor.white,
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
+                                        BorderRadius.all(Radius.circular(8)),
                                   ),
                                   child: Theme(
                                     data: Theme.of(context).copyWith(
@@ -79,39 +103,46 @@ class _AppointmentState extends State<Appointment> {
                                       textColor: AppColor.secondary,
                                       title: Row(
                                         children: [
-                                          Container(
-                                            height: 30,
-                                            width: 30,
+                                          CircleAvatar(
+                                            radius: 20,
+                                            backgroundColor: Colors.grey[200],
                                             child: appointments[index]
-                                            ['visitor_logo'] !=
-                                                ''
-                                                ? Image.network(
-                                                appointments[index]
-                                                ['visitor_logo'])
+                                                        ['visitor_logo'] !=
+                                                    ''
+                                                ? ClipOval(
+                                                    child: Image.network(
+                                                        appointments[index]
+                                                            ['visitor_logo'],
+                                                        width: 30,
+                                                        height: 30,
+                                                        fit: BoxFit.cover),
+                                                  )
                                                 : Icon(
-                                                Icons.person_2_rounded),
+                                                    Icons.person_2_rounded,
+                                                    color: Colors.grey[800],
+                                                  ),
                                           ),
                                           AppSpaces.horizontalSpace10,
                                           Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Container(
                                                 width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
+                                                        .size
+                                                        .width *
                                                     0.5,
                                                 child: Text(
                                                   appointments[index]
-                                                  ['visitor_name'],
+                                                      ['visitor_name'],
                                                   style: AppTextStyles.label,
                                                 ),
                                               ),
                                               AppSpaces.verticalSpace5,
                                               Container(
                                                 width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
+                                                        .size
+                                                        .width *
                                                     0.5,
                                                 child: Row(
                                                   children: [
@@ -120,46 +151,44 @@ class _AppointmentState extends State<Appointment> {
                                                             .label5),
                                                     Container(
                                                       padding:
-                                                      EdgeInsets.symmetric(
-                                                          horizontal: 5,
-                                                          vertical: 2),
-                                                      decoration:
-                                                      BoxDecoration(
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 5,
+                                                              vertical: 2),
+                                                      decoration: BoxDecoration(
                                                         color: appointments[
-                                                        index]
-                                                        [
-                                                        'status'] ==
-                                                            'Scheduled'
+                                                                        index]
+                                                                    [
+                                                                    'status'] ==
+                                                                'Scheduled'
                                                             ? Colors.blue
-                                                            : appointments[index]
-                                                        [
-                                                        'status'] ==
-                                                            'Rescheduled'
-                                                            ? Colors
-                                                            .grey[400]
-                                                            : appointments[index]
-                                                        [
-                                                        'status'] ==
-                                                            'Completed'
-                                                            ? Colors
-                                                            .green
-                                                            : appointments[index]['status'] ==
-                                                            'Confirmed'
-                                                            ? Colors
-                                                            .green
-                                                            : appointments[index]['status'] ==
-                                                            'No-show'
-                                                            ? Colors.red
-                                                            : appointments[index]['status'] == 'Cancelled'
-                                                            ? Colors.red
-                                                            : AppColor.bgColor,
+                                                            : appointments[index][
+                                                                        'status'] ==
+                                                                    'Rescheduled'
+                                                                ? Colors
+                                                                    .grey[400]
+                                                                : appointments[index]
+                                                                            [
+                                                                            'status'] ==
+                                                                        'Completed'
+                                                                    ? Colors
+                                                                        .green
+                                                                    : appointments[index]['status'] ==
+                                                                            'Confirmed'
+                                                                        ? Colors
+                                                                            .green
+                                                                        : appointments[index]['status'] ==
+                                                                                'No-show'
+                                                                            ? Colors.red
+                                                                            : appointments[index]['status'] == 'Cancelled'
+                                                                                ? Colors.red
+                                                                                : AppColor.bgColor,
                                                         borderRadius:
-                                                        BorderRadius
-                                                            .circular(5),
+                                                            BorderRadius
+                                                                .circular(5),
                                                       ),
                                                       child: Text(
                                                         appointments[index]
-                                                        ['status'],
+                                                            ['status'],
                                                         style: AppTextStyles
                                                             .whitelabel,
                                                       ),
@@ -171,14 +200,14 @@ class _AppointmentState extends State<Appointment> {
                                               Container(
                                                 height: 30,
                                                 width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                    0.6,
+                                                        .size
+                                                        .width *
+                                                    0.55,
                                                 decoration: BoxDecoration(
                                                   color: Colors.grey
                                                       .withOpacity(0.2),
                                                   borderRadius:
-                                                  BorderRadius.all(
+                                                      BorderRadius.all(
                                                     Radius.circular(5),
                                                   ),
                                                 ),
@@ -194,7 +223,7 @@ class _AppointmentState extends State<Appointment> {
                                                       AppSpaces
                                                           .horizontalSpace10,
                                                       Text(appointments[index]
-                                                      ['scheduled_on']),
+                                                          ['scheduled_on']),
                                                     ],
                                                   ),
                                                 ),
@@ -204,7 +233,7 @@ class _AppointmentState extends State<Appointment> {
                                         ],
                                       ),
                                       childrenPadding:
-                                      const EdgeInsets.only(left: 15),
+                                          const EdgeInsets.only(left: 15),
                                       children: [
                                         Align(
                                           alignment: Alignment.topLeft,
@@ -214,22 +243,22 @@ class _AppointmentState extends State<Appointment> {
                                                 TextSpan(
                                                     text: 'Working as ',
                                                     style:
-                                                    AppTextStyles.label5),
+                                                        AppTextStyles.label5),
                                                 TextSpan(
-                                                  text: appointments[index][
-                                                  'visitor_designation'],
+                                                  text: appointments[index]
+                                                      ['visitor_designation'],
                                                   style:
-                                                  AppTextStyles.textBody2,
+                                                      AppTextStyles.textBody2,
                                                 ),
                                                 TextSpan(
                                                     text: ' in ',
                                                     style:
-                                                    AppTextStyles.label5),
+                                                        AppTextStyles.label5),
                                                 TextSpan(
                                                   text:
-                                                  '${appointments[index]['visitor_organization']}, ${appointments[index]['visitor_city']}',
+                                                      '${appointments[index]['visitor_organization']}, ${appointments[index]['visitor_city']}',
                                                   style:
-                                                  AppTextStyles.textBody2,
+                                                      AppTextStyles.textBody2,
                                                 ),
                                               ],
                                             ),
@@ -244,14 +273,14 @@ class _AppointmentState extends State<Appointment> {
                                                 children: [
                                                   TextSpan(
                                                       text:
-                                                      'Purpose of Meeting : ',
+                                                          'Purpose of Meeting : ',
                                                       style:
-                                                      AppTextStyles.label5),
+                                                          AppTextStyles.label5),
                                                   TextSpan(
                                                     text: appointments[index]
-                                                    ['notes'],
-                                                    style: AppTextStyles
-                                                        .textBody2,
+                                                        ['notes'],
+                                                    style:
+                                                        AppTextStyles.textBody2,
                                                   ),
                                                 ],
                                               ),
@@ -259,7 +288,7 @@ class _AppointmentState extends State<Appointment> {
                                           ),
                                         AppSpaces.verticalSpace5,
                                         if (appointments[index][
-                                        'exhibitor_feedback_message'] !=
+                                                'exhibitor_feedback_message'] !=
                                             "")
                                           Align(
                                             alignment: Alignment.topLeft,
@@ -268,14 +297,14 @@ class _AppointmentState extends State<Appointment> {
                                                 children: [
                                                   TextSpan(
                                                       text:
-                                                      'Post Meeting Notes : ',
+                                                          'Post Meeting Notes : ',
                                                       style:
-                                                      AppTextStyles.label5),
+                                                          AppTextStyles.label5),
                                                   TextSpan(
                                                     text: appointments[index][
-                                                    'exhibitor_feedback_message'],
-                                                    style: AppTextStyles
-                                                        .textBody2,
+                                                        'exhibitor_feedback_message'],
+                                                    style:
+                                                        AppTextStyles.textBody2,
                                                   ),
                                                 ],
                                               ),

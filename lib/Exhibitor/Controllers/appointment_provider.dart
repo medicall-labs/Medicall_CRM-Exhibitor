@@ -6,7 +6,7 @@ import '../Services/remote_services.dart';
 class AppointmentProvider extends ChangeNotifier {
   final requestBaseUrl = AppUrl.baseUrl;
 
-  eventData(eventId) async {
+  appointmentData(eventId) async {
     try {
       var appointmentResponse = await RemoteService().getDataFromApi(
           '${requestBaseUrl}/events/${eventId}/appointments');

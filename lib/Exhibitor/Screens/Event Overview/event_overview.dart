@@ -7,6 +7,7 @@ import 'package:medicall_exhibitor/Exhibitor/Screens/Event%20Overview/stall_imag
 import 'package:medicall_exhibitor/Utils/Widgets/pie_chart.dart';
 import 'package:provider/provider.dart';
 
+import '../../../Utils/Widgets/shimmer.dart';
 import '../../Controllers/local_data.dart';
 
 class EventOverview extends StatefulWidget {
@@ -15,7 +16,6 @@ class EventOverview extends StatefulWidget {
 }
 
 class _EventOverviewState extends State<EventOverview> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +39,38 @@ class _EventOverviewState extends State<EventOverview> {
                         .eventData(localData.eventId),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AppSpaces.verticalSpace10,
+                              Skeleton(height: 40),
+                              AppSpaces.verticalSpace10,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Skeleton(
+                                    height: 370,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.35,
+                                  ),
+                                  Skeleton(
+                                    height:
+                                        MediaQuery.of(context).size.width * 0.5,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.5,
+                                  ),
+                                ],
+                              ),
+                              AppSpaces.verticalSpace10,
+                              Skeleton(height: 50),
+                              AppSpaces.verticalSpace10,
+                              Skeleton(height: 150),
+                            ],
+                          ),
+                        );
                       } else if (snapshot.hasError) {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       } else {
@@ -240,7 +271,7 @@ class _EventOverviewState extends State<EventOverview> {
                                                 Container(
                                                   height: 10,
                                                   width: 10,
-                                                  color:  Color(0xff3abf6c),
+                                                  color: Color(0xff3abf6c),
                                                 ),
                                                 AppSpaces.horizontalSpace5,
                                                 Text(
@@ -270,13 +301,15 @@ class _EventOverviewState extends State<EventOverview> {
                                     title: Text('Hall Layout',
                                         style: AppTextStyles.textBody),
                                     onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => PDFViewer(
-                                              pdfPath: insights['hall_layout']),
-                                        ),
-                                      );
+                                      if (insights['hall_layout'] != "")
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => PDFViewer(
+                                                pdfPath:
+                                                    insights['hall_layout']),
+                                          ),
+                                        );
                                     },
                                   ),
                                 ),

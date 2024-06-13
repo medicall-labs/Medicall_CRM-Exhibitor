@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medicall_exhibitor/Constants/app_color.dart';
 import 'package:get/get.dart';
+import 'package:medicall_exhibitor/Exhibitor/Controllers/history_provider.dart';
 import 'package:medicall_exhibitor/Exhibitor/Controllers/local_data.dart';
 import 'package:provider/provider.dart';
 import 'Exhibitor/Controllers/appointment_provider.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DashboardProvider()),
         ChangeNotifierProvider(create: (context) => EventProvider()),
         ChangeNotifierProvider(create: (context) => AppointmentProvider()),
+        ChangeNotifierProvider(create: (context) => HistoryProvider()),
       ],
       child: GetMaterialApp(
         title: 'Medicall Exhibitor',
