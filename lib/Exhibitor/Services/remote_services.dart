@@ -61,5 +61,4 @@ class RemoteService {
       return "Please try again later";
     }
   }
-
 }

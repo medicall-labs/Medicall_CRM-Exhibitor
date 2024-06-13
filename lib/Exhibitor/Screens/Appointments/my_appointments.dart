@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:get/get.dart';
 import 'package:medicall_exhibitor/Constants/styles.dart';
 import 'package:provider/provider.dart';
 import '../../../Constants/app_color.dart';
 import '../../../Constants/spacing.dart';
 import '../../../Utils/Widgets/alertBox.dart';
+import '../../../Utils/Widgets/select_time.dart';
 import '../../../Utils/Widgets/shimmer.dart';
 import '../../Controllers/appointment_provider.dart';
 import '../../Controllers/local_data.dart';
@@ -253,7 +255,29 @@ class _AppointmentState extends State<Appointment> {
                                                               width: 40,
                                                               child: IconButton(
                                                                   onPressed:
-                                                                      () async {},
+                                                                      () async {
+                                                                    var dates = await Provider.of<AppointmentProvider>(
+                                                                            context,
+                                                                            listen:
+                                                                                false)
+                                                                        .eventDates(
+                                                                            localData.eventId);
+                                                                    Navigator
+                                                                        .push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) =>
+                                                                              NumberPage(
+                                                                                eventId: appointments[
+                                                                                index][
+                                                                                'event_id'],
+                                                                                appointmentId: appointments[
+                                                                                index][
+                                                                                'appointment_id'],
+                                                                                eventDates: dates['data']['event_dates'],
+                                                                              )),
+                                                                    );
+                                                                  },
                                                                   tooltip:
                                                                       'Reschedule',
                                                                   icon: const Icon(

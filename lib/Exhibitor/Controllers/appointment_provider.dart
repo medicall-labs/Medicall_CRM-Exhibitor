@@ -22,6 +22,18 @@ class AppointmentProvider extends ChangeNotifier {
     }
   }
 
+  eventDates(eventId) async {
+    try {
+      var statusResponse = await RemoteService()
+          .getDataFromApi('$requestBaseUrl/event-dates?event_id=$eventId');
+      if (statusResponse["status"] == 'success') {
+        return statusResponse;
+      }
+    } catch (err) {
+      print(err);
+    }
+  }
+
   actionStatus(eventId, appId, status, data) async {
     try {
       var bodyContent;
@@ -33,6 +45,32 @@ class AppointmentProvider extends ChangeNotifier {
       var statusResponse = await RemoteService().postDataToApi(
           '$requestBaseUrl/events/$eventId/appointments/$appId', bodyContent);
       var result = jsonDecode(statusResponse.body);
+      if (result["status"] == 'success') {
+        Get.offAll(() => BottomNavBar(
+              currentPage: 1,
+            ));
+        return result;
+      }
+    } catch (err) {
+      print(err);
+    }
+  }
+
+  actionRescheduled(eventId, appId, date, time) async {
+    try {
+      var bodyContent;
+      bodyContent = {
+        "status": "rescheduled",
+        "date": date,
+        "time": time,
+      };
+      print('................................');
+      print(bodyContent);
+      var statusResponse = await RemoteService().postDataToApi(
+          '$requestBaseUrl/events/$eventId/appointments/$appId', bodyContent);
+      var result = jsonDecode(statusResponse.body);
+      print('................................');
+      print(result);
       if (result["status"] == 'success') {
         Get.offAll(() => BottomNavBar(
               currentPage: 1,
