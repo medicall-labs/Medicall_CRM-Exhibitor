@@ -23,13 +23,6 @@ class _EventOverviewState extends State<EventOverview> {
       child: Column(
         children: [
           AppSpaces.verticalSpace40,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [],
-            ),
-          ),
           Consumer<LocalDataProvider>(
             builder: (context, localData, child) => Padding(
                 padding:
@@ -83,12 +76,16 @@ class _EventOverviewState extends State<EventOverview> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               AppSpaces.verticalSpace10,
-                              Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  insights['current_event_title'],
-                                  style: AppTextStyles.header3,
-                                ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // Icon(Icons.person),
+
+                                  Text(
+                                    insights['current_event_title'],
+                                    style: AppTextStyles.header3,
+                                  ),
+                                ],
                               ),
                               AppSpaces.verticalSpace10,
                               Row(
@@ -394,7 +391,7 @@ class _EventOverviewState extends State<EventOverview> {
                                             style: AppTextStyles.textBody,
                                           ),
                                           Text(
-                                            "Goal Completed",
+                                            "Goals Completed",
                                             style: AppTextStyles.textBody2,
                                           ),
                                           Text(

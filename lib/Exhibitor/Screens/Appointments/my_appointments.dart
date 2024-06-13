@@ -4,6 +4,7 @@ import 'package:medicall_exhibitor/Constants/styles.dart';
 import 'package:provider/provider.dart';
 import '../../../Constants/app_color.dart';
 import '../../../Constants/spacing.dart';
+import '../../../Utils/Widgets/alertBox.dart';
 import '../../../Utils/Widgets/shimmer.dart';
 import '../../Controllers/appointment_provider.dart';
 import '../../Controllers/local_data.dart';
@@ -146,9 +147,9 @@ class _AppointmentState extends State<Appointment> {
                                                     0.5,
                                                 child: Row(
                                                   children: [
-                                                    Text('Status ',
-                                                        style: AppTextStyles
-                                                            .label5),
+                                                    // Text('Status ',
+                                                    //     style: AppTextStyles
+                                                    //         .label5),
                                                     Container(
                                                       padding:
                                                           EdgeInsets.symmetric(
@@ -196,6 +197,133 @@ class _AppointmentState extends State<Appointment> {
                                                   ],
                                                 ),
                                               ),
+                                              if (appointments[index]
+                                                          ['status'] ==
+                                                      'Scheduled' ||
+                                                  appointments[index]
+                                                          ['status'] ==
+                                                      'Rescheduled' ||
+                                                  appointments[index]
+                                                          ['status'] ==
+                                                      'Completed')
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.5,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                        width: 40,
+                                                        child: IconButton(
+                                                            onPressed: () {
+                                                              _showCommentDialog(
+                                                                context,
+                                                                appointments[
+                                                                        index][
+                                                                    'event_id'],
+                                                                appointments[
+                                                                        index][
+                                                                    'appointment_id'],
+                                                              );
+                                                            },
+                                                            tooltip:
+                                                                'Completed',
+                                                            icon: Icon(
+                                                                appointments[index]
+                                                                            [
+                                                                            'status'] ==
+                                                                        'Completed'
+                                                                    ? Icons
+                                                                        .message_outlined
+                                                                    : Icons
+                                                                        .add_task_rounded,
+                                                                size: 20,
+                                                                color: Colors
+                                                                    .green)),
+                                                      ),
+                                                      if (appointments[index]
+                                                              ['status'] !=
+                                                          'Completed')
+                                                        Row(
+                                                          children: [
+                                                            Container(
+                                                              width: 40,
+                                                              child: IconButton(
+                                                                  onPressed:
+                                                                      () async {},
+                                                                  tooltip:
+                                                                      'Reschedule',
+                                                                  icon: const Icon(
+                                                                      Icons
+                                                                          .calendar_month,
+                                                                      size:
+                                                                          20)),
+                                                            ),
+                                                            Container(
+                                                                width: 40,
+                                                                child:
+                                                                    IconButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    showDialogBox(
+                                                                      context,
+                                                                      'Confirm Action',
+                                                                      'Are you sure you want to cancel this appointment?',
+                                                                      appointments[
+                                                                              index]
+                                                                          [
+                                                                          'event_id'],
+                                                                      appointments[
+                                                                              index]
+                                                                          [
+                                                                          'appointment_id'],
+                                                                      'cancelled',
+                                                                    );
+                                                                  },
+                                                                  tooltip:
+                                                                      'Cancel',
+                                                                  icon: const Icon(
+                                                                      Icons
+                                                                          .cancel_outlined,
+                                                                      size: 20,
+                                                                      color: Colors
+                                                                          .red),
+                                                                )),
+                                                            Container(
+                                                                width: 40,
+                                                                child:
+                                                                    IconButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    showDialogBox(
+                                                                        context,
+                                                                        'Confirm Action',
+                                                                        'Are you sure this appointment is a No Show?',
+                                                                        appointments[index]
+                                                                            [
+                                                                            'event_id'],
+                                                                        appointments[index]
+                                                                            [
+                                                                            'appointment_id'],
+                                                                        'no-show');
+                                                                  },
+                                                                  tooltip:
+                                                                      'No Show',
+                                                                  icon: const Icon(
+                                                                      Icons
+                                                                          .person_off_outlined,
+                                                                      size: 20,
+                                                                      color: Colors
+                                                                          .red),
+                                                                )),
+                                                          ],
+                                                        ),
+                                                    ],
+                                                  ),
+                                                ),
                                               AppSpaces.verticalSpace5,
                                               Container(
                                                 height: 30,
@@ -331,4 +459,60 @@ class _AppointmentState extends State<Appointment> {
       ),
     );
   }
+}
+
+Future<void> _showCommentDialog(
+    BuildContext context, eventID, appointmentID) async {
+  String comment = '';
+
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: 300,
+          ),
+          child: SingleChildScrollView(
+            child: AlertDialog(
+              title: Text('Enter your feedback'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    height: 50,
+                    child: TextField(
+                      decoration: InputDecoration(labelText: 'Comments'),
+                      onChanged: (value) {
+                        comment = value;
+                      },
+                      maxLines: 2,
+                      keyboardType: TextInputType.multiline,
+                    ),
+                  ),
+                ],
+              ),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Provider.of<AppointmentProvider>(context, listen: false)
+                        .actionStatus(
+                            eventID, appointmentID, 'completed', comment);
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
 }

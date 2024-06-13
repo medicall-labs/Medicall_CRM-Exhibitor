@@ -45,21 +45,21 @@ class RemoteService {
     return jsonData;
   }
 
-  // postDataToApi(apiPath, apiBody) async {
-  //   try {
-  //     final uri = Uri.parse(apiPath);
-  //     var response = await http.post(uri,
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           'Accept': 'application/json',
-  //           'Authorization': 'Bearer ${loginDetails["token"]}',
-  //         },
-  //         body: jsonEncode(apiBody));
-  //     return response;
-  //   } catch (err) {
-  //     print("$err");
-  //     return "Please try again later";
-  //   }
-  // }
+  postDataToApi(apiPath, apiBody) async {
+    try {
+      final uri = Uri.parse(apiPath);
+      var response = await http.post(uri,
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ${tokenDetails["token"]}',
+          },
+          body: jsonEncode(apiBody));
+      return response;
+    } catch (err) {
+      print("$err");
+      return "Please try again later";
+    }
+  }
 
 }

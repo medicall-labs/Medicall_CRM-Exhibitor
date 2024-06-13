@@ -7,25 +7,34 @@ import 'Appointments/my_appointments.dart';
 import 'My_History/history.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+
+  int? currentPage;
+   BottomNavBar({super.key, this.currentPage});
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int currentIndex = 2;
+
+  late int currentIndex;
   List screens = [
     Placeholder(
-      child: Center(child: Text('Products')),
+      child: Center(child: Text('Dashboard')),
     ),
     Appointment(),
     EventOverview(),
     Placeholder(
-      child: Center(child: Text('History')),
+      child: Center(child: Text('Products')),
     ),
     MyHistory(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = widget.currentPage ?? 2;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
