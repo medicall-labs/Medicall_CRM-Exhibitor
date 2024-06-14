@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:medicall_exhibitor/Exhibitor/Screens/bottom_nav_bar.dart';
-import 'package:medicall_exhibitor/Exhibitor/Screens/register_event.dart';
 import 'package:provider/provider.dart';
 
 import '../../Constants/api_collection.dart';
+import '../Screens/Dashboard/dashboard.dart';
 import '../Services/remote_services.dart';
 import 'local_data.dart';
 
@@ -70,7 +70,7 @@ class AuthenticationProvider extends ChangeNotifier {
         if (result["current_event"] == "Registered") {
           Get.offAll(() => BottomNavBar());
         } else {
-          Get.offAll(() => EventRegistration());
+          Get.offAll(() => Dashboard());
         }
       } else {
         _resMessage = result['message'];

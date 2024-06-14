@@ -11,6 +11,8 @@ class AppTextStyles {
       fontWeight: FontWeight.bold, fontSize: 25, color: Colors.black);
   static final TextStyle header3 = GoogleFonts.lato(
       fontWeight: FontWeight.bold, fontSize: 25, color: AppColor.primary);
+  static final TextStyle header4 = GoogleFonts.lato(
+      fontWeight: FontWeight.bold, fontSize: 22, color: AppColor.secondary);
 
   static final TextStyle label = GoogleFonts.lato(
       fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black);
