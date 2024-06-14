@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lottie/lottie.dart';
 import 'package:medicall_exhibitor/Constants/app_color.dart';
 import 'package:medicall_exhibitor/Exhibitor/Screens/Event%20Overview/event_overview.dart';
 
 import 'Appointments/my_appointments.dart';
 import 'My_History/history.dart';
+import 'Products/all_product.dart';
 
 class BottomNavBar extends StatefulWidget {
 
@@ -24,9 +26,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     ),
     Appointment(),
     EventOverview(),
-    Placeholder(
-      child: Center(child: Text('Products')),
-    ),
+    Products(),
     MyHistory(),
   ];
 
@@ -47,11 +47,18 @@ class _BottomNavBarState extends State<BottomNavBar> {
         shape: const CircleBorder(),
         backgroundColor:
             currentIndex == 2 ? AppColor.primary : Colors.grey.shade400,
-        child: const Icon(
-          Icons.grid_view_outlined,
-          color: Colors.white,
-          size: 30,
+        child: ColorFiltered(
+          colorFilter: ColorFilter.mode(
+            AppColor.secondary,
+            BlendMode.modulate,
+          ),
+          child: Lottie.asset('assets/lottie/dashboard.json'),
         ),
+        // const Icon(
+        //   Icons.grid_view_outlined,
+        //   color: Colors.white,
+        //   size: 30,
+        // ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(

@@ -8,6 +8,8 @@ import 'Exhibitor/Controllers/appointment_provider.dart';
 import 'Exhibitor/Controllers/auth_provider.dart';
 import 'Exhibitor/Controllers/dashboard_provider.dart';
 import 'Exhibitor/Controllers/event_provider.dart';
+import 'Exhibitor/Controllers/products_provider.dart';
+import 'Exhibitor/Controllers/profile_provider.dart';
 import 'splash_screen.dart';
 
 void main() {
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => EventProvider()),
         ChangeNotifierProvider(create: (context) => AppointmentProvider()),
         ChangeNotifierProvider(create: (context) => HistoryProvider()),
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
+        ChangeNotifierProvider(create: (context) => ProductsProvider()),
       ],
       child: GetMaterialApp(
         title: 'Medicall Exhibitor',

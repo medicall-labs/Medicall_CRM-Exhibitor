@@ -67,8 +67,8 @@ class HistorySummary extends StatelessWidget {
                         AppSpaces.verticalSpace40,
                         Padding(
                           padding: const EdgeInsets.only(left: 10),
-                          child:
-                              Text('My History', style: AppTextStyles.header2),
+                          child: Text('Event History',
+                              style: AppTextStyles.header2),
                         ),
                         AppSpaces.verticalSpace10,
                         Align(
@@ -79,7 +79,7 @@ class HistorySummary extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          height: MediaQuery.of(context).size.height - 200,
+                          height: MediaQuery.of(context).size.height - 150,
                           child: ListView.builder(
                             itemCount: completedHistory.length,
                             itemBuilder: (context, index) {

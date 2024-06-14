@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:lottie/lottie.dart';
 import 'package:medicall_exhibitor/Constants/app_color.dart';
 import 'package:medicall_exhibitor/Constants/spacing.dart';
 import 'package:medicall_exhibitor/Constants/styles.dart';
 import 'package:medicall_exhibitor/Exhibitor/Controllers/event_provider.dart';
 import 'package:medicall_exhibitor/Exhibitor/Screens/Event%20Overview/stall_image.dart';
+import 'package:medicall_exhibitor/Exhibitor/Screens/Side_Menu/menus.dart';
 import 'package:medicall_exhibitor/Utils/Widgets/pie_chart.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Utils/Widgets/shimmer.dart';
 import '../../Controllers/local_data.dart';
+import 'bottom_sheet.dart';
 
 class EventOverview extends StatefulWidget {
   @override
@@ -16,405 +21,468 @@ class EventOverview extends StatefulWidget {
 }
 
 class _EventOverviewState extends State<EventOverview> {
+  final profileLogo = GetStorage().read("profileData") != ''
+      ? GetStorage().read("profileData")
+      : '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-      child: Column(
-        children: [
-          AppSpaces.verticalSpace40,
-          Consumer<LocalDataProvider>(
-            builder: (context, localData, child) => Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                child: FutureBuilder(
-                    future: Provider.of<EventProvider>(context, listen: false)
-                        .eventData(localData.eventId),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+      child: Consumer<LocalDataProvider>(
+        builder: (context, localData, child) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
+            child: FutureBuilder(
+                future: Provider.of<EventProvider>(context, listen: false)
+                    .eventData(localData.eventId),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Skeleton(height: 40),
+                          AppSpaces.verticalSpace10,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              AppSpaces.verticalSpace10,
-                              Skeleton(height: 40),
-                              AppSpaces.verticalSpace10,
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Skeleton(
-                                    height: 370,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.35,
-                                  ),
-                                  Skeleton(
-                                    height:
-                                        MediaQuery.of(context).size.width * 0.5,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.5,
-                                  ),
-                                ],
+                              Skeleton(
+                                height: 370,
+                                width: MediaQuery.of(context).size.width * 0.35,
                               ),
-                              AppSpaces.verticalSpace10,
-                              Skeleton(height: 50),
-                              AppSpaces.verticalSpace10,
-                              Skeleton(height: 150),
+                              Skeleton(
+                                height: MediaQuery.of(context).size.width * 0.5,
+                                width: MediaQuery.of(context).size.width * 0.5,
+                              ),
                             ],
                           ),
-                        );
-                      } else if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
-                      } else {
-                        var eventInsightsPage = snapshot.data;
-                        if (eventInsightsPage != null &&
-                            eventInsightsPage is Map<String, dynamic>) {
-                          var insights = eventInsightsPage['data'];
+                          AppSpaces.verticalSpace10,
+                          Skeleton(height: 50),
+                          AppSpaces.verticalSpace10,
+                          Skeleton(height: 150),
+                        ],
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    var eventInsightsPage = snapshot.data;
+                    if (eventInsightsPage != null &&
+                        eventInsightsPage is Map<String, dynamic>) {
+                      var insights = eventInsightsPage['data'];
 
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              AppSpaces.verticalSpace10,
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  // Icon(Icons.person),
-
-                                  Text(
-                                    insights['current_event_title'],
-                                    style: AppTextStyles.header3,
-                                  ),
-                                ],
+                              CircleAvatar(
+                                  radius: 15,
+                                  backgroundColor: Colors.grey[200],
+                                  child: profileLogo['data']['logo'] != ''
+                                      ? ClipOval(
+                                          child: Image.network(
+                                              profileLogo['data']['logo'],
+                                              fit: BoxFit.cover),
+                                        )
+                                      : Container()),
+                              Text(
+                                insights['current_event_title'],
+                                style: AppTextStyles.header3,
                               ),
-                              AppSpaces.verticalSpace10,
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Card(
-                                    elevation: 5,
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.35,
-                                      decoration: BoxDecoration(
-                                          color: AppColor.bgColor,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(8))),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 10),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Text(
-                                            'Scheduled',
-                                            style: AppTextStyles.label2,
-                                          ),
-                                          AppSpaces.verticalSpace5,
-                                          Text(
-                                            insights['scheduled_count']
-                                                .toString(),
-                                            style: AppTextStyles.label4,
-                                          ),
-                                          Divider(height: 20),
-                                          Text(
-                                            'Completed',
-                                            style: AppTextStyles.label2,
-                                          ),
-                                          AppSpaces.verticalSpace5,
-                                          Text(
-                                            insights['completed_count']
-                                                .toString(),
-                                            style: AppTextStyles.label4,
-                                          ),
-                                          Divider(height: 20),
-                                          Text(
-                                            'Rescheduled',
-                                            style: AppTextStyles.label2,
-                                          ),
-                                          AppSpaces.verticalSpace5,
-                                          Text(
-                                            insights['rescheduled_count']
-                                                .toString(),
-                                            style: AppTextStyles.label4,
-                                          ),
-                                          Divider(height: 20),
-                                          Text(
-                                            'No Show',
-                                            style: AppTextStyles.label2,
-                                          ),
-                                          AppSpaces.verticalSpace5,
-                                          Text(
-                                            insights['lapsed_count'].toString(),
-                                            style: AppTextStyles.label4,
-                                          ),
-                                          Divider(height: 20),
-                                          Text(
-                                            'Cancelled',
-                                            style: AppTextStyles.label2,
-                                          ),
-                                          AppSpaces.verticalSpace5,
-                                          Text(
-                                            insights['cancelled_count']
-                                                .toString(),
-                                            style: AppTextStyles.label4,
-                                          ),
-                                          Divider(height: 20),
-                                          Text(
-                                            'Total Appointments',
-                                            style: AppTextStyles.label2,
-                                          ),
-                                          Text(
-                                            insights['total_appointments_count']
-                                                .toString(),
-                                            style: AppTextStyles.label4,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(SideMenu());
+                                },
+                                child: ColorFiltered(
+                                  colorFilter: ColorFilter.mode(
+                                    AppColor.secondary,
+                                    BlendMode.modulate,
                                   ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        height:
-                                            MediaQuery.of(context).size.width *
-                                                0.5,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.5,
-                                        child: Stack(children: [
-                                          Center(
-                                              child: PieChart(
-                                            insights: insights,
-                                          )),
-                                          Center(
-                                              child: Text(
-                                            insights['total_appointments_count']
-                                                .toString(),
-                                            style: AppTextStyles.header3,
-                                          ))
-                                        ]),
-                                      ),
-                                      Container(
-                                        width: 75,
+                                  child: Container(
+                                      height: 30,
+                                      child: Lottie.asset(
+                                          'assets/lottie/menu.json')),
+                                ),
+                              ),
+                            ],
+                          ),
+                          AppSpaces.verticalSpace10,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Card(
+                                elevation: 5,
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.35,
+                                  decoration: BoxDecoration(
+                                      color: AppColor.bgColor,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8))),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 10),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      GestureDetector(
+                                        onTap: () {
+                                          _showBottomSheet(context, 'Scheduled',
+                                              localData.eventId);
+                                        },
                                         child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
                                           children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  height: 10,
-                                                  width: 10,
-                                                  color: Color(0xff3abfaf),
-                                                ),
-                                                AppSpaces.horizontalSpace5,
-                                                Text(
-                                                  'Scheduled',
-                                                  style:
-                                                      AppTextStyles.textBody3,
-                                                )
-                                              ],
+                                            Text(
+                                              'Scheduled',
+                                              style: AppTextStyles.label2,
                                             ),
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  height: 10,
-                                                  width: 10,
-                                                  color: Color(0xff8dbf3a),
-                                                ),
-                                                AppSpaces.horizontalSpace5,
-                                                Text(
-                                                  'Completed',
-                                                  style:
-                                                      AppTextStyles.textBody3,
-                                                )
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  height: 10,
-                                                  width: 10,
-                                                  color: Color(0xffbf3a4a),
-                                                ),
-                                                AppSpaces.horizontalSpace5,
-                                                Text(
-                                                  'Rescheduled',
-                                                  style:
-                                                      AppTextStyles.textBody3,
-                                                )
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  height: 10,
-                                                  width: 10,
-                                                  color: Color(0xff6c3abf),
-                                                ),
-                                                AppSpaces.horizontalSpace5,
-                                                Text(
-                                                  'No Show',
-                                                  style:
-                                                      AppTextStyles.textBody3,
-                                                )
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  height: 10,
-                                                  width: 10,
-                                                  color: Color(0xff3abf6c),
-                                                ),
-                                                AppSpaces.horizontalSpace5,
-                                                Text(
-                                                  'Cancelled',
-                                                  style:
-                                                      AppTextStyles.textBody3,
-                                                )
-                                              ],
+                                            AppSpaces.verticalSpace5,
+                                            Text(
+                                              insights['scheduled_count']
+                                                  .toString(),
+                                              style: AppTextStyles.label4,
                                             ),
                                           ],
                                         ),
                                       ),
+                                      Divider(height: 20),
+                                      GestureDetector(
+                                        onTap: () {
+                                          _showBottomSheet(context, 'Completed',
+                                              localData.eventId);
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              'Completed',
+                                              style: AppTextStyles.label2,
+                                            ),
+                                            AppSpaces.verticalSpace5,
+                                            Text(
+                                              insights['completed_count']
+                                                  .toString(),
+                                              style: AppTextStyles.label4,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(height: 20),
+                                      GestureDetector(
+                                        onTap: () {
+                                          _showBottomSheet(context,
+                                              'Rescheduled', localData.eventId);
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              'Rescheduled',
+                                              style: AppTextStyles.label2,
+                                            ),
+                                            AppSpaces.verticalSpace5,
+                                            Text(
+                                              insights['rescheduled_count']
+                                                  .toString(),
+                                              style: AppTextStyles.label4,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(height: 20),
+                                      GestureDetector(
+                                        onTap: () {
+                                          _showBottomSheet(context, 'No-show',
+                                              localData.eventId);
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              'No Show',
+                                              style: AppTextStyles.label2,
+                                            ),
+                                            AppSpaces.verticalSpace5,
+                                            Text(
+                                              insights['lapsed_count']
+                                                  .toString(),
+                                              style: AppTextStyles.label4,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(height: 20),
+                                      GestureDetector(
+                                        onTap: () {
+                                          _showBottomSheet(context, 'Cancelled',
+                                              localData.eventId);
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              'Cancelled',
+                                              style: AppTextStyles.label2,
+                                            ),
+                                            AppSpaces.verticalSpace5,
+                                            Text(
+                                              insights['cancelled_count']
+                                                  .toString(),
+                                              style: AppTextStyles.label4,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(height: 20),
+                                      Text(
+                                        'Total Appointments',
+                                        style: AppTextStyles.label2,
+                                      ),
+                                      Text(
+                                        insights['total_appointments_count']
+                                            .toString(),
+                                        style: AppTextStyles.label4,
+                                      ),
                                     ],
-                                  )
-                                ],
-                              ),
-                              AppSpaces.verticalSpace10,
-                              Card(
-                                elevation: 5,
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      color: AppColor.white,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(8))),
-                                  child: ListTile(
-                                    title: Text('Hall Layout',
-                                        style: AppTextStyles.textBody),
-                                    onTap: () {
-                                      if (insights['hall_layout'] != "")
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => PDFViewer(
-                                                pdfPath:
-                                                    insights['hall_layout']),
-                                          ),
-                                        );
-                                    },
                                   ),
                                 ),
                               ),
-                              AppSpaces.verticalSpace10,
-                              Card(
-                                elevation: 5,
-                                child: Container(
-                                  height: 150,
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
-                                    color: AppColor.white,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    height:
+                                        MediaQuery.of(context).size.width * 0.5,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.5,
+                                    child: Stack(children: [
+                                      Center(
+                                          child: PieChart(
+                                        insights: insights,
+                                      )),
+                                      Center(
+                                          child: Text(
+                                        insights['total_appointments_count']
+                                            .toString(),
+                                        style: AppTextStyles.header3,
+                                      ))
+                                    ]),
                                   ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                  Container(
+                                    width: 75,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              height: 10,
+                                              width: 10,
+                                              color: Color(0xff3abfaf),
+                                            ),
+                                            AppSpaces.horizontalSpace5,
+                                            Text(
+                                              'Scheduled',
+                                              style: AppTextStyles.textBody3,
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              height: 10,
+                                              width: 10,
+                                              color: Color(0xff8dbf3a),
+                                            ),
+                                            AppSpaces.horizontalSpace5,
+                                            Text(
+                                              'Completed',
+                                              style: AppTextStyles.textBody3,
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              height: 10,
+                                              width: 10,
+                                              color: Color(0xffbf3a4a),
+                                            ),
+                                            AppSpaces.horizontalSpace5,
+                                            Text(
+                                              'Rescheduled',
+                                              style: AppTextStyles.textBody3,
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              height: 10,
+                                              width: 10,
+                                              color: Color(0xff6c3abf),
+                                            ),
+                                            AppSpaces.horizontalSpace5,
+                                            Text(
+                                              'No Show',
+                                              style: AppTextStyles.textBody3,
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              height: 10,
+                                              width: 10,
+                                              color: Color(0xff3abf6c),
+                                            ),
+                                            AppSpaces.horizontalSpace5,
+                                            Text(
+                                              'Cancelled',
+                                              style: AppTextStyles.textBody3,
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          AppSpaces.verticalSpace10,
+                          Card(
+                            elevation: 5,
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color: AppColor.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8))),
+                              child: ListTile(
+                                title: Text('Hall Layout',
+                                    style: AppTextStyles.textBody),
+                                onTap: () {
+                                  if (insights['hall_layout'] != "")
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PDFViewer(
+                                            pdfPath: insights['hall_layout']),
+                                      ),
+                                    );
+                                },
+                              ),
+                            ),
+                          ),
+                          AppSpaces.verticalSpace10,
+                          Card(
+                            elevation: 5,
+                            child: Container(
+                              height: 150,
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                                color: AppColor.white,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Stack(
                                     children: [
-                                      Stack(
-                                        children: [
-                                          Container(
-                                              width: 100,
-                                              height: 100,
-                                              decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                      width: 8,
-                                                      color: Colors.black12)),
+                                      Container(
+                                          width: 100,
+                                          height: 100,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  width: 8,
+                                                  color: Colors.black12)),
+                                          child: Center(
+                                            child: Container(
+                                              width: 50,
+                                              height: 50,
+                                              decoration: const BoxDecoration(
+                                                  shape: BoxShape.circle),
                                               child: Center(
-                                                child: Container(
-                                                  width: 50,
-                                                  height: 50,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle),
-                                                  child: Center(
-                                                      child: Text(
-                                                    "${((insights['completed_count'] / insights['total_appointments_count']) * 100).toInt()}%",
-                                                    style: AppTextStyles.label,
-                                                  )),
-                                                ),
+                                                  child: Text(
+                                                "${((insights['completed_count'] / insights['total_appointments_count']) * 100).toInt()}%",
+                                                style: AppTextStyles.label,
                                               )),
-                                          Positioned(
-                                            top: 5,
-                                            left: 5,
-                                            child: RotatedBox(
-                                              quarterTurns: 1,
-                                              child:
-                                                  TweenAnimationBuilder<double>(
-                                                tween: Tween<double>(
-                                                    begin: 0.0,
-                                                    end: insights[
-                                                            'completed_count'] /
-                                                        insights[
-                                                            'total_appointments_count']),
-                                                duration: const Duration(
-                                                    milliseconds: 1000),
-                                                builder: (context, value, _) =>
-                                                    SizedBox(
-                                                  width: 90,
-                                                  height: 90,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                          strokeWidth: 8,
-                                                          value: value,
-                                                          color: AppColor
-                                                              .secondary),
-                                                ),
-                                              ),
+                                            ),
+                                          )),
+                                      Positioned(
+                                        top: 5,
+                                        left: 5,
+                                        child: RotatedBox(
+                                          quarterTurns: 1,
+                                          child: TweenAnimationBuilder<double>(
+                                            tween: Tween<double>(
+                                                begin: 0.0,
+                                                end: insights[
+                                                        'completed_count'] /
+                                                    insights[
+                                                        'total_appointments_count']),
+                                            duration: const Duration(
+                                                milliseconds: 1000),
+                                            builder: (context, value, _) =>
+                                                SizedBox(
+                                              width: 90,
+                                              height: 90,
+                                              child: CircularProgressIndicator(
+                                                  strokeWidth: 8,
+                                                  value: value,
+                                                  color: AppColor.secondary),
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Appointments",
-                                            style: AppTextStyles.textBody,
-                                          ),
-                                          Text(
-                                            "Goals Completed",
-                                            style: AppTextStyles.textBody2,
-                                          ),
-                                          Text(
-                                            "${insights['completed_count'].toString()} / ${insights['total_appointments_count'].toString()}",
-                                            style: AppTextStyles.label3,
-                                          ),
-                                        ],
+                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Appointments",
+                                        style: AppTextStyles.textBody,
+                                      ),
+                                      Text(
+                                        "Goals Completed",
+                                        style: AppTextStyles.textBody2,
+                                      ),
+                                      Text(
+                                        "${insights['completed_count'].toString()} / ${insights['total_appointments_count'].toString()}",
+                                        style: AppTextStyles.label3,
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            ],
-                          );
-                        } else {
-                          return const Center(
-                              child: Text('No data available.'));
-                        }
-                      }
-                    })),
-          )
-        ],
+                            ),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return const Center(child: Text('No data available.'));
+                    }
+                  }
+                })),
       ),
     ));
   }
+}
+
+void _showBottomSheet(BuildContext context, data, id) {
+  var appointmentStatus = AppointmentStatus();
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+    builder: (BuildContext context) {
+      // Call the method to build the content
+      return appointmentStatus.buildContent(context, data, id);
+    },
+  );
 }

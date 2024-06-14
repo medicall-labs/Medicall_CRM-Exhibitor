@@ -25,17 +25,10 @@ class _MyHistoryState extends State<MyHistory> {
       child: Column(
         children: [
           AppSpaces.verticalSpace40,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [],
-            ),
-          ),
           Consumer<LocalDataProvider>(
             builder: (context, localData, child) => Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 8),
                 child: FutureBuilder(
                     future: Provider.of<HistoryProvider>(context, listen: false)
                         .historyData(),

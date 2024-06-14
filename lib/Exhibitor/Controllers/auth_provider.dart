@@ -10,6 +10,7 @@ import 'package:medicall_exhibitor/Exhibitor/Screens/register_event.dart';
 import 'package:provider/provider.dart';
 
 import '../../Constants/api_collection.dart';
+import '../Services/remote_services.dart';
 import 'local_data.dart';
 
 class AuthenticationProvider extends ChangeNotifier {
@@ -55,6 +56,12 @@ class AuthenticationProvider extends ChangeNotifier {
       var result = jsonDecode(response.body);
       if (result["status"] == "success") {
         GetStorage().write("local_store", result);
+        var profileResponse = await RemoteService()
+            .getDataFromApi('${requestBaseUrl}/exhibitor/profile');
+        if (profileResponse["status"] == 'success') {
+          GetStorage().write("profileData", profileResponse);
+        }
+
         _isLoading = false;
         _resMessage = "Login successfull!";
         Provider.of<LocalDataProvider>(context, listen: false)
