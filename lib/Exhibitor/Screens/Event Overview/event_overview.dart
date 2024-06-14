@@ -7,10 +7,12 @@ import 'package:medicall_exhibitor/Constants/spacing.dart';
 import 'package:medicall_exhibitor/Constants/styles.dart';
 import 'package:medicall_exhibitor/Exhibitor/Controllers/event_provider.dart';
 import 'package:medicall_exhibitor/Exhibitor/Screens/Event%20Overview/stall_image.dart';
+import 'package:medicall_exhibitor/Exhibitor/Screens/My_History/history.dart';
 import 'package:medicall_exhibitor/Utils/Widgets/pie_chart.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Utils/Widgets/shimmer.dart';
+import '../../Controllers/auth_provider.dart';
 import '../../Controllers/local_data.dart';
 import 'bottom_sheet.dart';
 
@@ -195,13 +197,13 @@ class _EventOverviewState extends State<EventOverview> {
                                 ],
                                 onSelected: (value) {
                                   if (value == 1) {
-
+                                    // Navigate to My Profile
                                   } else if (value == 2) {
-
-                                  }else if (value == 2) {
-
-                                  }else  {
-
+                                    // Navigate to Products
+                                  } else if (value == 3) {
+                                    Get.to(() => MyHistory());
+                                  } else if (value == 4) {
+                                    AuthenticationProvider().logout();
                                   }
                                 },
                               ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:medicall_exhibitor/Auth/login.dart';
 import 'package:medicall_exhibitor/Exhibitor/Screens/bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,10 @@ class AuthenticationProvider extends ChangeNotifier {
   ///Setter
   bool _isLoading = false;
   String _resMessage = '';
+
+  var tokenDetails = GetStorage().read("local_store") != ''
+      ? GetStorage().read("local_store")
+      : '';
 
   //Getter
   bool get isLoading => _isLoading;
@@ -100,6 +105,24 @@ class AuthenticationProvider extends ChangeNotifier {
           },
           body: jsonEncode(apiBody));
       return jsonDecode(response.body);
+    } catch (err) {
+      return null;
+    }
+  }
+
+  logout() async {
+    try {
+      final uri = Uri.parse('$requestBaseUrl/logout');
+      var response = await http.post(uri, headers: {
+        'Authorization': 'Bearer ${tokenDetails["token"]}',
+      });
+      var result = jsonDecode(response.body);
+      if (result["status"] == "success") {
+        GetStorage().erase();
+        Get.offAll(() => const LoginPage());
+      }
+
+      return response;
     } catch (err) {
       return null;
     }

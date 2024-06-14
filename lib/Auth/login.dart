@@ -135,7 +135,6 @@ class _LoginPageState extends State<LoginPage> {
                               _userIdController.text.length == 10) {
                             var otpResult = await AuthenticationProvider()
                                 .otp(_userIdController.text);
-                            print(otpResult);
                             if (_userIdController.text.isNotEmpty)
                               showMessage(
                                   backgroundColor: Colors.green,
