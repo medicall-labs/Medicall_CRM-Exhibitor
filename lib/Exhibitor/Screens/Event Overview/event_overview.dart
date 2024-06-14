@@ -7,7 +7,6 @@ import 'package:medicall_exhibitor/Constants/spacing.dart';
 import 'package:medicall_exhibitor/Constants/styles.dart';
 import 'package:medicall_exhibitor/Exhibitor/Controllers/event_provider.dart';
 import 'package:medicall_exhibitor/Exhibitor/Screens/Event%20Overview/stall_image.dart';
-import 'package:medicall_exhibitor/Exhibitor/Screens/Side_Menu/menus.dart';
 import 'package:medicall_exhibitor/Utils/Widgets/pie_chart.dart';
 import 'package:provider/provider.dart';
 
@@ -92,11 +91,8 @@ class _EventOverviewState extends State<EventOverview> {
                                 insights['current_event_title'],
                                 style: AppTextStyles.header3,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  Get.to(SideMenu());
-                                },
-                                child: ColorFiltered(
+                              PopupMenuButton(
+                                icon: ColorFiltered(
                                   colorFilter: ColorFilter.mode(
                                     AppColor.secondary,
                                     BlendMode.modulate,
@@ -106,6 +102,108 @@ class _EventOverviewState extends State<EventOverview> {
                                       child: Lottie.asset(
                                           'assets/lottie/menu.json')),
                                 ),
+                                color: Colors.white,
+                                itemBuilder: (BuildContext context) => [
+                                  PopupMenuItem(
+                                    value: 1,
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 15,
+                                          backgroundColor: Colors.grey[200],
+                                          child: Icon(
+                                            Icons.person,
+                                            color:
+                                                AppColor.black.withOpacity(0.5),
+                                            size: 20,
+                                          ),
+                                        ),
+                                        AppSpaces.horizontalSpace20,
+                                        Text(
+                                          'My Profile',
+                                          style: AppTextStyles.label,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 2,
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 15,
+                                          backgroundColor: Colors.grey[200],
+                                          child: Icon(
+                                            Icons.shopping_cart_outlined,
+                                            color:
+                                                AppColor.black.withOpacity(0.5),
+                                            size: 20,
+                                          ),
+                                        ),
+                                        AppSpaces.horizontalSpace20,
+                                        Text(
+                                          'Products',
+                                          style: AppTextStyles.label,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 3,
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 15,
+                                          backgroundColor: Colors.grey[200],
+                                          child: Icon(
+                                            Icons.history_rounded,
+                                            color:
+                                                AppColor.black.withOpacity(0.5),
+                                            size: 20,
+                                          ),
+                                        ),
+                                        AppSpaces.horizontalSpace20,
+                                        Text(
+                                          'My History',
+                                          style: AppTextStyles.label,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 4,
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 15,
+                                          backgroundColor: Colors.grey[200],
+                                          child: Icon(
+                                            Icons.logout,
+                                            color:
+                                                AppColor.black.withOpacity(0.5),
+                                            size: 20,
+                                          ),
+                                        ),
+                                        AppSpaces.horizontalSpace20,
+                                        Text(
+                                          'Logout',
+                                          style: AppTextStyles.label,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                                onSelected: (value) {
+                                  if (value == 1) {
+
+                                  } else if (value == 2) {
+
+                                  }else if (value == 2) {
+
+                                  }else  {
+
+                                  }
+                                },
                               ),
                             ],
                           ),
