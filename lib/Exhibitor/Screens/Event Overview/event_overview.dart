@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import '../../../Utils/Widgets/shimmer.dart';
 import '../../Controllers/auth_provider.dart';
 import '../../Controllers/local_data.dart';
+import '../My_Profile/profile.dart';
 import 'bottom_sheet.dart';
 
 class EventOverview extends StatefulWidget {
@@ -72,7 +73,7 @@ class _EventOverviewState extends State<EventOverview> {
                     if (eventInsightsPage != null &&
                         eventInsightsPage is Map<String, dynamic>) {
                       var insights = eventInsightsPage['data'];
-
+                      print('.5400..............$insights');
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -197,7 +198,7 @@ class _EventOverviewState extends State<EventOverview> {
                                 ],
                                 onSelected: (value) {
                                   if (value == 1) {
-                                    // Navigate to My Profile
+                                    Get.to(() => MyProfile());
                                   } else if (value == 2) {
                                     // Navigate to Products
                                   } else if (value == 3) {
@@ -346,108 +347,110 @@ class _EventOverviewState extends State<EventOverview> {
                                   ),
                                 ),
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    height:
-                                        MediaQuery.of(context).size.width * 0.5,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.5,
-                                    child: Stack(children: [
-                                      Center(
-                                          child: PieChart(
-                                        insights: insights,
-                                      )),
-                                      Center(
-                                          child: Text(
-                                        insights['total_appointments_count']
-                                            .toString(),
-                                        style: AppTextStyles.header3,
-                                      ))
-                                    ]),
-                                  ),
-                                  Container(
-                                    width: 75,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Container(
-                                              height: 10,
-                                              width: 10,
-                                              color: Color(0xff3abfaf),
-                                            ),
-                                            AppSpaces.horizontalSpace5,
-                                            Text(
-                                              'Scheduled',
-                                              style: AppTextStyles.textBody3,
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              height: 10,
-                                              width: 10,
-                                              color: Color(0xff8dbf3a),
-                                            ),
-                                            AppSpaces.horizontalSpace5,
-                                            Text(
-                                              'Completed',
-                                              style: AppTextStyles.textBody3,
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              height: 10,
-                                              width: 10,
-                                              color: Color(0xffbf3a4a),
-                                            ),
-                                            AppSpaces.horizontalSpace5,
-                                            Text(
-                                              'Rescheduled',
-                                              style: AppTextStyles.textBody3,
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              height: 10,
-                                              width: 10,
-                                              color: Color(0xff6c3abf),
-                                            ),
-                                            AppSpaces.horizontalSpace5,
-                                            Text(
-                                              'No Show',
-                                              style: AppTextStyles.textBody3,
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              height: 10,
-                                              width: 10,
-                                              color: Color(0xff3abf6c),
-                                            ),
-                                            AppSpaces.horizontalSpace5,
-                                            Text(
-                                              'Cancelled',
-                                              style: AppTextStyles.textBody3,
-                                            )
-                                          ],
-                                        ),
-                                      ],
+                              if (insights['total_appointments_count'] != 0)
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.5,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      child: Stack(children: [
+                                        Center(
+                                            child: PieChart(
+                                          insights: insights,
+                                        )),
+                                        Center(
+                                            child: Text(
+                                          insights['total_appointments_count']
+                                              .toString(),
+                                          style: AppTextStyles.header3,
+                                        ))
+                                      ]),
                                     ),
-                                  ),
-                                ],
-                              )
+                                    Container(
+                                      width: 75,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                height: 10,
+                                                width: 10,
+                                                color: Color(0xff3abfaf),
+                                              ),
+                                              AppSpaces.horizontalSpace5,
+                                              Text(
+                                                'Scheduled',
+                                                style: AppTextStyles.textBody3,
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                height: 10,
+                                                width: 10,
+                                                color: Color(0xff8dbf3a),
+                                              ),
+                                              AppSpaces.horizontalSpace5,
+                                              Text(
+                                                'Completed',
+                                                style: AppTextStyles.textBody3,
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                height: 10,
+                                                width: 10,
+                                                color: Color(0xffbf3a4a),
+                                              ),
+                                              AppSpaces.horizontalSpace5,
+                                              Text(
+                                                'Rescheduled',
+                                                style: AppTextStyles.textBody3,
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                height: 10,
+                                                width: 10,
+                                                color: Color(0xff6c3abf),
+                                              ),
+                                              AppSpaces.horizontalSpace5,
+                                              Text(
+                                                'No Show',
+                                                style: AppTextStyles.textBody3,
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                height: 10,
+                                                width: 10,
+                                                color: Color(0xff3abf6c),
+                                              ),
+                                              AppSpaces.horizontalSpace5,
+                                              Text(
+                                                'Cancelled',
+                                                style: AppTextStyles.textBody3,
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ],
                           ),
                           AppSpaces.verticalSpace10,
@@ -476,92 +479,97 @@ class _EventOverviewState extends State<EventOverview> {
                             ),
                           ),
                           AppSpaces.verticalSpace10,
-                          Card(
-                            elevation: 5,
-                            child: Container(
-                              height: 150,
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                                color: AppColor.white,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Stack(
-                                    children: [
-                                      Container(
-                                          width: 100,
-                                          height: 100,
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                  width: 8,
-                                                  color: Colors.black12)),
-                                          child: Center(
-                                            child: Container(
-                                              width: 50,
-                                              height: 50,
-                                              decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle),
-                                              child: Center(
-                                                  child: Text(
-                                                "${((insights['completed_count'] / insights['total_appointments_count']) * 100).toInt()}%",
-                                                style: AppTextStyles.label,
-                                              )),
-                                            ),
-                                          )),
-                                      Positioned(
-                                        top: 5,
-                                        left: 5,
-                                        child: RotatedBox(
-                                          quarterTurns: 1,
-                                          child: TweenAnimationBuilder<double>(
-                                            tween: Tween<double>(
-                                                begin: 0.0,
-                                                end: insights[
-                                                        'completed_count'] /
-                                                    insights[
-                                                        'total_appointments_count']),
-                                            duration: const Duration(
-                                                milliseconds: 1000),
-                                            builder: (context, value, _) =>
-                                                SizedBox(
-                                              width: 90,
-                                              height: 90,
-                                              child: CircularProgressIndicator(
-                                                  strokeWidth: 8,
-                                                  value: value,
-                                                  color: AppColor.secondary),
+                          if (insights['total_appointments_count'] != 0)
+                            Card(
+                              elevation: 5,
+                              child: Container(
+                                height: 150,
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8)),
+                                  color: AppColor.white,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        Container(
+                                            width: 100,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                    width: 8,
+                                                    color: Colors.black12)),
+                                            child: Center(
+                                              child: Container(
+                                                width: 50,
+                                                height: 50,
+                                                decoration: const BoxDecoration(
+                                                    shape: BoxShape.circle),
+                                                child: Center(
+                                                    child: Text(
+                                                  "${((insights['completed_count'] / insights['total_appointments_count']) * 100).toInt()}%",
+                                                  style: AppTextStyles.label,
+                                                )),
+                                              ),
+                                            )),
+                                        Positioned(
+                                          top: 5,
+                                          left: 5,
+                                          child: RotatedBox(
+                                            quarterTurns: 1,
+                                            child:
+                                                TweenAnimationBuilder<double>(
+                                              tween: Tween<double>(
+                                                  begin: 0.0,
+                                                  end: insights[
+                                                          'completed_count'] /
+                                                      insights[
+                                                          'total_appointments_count']),
+                                              duration: const Duration(
+                                                  milliseconds: 1000),
+                                              builder: (context, value, _) =>
+                                                  SizedBox(
+                                                width: 90,
+                                                height: 90,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                        strokeWidth: 8,
+                                                        value: value,
+                                                        color:
+                                                            AppColor.secondary),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Appointments",
-                                        style: AppTextStyles.textBody,
-                                      ),
-                                      Text(
-                                        "Goals Completed",
-                                        style: AppTextStyles.textBody2,
-                                      ),
-                                      Text(
-                                        "${insights['completed_count'].toString()} / ${insights['total_appointments_count'].toString()}",
-                                        style: AppTextStyles.label3,
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Appointments",
+                                          style: AppTextStyles.textBody,
+                                        ),
+                                        Text(
+                                          "Goals Completed",
+                                          style: AppTextStyles.textBody2,
+                                        ),
+                                        Text(
+                                          "${insights['completed_count'].toString()} / ${insights['total_appointments_count'].toString()}",
+                                          style: AppTextStyles.label3,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
                         ],
                       );
                     } else {

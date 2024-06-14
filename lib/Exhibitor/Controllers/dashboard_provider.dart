@@ -32,16 +32,15 @@ class DashboardProvider extends ChangeNotifier {
 
   eventRegister(eventId) async {
     try {
-      print('.eventId...............${eventId}....................');
-      // var statusResponse = await RemoteService().postDataToApi(
-      //     '$requestBaseUrl/events/$eventId/exhibitor/registration', '');
-      // var result = jsonDecode(statusResponse.body);
-      // if (result["status"] == 'success') {
-      //   Get.offAll(() => BottomNavBar(
-      //     currentPage: 2,
-      //   ));
-      //   return result;
-      // }
+      var statusResponse = await RemoteService().postDataToApi(
+          '$requestBaseUrl/events/$eventId/exhibitor/registration', '');
+      var result = jsonDecode(statusResponse.body);
+      if (result["status"] == 'success') {
+        Get.offAll(() => BottomNavBar(
+          currentPage: 2,
+        ));
+        return result;
+      }
     } catch (err) {
       print(err);
     }
