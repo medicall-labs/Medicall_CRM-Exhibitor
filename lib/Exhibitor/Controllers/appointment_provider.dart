@@ -47,7 +47,7 @@ class AppointmentProvider extends ChangeNotifier {
       var result = jsonDecode(statusResponse.body);
       if (result["status"] == 'success') {
         Get.offAll(() => BottomNavBar(
-              currentPage: 1,
+              currentPage: 0,
             ));
         return result;
       }
@@ -69,7 +69,7 @@ class AppointmentProvider extends ChangeNotifier {
       var result = jsonDecode(statusResponse.body);
       if (result["status"] == 'success') {
         Get.offAll(() => BottomNavBar(
-              currentPage: 1,
+              currentPage: 0,
             ));
         return result;
       }

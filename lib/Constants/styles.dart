@@ -17,6 +17,8 @@ class AppTextStyles {
 
   static final TextStyle label2 =
       GoogleFonts.lato(fontSize: 12,fontWeight: FontWeight.bold, color: AppColor.black);
+  static final TextStyle menu =
+  GoogleFonts.lato(fontSize: 12,fontWeight: FontWeight.bold, color: AppColor.grey);
   static final TextStyle label3 =
       GoogleFonts.lato(fontSize: 18, color: Colors.black);
   static final TextStyle label4 =

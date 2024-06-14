@@ -18,7 +18,7 @@ class NumberPage extends StatefulWidget {
 }
 
 class _NumberPageState extends State<NumberPage> {
-  var hour = 9; // Initial value set to 9 (9 AM)
+  var hour = 10;
   var minute = 0;
   String? selectedDate;
 
@@ -65,7 +65,7 @@ class _NumberPageState extends State<NumberPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     NumberPicker(
-                      minValue: 9,
+                      minValue: 10,
                       maxValue: 18,
                       value: hour,
                       zeroPad: true,
