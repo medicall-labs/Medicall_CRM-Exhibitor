@@ -64,13 +64,9 @@ class AppointmentProvider extends ChangeNotifier {
         "date": date,
         "time": time,
       };
-      print('................................');
-      print(bodyContent);
       var statusResponse = await RemoteService().postDataToApi(
           '$requestBaseUrl/events/$eventId/appointments/$appId', bodyContent);
       var result = jsonDecode(statusResponse.body);
-      print('................................');
-      print(result);
       if (result["status"] == 'success') {
         Get.offAll(() => BottomNavBar(
               currentPage: 1,

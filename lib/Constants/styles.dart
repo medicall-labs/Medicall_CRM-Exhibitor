@@ -25,6 +25,9 @@ class AppTextStyles {
   static final TextStyle label5 =
   GoogleFonts.lato(fontSize: 14, color: AppColor.grey);
 
+  static final TextStyle label6 =
+  GoogleFonts.lato(fontSize: 20, color: AppColor.black,fontWeight: FontWeight.bold);
+
   static final TextStyle whitelabel =
   GoogleFonts.lato(fontSize: 14, color: AppColor.white);
 

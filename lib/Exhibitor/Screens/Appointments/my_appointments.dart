@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:medicall_exhibitor/Constants/styles.dart';
 import 'package:provider/provider.dart';
 import '../../../Constants/app_color.dart';
@@ -19,6 +20,9 @@ class Appointment extends StatefulWidget {
 }
 
 class _AppointmentState extends State<Appointment> {
+  final profileLogo = GetStorage().read("profileData") != ''
+      ? GetStorage().read("profileData")
+      : '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,8 +73,23 @@ class _AppointmentState extends State<Appointment> {
                         AppSpaces.verticalSpace40,
                         Padding(
                           padding: const EdgeInsets.only(left: 10),
-                          child: Text('Appointments',
-                              style: AppTextStyles.header2),
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                  radius: 15,
+                                  backgroundColor: Colors.grey[200],
+                                  child: profileLogo['data']['logo'] != ''
+                                      ? ClipOval(
+                                          child: Image.network(
+                                              profileLogo['data']['logo'],
+                                              fit: BoxFit.cover),
+                                        )
+                                      : Container()),
+                              AppSpaces.horizontalSpace10,
+                              Text('Appointments',
+                                  style: AppTextStyles.header2),
+                            ],
+                          ),
                         ),
                         AppSpaces.verticalSpace10,
                         Align(
@@ -92,379 +111,378 @@ class _AppointmentState extends State<Appointment> {
                                 elevation: 5,
                                 margin: EdgeInsets.symmetric(
                                     vertical: 8, horizontal: 8),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: AppColor.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
-                                  ),
-                                  child: Theme(
-                                    data: Theme.of(context).copyWith(
-                                        dividerColor: Colors.transparent),
-                                    child: ExpansionTile(
-                                      iconColor: AppColor.grey,
-                                      textColor: AppColor.secondary,
-                                      title: Row(
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 20,
-                                            backgroundColor: Colors.grey[200],
-                                            child: appointments[index]
-                                                        ['visitor_logo'] !=
-                                                    ''
-                                                ? ClipOval(
-                                                    child: Image.network(
-                                                        appointments[index]
-                                                            ['visitor_logo'],
-                                                        width: 30,
-                                                        height: 30,
-                                                        fit: BoxFit.cover),
-                                                  )
-                                                : Icon(
-                                                    Icons.person_2_rounded,
-                                                    color: Colors.grey[800],
-                                                  ),
-                                          ),
-                                          AppSpaces.horizontalSpace10,
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: AppColor.white,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8)),
+                                      ),
+                                      child: Theme(
+                                        data: Theme.of(context).copyWith(
+                                            dividerColor: Colors.transparent),
+                                        child: ExpansionTile(
+                                          iconColor: AppColor.grey,
+                                          textColor: AppColor.secondary,
+                                          title: Row(
                                             children: [
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.5,
-                                                child: Text(
-                                                  appointments[index]
-                                                      ['visitor_name'],
-                                                  style: AppTextStyles.label,
-                                                ),
+                                              CircleAvatar(
+                                                radius: 20,
+                                                backgroundColor:
+                                                    Colors.grey[200],
+                                                child: appointments[index]
+                                                            ['visitor_logo'] !=
+                                                        ''
+                                                    ? ClipOval(
+                                                        child: Image.network(
+                                                            appointments[index][
+                                                                'visitor_logo'],
+                                                            width: 30,
+                                                            height: 30,
+                                                            fit: BoxFit.cover),
+                                                      )
+                                                    : Icon(
+                                                        Icons.person_2_rounded,
+                                                        color: Colors.grey[800],
+                                                      ),
                                               ),
-                                              AppSpaces.verticalSpace5,
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.5,
-                                                child: Row(
-                                                  children: [
-                                                    // Text('Status ',
-                                                    //     style: AppTextStyles
-                                                    //         .label5),
-                                                    Container(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 5,
-                                                              vertical: 2),
-                                                      decoration: BoxDecoration(
-                                                        color: appointments[
-                                                                        index]
-                                                                    [
-                                                                    'status'] ==
-                                                                'Scheduled'
-                                                            ? Colors.blue
-                                                            : appointments[index][
-                                                                        'status'] ==
-                                                                    'Rescheduled'
-                                                                ? Colors
-                                                                    .grey[400]
-                                                                : appointments[index]
-                                                                            [
-                                                                            'status'] ==
-                                                                        'Completed'
-                                                                    ? Colors
-                                                                        .green
-                                                                    : appointments[index]['status'] ==
-                                                                            'Confirmed'
-                                                                        ? Colors
-                                                                            .green
-                                                                        : appointments[index]['status'] ==
-                                                                                'No-show'
-                                                                            ? Colors.red
-                                                                            : appointments[index]['status'] == 'Cancelled'
-                                                                                ? Colors.red
-                                                                                : AppColor.bgColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-                                                      child: Text(
-                                                        appointments[index]
-                                                            ['status'],
-                                                        style: AppTextStyles
-                                                            .whitelabel,
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                              if (appointments[index]
-                                                          ['status'] ==
-                                                      'Scheduled' ||
-                                                  appointments[index]
-                                                          ['status'] ==
-                                                      'Rescheduled' ||
-                                                  appointments[index]
-                                                          ['status'] ==
-                                                      'Completed')
-                                                Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.5,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      Container(
-                                                        width: 40,
-                                                        child: IconButton(
-                                                            onPressed: () {
-                                                              _showCommentDialog(
-                                                                context,
-                                                                appointments[
-                                                                        index][
-                                                                    'event_id'],
-                                                                appointments[
-                                                                        index][
-                                                                    'appointment_id'],
-                                                              );
-                                                            },
-                                                            tooltip:
-                                                                'Completed',
-                                                            icon: Icon(
-                                                                appointments[index]
-                                                                            [
-                                                                            'status'] ==
-                                                                        'Completed'
-                                                                    ? Icons
-                                                                        .message_outlined
-                                                                    : Icons
-                                                                        .add_task_rounded,
-                                                                size: 20,
-                                                                color: Colors
-                                                                    .green)),
-                                                      ),
-                                                      if (appointments[index]
-                                                              ['status'] !=
+                                              AppSpaces.horizontalSpace10,
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.5,
+                                                    child: Text(
+                                                      appointments[index]
+                                                          ['visitor_name'],
+                                                      style:
+                                                          AppTextStyles.label,
+                                                    ),
+                                                  ),
+                                                  AppSpaces.verticalSpace5,
+                                                  if (appointments[index]
+                                                              ['status'] ==
+                                                          'Scheduled' ||
+                                                      appointments[index]
+                                                              ['status'] ==
+                                                          'Rescheduled' ||
+                                                      appointments[index]
+                                                              ['status'] ==
                                                           'Completed')
-                                                        Row(
-                                                          children: [
-                                                            Container(
-                                                              width: 40,
-                                                              child: IconButton(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    var dates = await Provider.of<AppointmentProvider>(
+                                                    Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.5,
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Container(
+                                                            width: 40,
+                                                            child: IconButton(
+                                                                onPressed: () {
+                                                                  _showCommentDialog(
+                                                                    context,
+                                                                    appointments[
+                                                                            index]
+                                                                        [
+                                                                        'event_id'],
+                                                                    appointments[
+                                                                            index]
+                                                                        [
+                                                                        'appointment_id'],
+                                                                  );
+                                                                },
+                                                                tooltip:
+                                                                    'Completed',
+                                                                icon: Icon(
+                                                                    appointments[index]['status'] ==
+                                                                            'Completed'
+                                                                        ? Icons
+                                                                            .message_outlined
+                                                                        : Icons
+                                                                            .add_task_rounded,
+                                                                    size: 20,
+                                                                    color: Colors
+                                                                        .green)),
+                                                          ),
+                                                          if (appointments[
+                                                                      index]
+                                                                  ['status'] !=
+                                                              'Completed')
+                                                            Row(
+                                                              children: [
+                                                                Container(
+                                                                  width: 40,
+                                                                  child:
+                                                                      IconButton(
+                                                                          onPressed:
+                                                                              () async {
+                                                                            var dates =
+                                                                                await Provider.of<AppointmentProvider>(context, listen: false).eventDates(localData.eventId);
+                                                                            Navigator.push(
+                                                                              context,
+                                                                              MaterialPageRoute(
+                                                                                  builder: (context) => NumberPage(
+                                                                                        eventId: appointments[index]['event_id'],
+                                                                                        appointmentId: appointments[index]['appointment_id'],
+                                                                                        eventDates: dates['data']['event_dates'],
+                                                                                      )),
+                                                                            );
+                                                                          },
+                                                                          tooltip:
+                                                                              'Reschedule',
+                                                                          icon: const Icon(
+                                                                              Icons.calendar_month,
+                                                                              size: 20)),
+                                                                ),
+                                                                Container(
+                                                                    width: 40,
+                                                                    child:
+                                                                        IconButton(
+                                                                      onPressed:
+                                                                          () {
+                                                                        showDialogBox(
+                                                                          context,
+                                                                          'Confirm Action',
+                                                                          'Are you sure you want to cancel this appointment?',
+                                                                          appointments[index]
+                                                                              [
+                                                                              'event_id'],
+                                                                          appointments[index]
+                                                                              [
+                                                                              'appointment_id'],
+                                                                          'cancelled',
+                                                                        );
+                                                                      },
+                                                                      tooltip:
+                                                                          'Cancel',
+                                                                      icon: const Icon(
+                                                                          Icons
+                                                                              .cancel_outlined,
+                                                                          size:
+                                                                              20,
+                                                                          color:
+                                                                              Colors.red),
+                                                                    )),
+                                                                Container(
+                                                                    width: 40,
+                                                                    child:
+                                                                        IconButton(
+                                                                      onPressed:
+                                                                          () {
+                                                                        showDialogBox(
                                                                             context,
-                                                                            listen:
-                                                                                false)
-                                                                        .eventDates(
-                                                                            localData.eventId);
-                                                                    Navigator
-                                                                        .push(
-                                                                      context,
-                                                                      MaterialPageRoute(
-                                                                          builder: (context) =>
-                                                                              NumberPage(
-                                                                                eventId: appointments[
-                                                                                index][
-                                                                                'event_id'],
-                                                                                appointmentId: appointments[
-                                                                                index][
-                                                                                'appointment_id'],
-                                                                                eventDates: dates['data']['event_dates'],
-                                                                              )),
-                                                                    );
-                                                                  },
-                                                                  tooltip:
-                                                                      'Reschedule',
-                                                                  icon: const Icon(
-                                                                      Icons
-                                                                          .calendar_month,
-                                                                      size:
-                                                                          20)),
+                                                                            'Confirm Action',
+                                                                            'Are you sure this appointment is a No Show?',
+                                                                            appointments[index]['event_id'],
+                                                                            appointments[index]['appointment_id'],
+                                                                            'no-show');
+                                                                      },
+                                                                      tooltip:
+                                                                          'No Show',
+                                                                      icon: const Icon(
+                                                                          Icons
+                                                                              .person_off_outlined,
+                                                                          size:
+                                                                              20,
+                                                                          color:
+                                                                              Colors.red),
+                                                                    )),
+                                                              ],
                                                             ),
-                                                            Container(
-                                                                width: 40,
-                                                                child:
-                                                                    IconButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    showDialogBox(
-                                                                      context,
-                                                                      'Confirm Action',
-                                                                      'Are you sure you want to cancel this appointment?',
-                                                                      appointments[
-                                                                              index]
-                                                                          [
-                                                                          'event_id'],
-                                                                      appointments[
-                                                                              index]
-                                                                          [
-                                                                          'appointment_id'],
-                                                                      'cancelled',
-                                                                    );
-                                                                  },
-                                                                  tooltip:
-                                                                      'Cancel',
-                                                                  icon: const Icon(
-                                                                      Icons
-                                                                          .cancel_outlined,
-                                                                      size: 20,
-                                                                      color: Colors
-                                                                          .red),
-                                                                )),
-                                                            Container(
-                                                                width: 40,
-                                                                child:
-                                                                    IconButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    showDialogBox(
-                                                                        context,
-                                                                        'Confirm Action',
-                                                                        'Are you sure this appointment is a No Show?',
-                                                                        appointments[index]
-                                                                            [
-                                                                            'event_id'],
-                                                                        appointments[index]
-                                                                            [
-                                                                            'appointment_id'],
-                                                                        'no-show');
-                                                                  },
-                                                                  tooltip:
-                                                                      'No Show',
-                                                                  icon: const Icon(
-                                                                      Icons
-                                                                          .person_off_outlined,
-                                                                      size: 20,
-                                                                      color: Colors
-                                                                          .red),
-                                                                )),
-                                                          ],
-                                                        ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              AppSpaces.verticalSpace5,
-                                              Container(
-                                                height: 30,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.55,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.2),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(5),
-                                                  ),
-                                                ),
-                                                child: Center(
-                                                  child: Row(
-                                                    children: [
-                                                      AppSpaces
-                                                          .horizontalSpace10,
-                                                      Icon(
-                                                        Icons.calendar_month,
-                                                        size: 20,
+                                                        ],
                                                       ),
-                                                      AppSpaces
-                                                          .horizontalSpace10,
-                                                      Text(appointments[index]
-                                                          ['scheduled_on']),
-                                                    ],
+                                                    ),
+                                                  AppSpaces.verticalSpace5,
+                                                  Container(
+                                                    height: 30,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.55,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.grey
+                                                          .withOpacity(0.2),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(5),
+                                                      ),
+                                                    ),
+                                                    child: Center(
+                                                      child: Row(
+                                                        children: [
+                                                          AppSpaces
+                                                              .horizontalSpace10,
+                                                          Icon(
+                                                            Icons
+                                                                .calendar_month,
+                                                            size: 20,
+                                                          ),
+                                                          AppSpaces
+                                                              .horizontalSpace10,
+                                                          Text(appointments[
+                                                                  index]
+                                                              ['scheduled_on']),
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
+                                                ],
                                               ),
                                             ],
                                           ),
-                                        ],
+                                          childrenPadding:
+                                              const EdgeInsets.only(left: 15),
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text.rich(
+                                                TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                        text: 'Working as ',
+                                                        style: AppTextStyles
+                                                            .label5),
+                                                    TextSpan(
+                                                      text: appointments[index][
+                                                          'visitor_designation'],
+                                                      style: AppTextStyles
+                                                          .textBody2,
+                                                    ),
+                                                    TextSpan(
+                                                        text: ' in ',
+                                                        style: AppTextStyles
+                                                            .label5),
+                                                    TextSpan(
+                                                      text:
+                                                          '${appointments[index]['visitor_organization']}, ${appointments[index]['visitor_city']}',
+                                                      style: AppTextStyles
+                                                          .textBody2,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            AppSpaces.verticalSpace5,
+                                            if (appointments[index]['notes'] !=
+                                                "")
+                                              Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Text.rich(
+                                                  TextSpan(
+                                                    children: [
+                                                      TextSpan(
+                                                          text:
+                                                              'Purpose of Meeting : ',
+                                                          style: AppTextStyles
+                                                              .label5),
+                                                      TextSpan(
+                                                        text:
+                                                            appointments[index]
+                                                                ['notes'],
+                                                        style: AppTextStyles
+                                                            .textBody2,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            AppSpaces.verticalSpace5,
+                                            if (appointments[index][
+                                                    'exhibitor_feedback_message'] !=
+                                                "")
+                                              Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Text.rich(
+                                                  TextSpan(
+                                                    children: [
+                                                      TextSpan(
+                                                          text:
+                                                              'Post Meeting Notes : ',
+                                                          style: AppTextStyles
+                                                              .label5),
+                                                      TextSpan(
+                                                        text: appointments[
+                                                                index][
+                                                            'exhibitor_feedback_message'],
+                                                        style: AppTextStyles
+                                                            .textBody2,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                          ],
+                                        ),
                                       ),
-                                      childrenPadding:
-                                          const EdgeInsets.only(left: 15),
-                                      children: [
-                                        Align(
-                                          alignment: Alignment.topLeft,
-                                          child: Text.rich(
-                                            TextSpan(
-                                              children: [
-                                                TextSpan(
-                                                    text: 'Working as ',
-                                                    style:
-                                                        AppTextStyles.label5),
-                                                TextSpan(
-                                                  text: appointments[index]
-                                                      ['visitor_designation'],
-                                                  style:
-                                                      AppTextStyles.textBody2,
-                                                ),
-                                                TextSpan(
-                                                    text: ' in ',
-                                                    style:
-                                                        AppTextStyles.label5),
-                                                TextSpan(
-                                                  text:
-                                                      '${appointments[index]['visitor_organization']}, ${appointments[index]['visitor_city']}',
-                                                  style:
-                                                      AppTextStyles.textBody2,
-                                                ),
-                                              ],
+                                    ),
+                                    Positioned(
+                                      top: 0,
+                                      right: 10,
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.2,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 2),
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(8),
+                                              bottomRight: Radius.circular(8)),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            appointments[index]['status'],
+                                            style: GoogleFonts.lato(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                              color: appointments[index]
+                                                          ['status'] ==
+                                                      'Scheduled'
+                                                  ? Colors.blue
+                                                  : appointments[index]
+                                                              ['status'] ==
+                                                          'Rescheduled'
+                                                      ? Colors.grey
+                                                      : appointments[index]
+                                                                  ['status'] ==
+                                                              'Completed'
+                                                          ? Colors.green
+                                                          : appointments[index][
+                                                                      'status'] ==
+                                                                  'Confirmed'
+                                                              ? Colors.green
+                                                              : appointments[index]
+                                                                          [
+                                                                          'status'] ==
+                                                                      'No-show'
+                                                                  ? Colors.red
+                                                                  : appointments[index]
+                                                                              [
+                                                                              'status'] ==
+                                                                          'Cancelled'
+                                                                      ? Colors
+                                                                          .red
+                                                                      : AppColor
+                                                                          .bgColor,
                                             ),
                                           ),
                                         ),
-                                        AppSpaces.verticalSpace5,
-                                        if (appointments[index]['notes'] != "")
-                                          Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text.rich(
-                                              TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                      text:
-                                                          'Purpose of Meeting : ',
-                                                      style:
-                                                          AppTextStyles.label5),
-                                                  TextSpan(
-                                                    text: appointments[index]
-                                                        ['notes'],
-                                                    style:
-                                                        AppTextStyles.textBody2,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        AppSpaces.verticalSpace5,
-                                        if (appointments[index][
-                                                'exhibitor_feedback_message'] !=
-                                            "")
-                                          Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text.rich(
-                                              TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                      text:
-                                                          'Post Meeting Notes : ',
-                                                      style:
-                                                          AppTextStyles.label5),
-                                                  TextSpan(
-                                                    text: appointments[index][
-                                                        'exhibitor_feedback_message'],
-                                                    style:
-                                                        AppTextStyles.textBody2,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                      ],
-                                    ),
-                                  ),
+                                      ),
+                                    )
+                                  ],
                                 ),
                               );
                             },
