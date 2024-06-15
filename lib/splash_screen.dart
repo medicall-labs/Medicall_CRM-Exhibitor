@@ -69,10 +69,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void update() async {
-    print('Updating');
     await InAppUpdate.startFlexibleUpdate();
     InAppUpdate.completeFlexibleUpdate().then((_) {}).catchError((e) {
-      print(e.toString());
     });
   }
 

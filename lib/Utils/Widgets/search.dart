@@ -27,9 +27,7 @@ class _SearchDropdownState extends State<SearchDropdown> {
     if (response.statusCode == 200) {
       final Map<String,dynamic> data = json.decode(response.body);
       if (data.isNotEmpty) {
-        print("pincode----> ${data['records'][0]['districtname']}");
         _selectedPostalAddress = data['records'][0];
-        print("pincode_details----> ${_selectedPostalAddress}");
         widget.onSearchResults(_selectedPostalAddress!);
       }
     } else {

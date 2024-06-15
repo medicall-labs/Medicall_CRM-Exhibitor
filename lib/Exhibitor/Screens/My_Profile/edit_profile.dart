@@ -857,7 +857,6 @@ class _EditProfileState extends State<EditProfile> {
                                                                 setState(() {
                                                                   if (productId.contains(eventProduct['id'])) {
                                                                     productId.remove(eventProduct['id']);
-                                                                    print('Product ID ${eventProduct['id']} removed.');
                                                                     ProductsProvider().addProductstoCurrentEvent(
                                                                       localData.eventId,
                                                                       productId,
