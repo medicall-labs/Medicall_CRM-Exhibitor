@@ -13,6 +13,7 @@ import '../../../Constants/app_color.dart';
 import '../../../Constants/styles.dart';
 import '../../../Utils/Widgets/search.dart';
 import '../../Controllers/local_data.dart';
+import '../../Controllers/products_provider.dart';
 import '../../Controllers/profile_provider.dart';
 
 class EditProfile extends StatefulWidget {
@@ -34,6 +35,8 @@ class _EditProfileState extends State<EditProfile> {
 
   Map<String, dynamic> editedProfile = {};
 
+  List productId = [];
+
   Future<void> _pickImage() async {
     // show = true;
     final pickedFile =
@@ -48,6 +51,10 @@ class _EditProfileState extends State<EditProfile> {
       ProfileProvider().editLogo(base64Image);
     }
   }
+
+  var tokenDetails = GetStorage().read("local_store") != ''
+      ? GetStorage().read("local_store")
+      : '';
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +74,14 @@ class _EditProfileState extends State<EditProfile> {
     editedProfile['country'] = profileDetails['data']['country'];
     editedProfile['address'] = profileDetails['data']['address'];
     editedProfile['product_id'] = profileDetails['data']['product_id'];
+
+    for (int i = 0; i < profileDetails['data']['events'].length; i++)
+      if (profileDetails['data']['events'][i]['id'] ==
+          tokenDetails['current_event_id']) {
+        for (var items in profileDetails['data']['events'][i]['products'])
+          productId.add(items['id']);
+      }
+
     return Scaffold(
         backgroundColor: AppColor.bgColor,
         body: SingleChildScrollView(
@@ -770,19 +785,14 @@ class _EditProfileState extends State<EditProfile> {
                                             isScrollControlled: true,
                                             builder: (context) {
                                               return ProductSearchBottomSheet(
-                                                eventName: profileDetails['data']
-                                                ['events'][i]['name'],
+                                                eventName:
+                                                    profileDetails['data']
+                                                        ['events'][i]['name'],
                                                 eventId: profileDetails['data']
-                                                ['events'][i]['id'],
+                                                    ['events'][i]['id'],
                                               );
                                             },
                                           );
-                                          // Get.to(AddProduct(
-                                          //   eventName: profileDetails['data']
-                                          //       ['events'][i]['name'],
-                                          //   eventId: profileDetails['data']
-                                          //       ['events'][i]['id'],
-                                          // ));
                                         },
                                         icon: Icon(
                                           Icons.add,
@@ -815,19 +825,59 @@ class _EditProfileState extends State<EditProfile> {
                                                   color: AppColor.grey,
                                                 ),
                                                 AppSpaces.horizontalSpace5,
-                                                Text(
-                                                  eventProduct['name'] ?? 'N/A',
-                                                  style: AppTextStyles.textBody,
+                                                Container(
+                                                  width: 150,
+                                                  child: Text(
+                                                    eventProduct['name'] ??
+                                                        'N/A',
+                                                    style:
+                                                        AppTextStyles.textBody,
+                                                  ),
                                                 ),
                                                 AppSpaces.horizontalSpace10,
                                                 GestureDetector(
-                                                  onTap: (){},
-                                                  child:  Icon(
+                                                  onTap: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext context) {
+                                                        return AlertDialog(
+                                                          title: Text('Confirm Delete'),
+                                                          content: Text('Are you sure you want to delete ${eventProduct['name']}?'),
+                                                          actions: <Widget>[
+                                                            TextButton(
+                                                              child: Text('Cancel'),
+                                                              onPressed: () {
+                                                                Navigator.of(context).pop();
+                                                              },
+                                                            ),
+                                                            TextButton(
+                                                              child: Text('Delete'),
+                                                              onPressed: () {
+                                                                Navigator.of(context).pop(); // Close the dialog
+                                                                setState(() {
+                                                                  if (productId.contains(eventProduct['id'])) {
+                                                                    productId.remove(eventProduct['id']);
+                                                                    print('Product ID ${eventProduct['id']} removed.');
+                                                                    ProductsProvider().addProductstoCurrentEvent(
+                                                                      localData.eventId,
+                                                                      productId,
+                                                                    );
+                                                                  }
+                                                                });
+                                                              },
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Icon(
                                                     Icons.delete,
                                                     size: 20,
                                                     color: AppColor.grey,
                                                   ),
-                                                )
+                                                ),
+
                                               ],
                                             ),
                                           ),

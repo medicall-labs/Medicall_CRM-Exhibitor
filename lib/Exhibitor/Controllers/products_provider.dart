@@ -55,7 +55,7 @@ class ProductsProvider extends ChangeNotifier {
     }
   }
 
-  addProductstoCurrentEvent(id, productId) async {
+  addProductstoCurrentEvent( id, productId) async {
     try {
       var bodyContent = {
         "products": productId,
@@ -67,7 +67,6 @@ class ProductsProvider extends ChangeNotifier {
         GetStorage().remove("profileData");
         Get.offAll(BottomNavBar());
         Get.to(MyProfile());
-        print(result);
         return result;
       }
     } catch (err) {

@@ -29,7 +29,6 @@ class _EventOverviewState extends State<EventOverview> {
 
   @override
   Widget build(BuildContext context) {
-    print('5400-----${profileLogo?['data']}');
     return Scaffold(
         body: SingleChildScrollView(
       child: Consumer<LocalDataProvider>(

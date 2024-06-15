@@ -51,8 +51,6 @@ class ProfileProvider extends ChangeNotifier {
       var statusResponse = await RemoteService().postDataToApi(
           '$requestBaseUrl/exhibitor/profile/edit', editedProfileData);
       var result = jsonDecode(statusResponse.body);
-      print("............................");
-      print(result);
       if (result["status"] == 'success') {
         showDialog(
             context: context,
