@@ -11,6 +11,7 @@ import 'package:medicall_exhibitor/Exhibitor/Screens/My_History/history.dart';
 import 'package:medicall_exhibitor/Utils/Widgets/pie_chart.dart';
 import 'package:provider/provider.dart';
 
+import '../../../Utils/Identity/identity.dart';
 import '../../../Utils/Widgets/shimmer.dart';
 import '../../Controllers/auth_provider.dart';
 import '../../Controllers/local_data.dart';
@@ -211,6 +212,7 @@ class _EventOverviewState extends State<EventOverview> {
                               ),
                             ],
                           ),
+                          CustomTextWidget(),
                           AppSpaces.verticalSpace10,
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,

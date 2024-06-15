@@ -10,6 +10,7 @@ import '../Exhibitor/Controllers/auth_provider.dart';
 import '../Exhibitor/Services/remote_services.dart';
 import 'package:get/get.dart';
 
+import '../Utils/Identity/identity.dart';
 import '../Utils/Widgets/button.dart';
 import '../Utils/Widgets/snack_bar.dart';
 
@@ -42,9 +43,15 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppSpaces.verticalSpace40,
-                Text(
-                  'Login to Continue...',
-                  style: AppTextStyles.header1,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Login to Continue...',
+                      style: AppTextStyles.header1,
+                    ),
+                    CustomTextWidget(),
+                  ],
                 ),
                 SizedBox(
                   height: 150,
