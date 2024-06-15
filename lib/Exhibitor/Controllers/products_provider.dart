@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../Constants/api_collection.dart';
+import '../../Utils/Widgets/snack_bar.dart';
 import '../Screens/bottom_nav_bar.dart';
 import '../Services/remote_services.dart';
 
@@ -22,28 +24,6 @@ class ProductsProvider extends ChangeNotifier {
       return {};
     }
   }
-
-  // actionRescheduled(eventId, appId, date, time) async {
-  //   try {
-  //     var bodyContent;
-  //     bodyContent = {
-  //       "status": "rescheduled",
-  //       "date": date,
-  //       "time": time,
-  //     };
-  //     var statusResponse = await RemoteService().postDataToApi(
-  //         '$requestBaseUrl/events/$eventId/appointments/$appId', bodyContent);
-  //     var result = jsonDecode(statusResponse.body);
-  //     if (result["status"] == 'success') {
-  //       Get.offAll(() => BottomNavBar(
-  //             currentPage: 1,
-  //           ));
-  //       return result;
-  //     }
-  //   } catch (err) {
-  //     print(err);
-  //   }
-  // }
 
   addImage(id, imageId) async {
     try {

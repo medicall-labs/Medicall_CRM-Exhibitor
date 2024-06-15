@@ -13,7 +13,12 @@ import '../../../Utils/Widgets/alertBox.dart';
 import '../../../Utils/Widgets/shimmer.dart';
 import '../../Controllers/local_data.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   final UserDetails = GetStorage().read("local_store") != ''
       ? GetStorage().read("local_store")
       : '';

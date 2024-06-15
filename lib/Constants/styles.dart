@@ -10,7 +10,7 @@ class AppTextStyles {
   static final TextStyle header2 = GoogleFonts.lato(
       fontWeight: FontWeight.bold, fontSize: 25, color: Colors.black);
   static final TextStyle header3 = GoogleFonts.lato(
-      fontWeight: FontWeight.bold, fontSize: 25, color: AppColor.primary);
+      fontWeight: FontWeight.bold, fontSize: 22, color: AppColor.primary);
   static final TextStyle header4 = GoogleFonts.lato(
       fontWeight: FontWeight.bold, fontSize: 22, color: AppColor.secondary);
 
@@ -29,6 +29,9 @@ class AppTextStyles {
   static final TextStyle label5 =
   GoogleFonts.lato(fontSize: 14, color: AppColor.grey);
 
+  static final TextStyle label7 =
+  GoogleFonts.lato(fontSize: 16, color: AppColor.grey);
+
   static final TextStyle label6 =
   GoogleFonts.lato(fontSize: 20, color: AppColor.black,fontWeight: FontWeight.bold);
 
@@ -41,6 +44,11 @@ class AppTextStyles {
       GoogleFonts.lato(fontSize: 14, color: AppColor.black);
   static final TextStyle textBody3 =
       GoogleFonts.lato(fontSize: 12, color: AppColor.black);
+
+  static final TextStyle profileHead =
+  GoogleFonts.lato(fontSize: 18, color: AppColor.black);
+  static final TextStyle profileHead2 =
+  GoogleFonts.lato(fontSize: 16, color: AppColor.grey);
 
 
   static final TextStyle validation =

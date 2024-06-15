@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:medicall_exhibitor/Exhibitor/Screens/bottom_nav_bar.dart';
-import 'package:medicall_exhibitor/Exhibitor/Screens/Dashboard/register_event.dart';
 import 'Auth/login.dart';
 
 class SplashScreen extends StatefulWidget {
