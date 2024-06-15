@@ -15,6 +15,7 @@ import '../../../Utils/Widgets/shimmer.dart';
 import '../../Controllers/auth_provider.dart';
 import '../../Controllers/local_data.dart';
 import '../My_Profile/profile.dart';
+import '../Products/products.dart';
 import 'bottom_sheet.dart';
 
 class EventOverview extends StatefulWidget {
@@ -200,7 +201,7 @@ class _EventOverviewState extends State<EventOverview> {
                                   if (value == 1) {
                                     Get.to(() => MyProfile());
                                   } else if (value == 2) {
-                                    // Navigate to Products
+                                    Get.to(AllProducts());
                                   } else if (value == 3) {
                                     Get.to(() => MyHistory());
                                   } else if (value == 4) {

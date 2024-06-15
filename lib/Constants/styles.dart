@@ -37,6 +37,8 @@ class AppTextStyles {
 
   static final TextStyle whitelabel =
   GoogleFonts.lato(fontSize: 14, color: AppColor.white);
+  static final TextStyle whitelabel1 =
+  GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize: 16, color: AppColor.white);
 
   static final TextStyle textBody =
       GoogleFonts.lato(fontSize: 16, color: AppColor.black);
