@@ -1,4 +1,4 @@
-package com.example.medicall_exhibitor
+package com.medicall.exhibitor
 
 import io.flutter.embedding.android.FlutterActivity
 
