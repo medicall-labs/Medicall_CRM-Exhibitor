@@ -36,9 +36,7 @@ class DashboardProvider extends ChangeNotifier {
           '$requestBaseUrl/events/$eventId/exhibitor/registration', '');
       var result = jsonDecode(statusResponse.body);
       if (result["status"] == 'success') {
-        Get.offAll(() => BottomNavBar(
-          currentPage: 2,
-        ));
+        Get.offAll(() => BottomNavBar());
         return result;
       }
     } catch (err) {

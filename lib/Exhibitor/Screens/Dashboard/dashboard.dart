@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:get_storage/get_storage.dart';
 import 'package:medicall_exhibitor/Constants/spacing.dart';
 import 'package:medicall_exhibitor/Exhibitor/Controllers/dashboard_provider.dart';
+import 'package:medicall_exhibitor/Exhibitor/Screens/bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Constants/app_color.dart';
@@ -91,6 +93,7 @@ class Dashboard extends StatelessWidget {
                                       listen: false)
                                   .changeEventID(registerEventPage['data']
                                       ['currentEvent']['id']);
+                              Get.offAll(BottomNavBar());
                             }
                           },
                           child: Container(
@@ -231,6 +234,7 @@ class Dashboard extends StatelessWidget {
                                             listen: false)
                                         .changeEventID(registerEventPage['data']
                                             ['upcomingEvents'][index]['id']);
+                                    Get.offAll(BottomNavBar());
                                   }
                                 },
                                 child: Container(
