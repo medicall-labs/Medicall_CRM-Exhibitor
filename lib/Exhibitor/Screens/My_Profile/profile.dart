@@ -30,8 +30,16 @@ class MyProfile extends StatelessWidget {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Column(
                           children: [
-                            Skeleton(height: 40),
-                            AppSpaces.verticalSpace20,
+                            AppSpaces.verticalSpace10,
+                            Skeleton(height: 50),
+                            AppSpaces.verticalSpace15,
+                            Skeleton(height: 90),
+                            AppSpaces.verticalSpace5,
+                            Skeleton(height: 100),
+                            AppSpaces.verticalSpace5,
+                            Skeleton(height: 300),
+                            AppSpaces.verticalSpace5,
+                            Skeleton(height: 200),
                           ],
                         );
                       } else if (snapshot.hasError) {
