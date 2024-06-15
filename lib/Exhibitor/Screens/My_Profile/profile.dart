@@ -254,7 +254,7 @@ class MyProfile extends StatelessWidget {
                                               ),
                                               AppSpaces.horizontalSpace5,
                                               Text(
-                                                'Category Name',
+                                                'Business Type',
                                                 style: AppTextStyles.label7,
                                               ),
                                               Spacer(),
