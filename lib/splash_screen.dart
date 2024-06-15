@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:in_app_update/in_app_update.dart';
@@ -35,9 +36,11 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     _timer = Timer.periodic(Duration(seconds: 3), (timer) {
       if (mounted) {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) =>
-                UserDetails != null ? BottomNavBar() : LoginPage()));
+        setState(() {
+          Get.offAll(GetStorage().read("local_store") != null
+              ? BottomNavBar()
+              : LoginPage());
+        });
       }
     });
   }
