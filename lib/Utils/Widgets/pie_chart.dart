@@ -18,8 +18,6 @@ class PieChart extends StatelessWidget {
           domain: 'Rescheduled',
           measure: insights['rescheduled_count'],
           color: Color(0xffbf3a4a)),
-      // OrdinalData(
-      //     domain: 'Confirmed Count', measure: 9, color: Colors.purple[300]),
       OrdinalData(
           domain: 'No Show',
           measure: insights['lapsed_count'],
@@ -59,7 +57,7 @@ class PieChart extends StatelessWidget {
 
           arcLength: 2 * pi,
           arcWidth: 20,
-          startAngle: -pi / 3,
+          // startAngle: -pi / 3,
           // strokeWidthPx: 2,
         ),
       ),
