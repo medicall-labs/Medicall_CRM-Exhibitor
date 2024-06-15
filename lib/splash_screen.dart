@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     _loadAppOpenCount();
     _incrementAppOpenCount();
     checkForUpdate();
-    if (appOpenCount == 36) {
+    if (appOpenCount == 10 || appOpenCount == 20) {
       _inAppReview.requestReview();
     }
     _timer = Timer.periodic(Duration(seconds: 3), (timer) {

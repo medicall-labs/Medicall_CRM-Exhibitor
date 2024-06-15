@@ -1,4 +1,12 @@
+import 'dart:ui';
+
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'firebase_options.dart';
+
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:medicall_exhibitor/Constants/app_color.dart';
 import 'package:get/get.dart';
 import 'package:medicall_exhibitor/Exhibitor/Controllers/history_provider.dart';
@@ -12,7 +20,24 @@ import 'Exhibitor/Controllers/products_provider.dart';
 import 'Exhibitor/Controllers/profile_provider.dart';
 import 'splash_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  PlatformDispatcher.instance.onError = (error, stack) {
+    String errorMessage = "Error occurred: $error";
+    var userDetails = GetStorage().read("login_data");
+    if (userDetails['data'] != null) {
+      errorMessage +=
+          ' Mobile number : ${userDetails['data']['mobile_number']}';
+    }
+    FirebaseCrashlytics.instance.recordError(errorMessage, stack, fatal: true);
+    return true;
+  };
+
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
