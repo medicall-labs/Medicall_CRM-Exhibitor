@@ -29,6 +29,7 @@ class _EventOverviewState extends State<EventOverview> {
 
   @override
   Widget build(BuildContext context) {
+    print('5400-----${profileLogo?['data']}');
     return Scaffold(
         body: SingleChildScrollView(
       child: Consumer<LocalDataProvider>(
@@ -79,16 +80,17 @@ class _EventOverviewState extends State<EventOverview> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              CircleAvatar(
-                                  radius: 15,
-                                  backgroundColor: Colors.grey[200],
-                                  child: profileLogo['data']['logo'] != ''
-                                      ? ClipOval(
-                                          child: Image.network(
-                                              profileLogo['data']['logo'],
-                                              fit: BoxFit.cover),
-                                        )
-                                      : Container()),
+                              if (profileLogo != null)
+                                CircleAvatar(
+                                    radius: 15,
+                                    backgroundColor: Colors.grey[200],
+                                    child: profileLogo?['data']['logo'] != ''
+                                        ? ClipOval(
+                                            child: Image.network(
+                                                profileLogo['data']['logo'],
+                                                fit: BoxFit.cover),
+                                          )
+                                        : Container()),
                               Text(
                                 insights['current_event_title'],
                                 style: AppTextStyles.header3,

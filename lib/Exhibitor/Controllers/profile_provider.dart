@@ -20,7 +20,7 @@ class ProfileProvider extends ChangeNotifier {
       var profileResponse = await RemoteService()
           .getDataFromApi('${requestBaseUrl}/exhibitor/profile');
       if (profileResponse["status"] == 'success') {
-        ProfileModel profileModel = ProfileModel.fromJson(profileResponse);
+        ProfileModel.fromJson(profileResponse);
         GetStorage().write("profileData", profileResponse);
         return profileResponse;
       }

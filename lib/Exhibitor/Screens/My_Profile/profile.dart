@@ -41,7 +41,6 @@ class MyProfile extends StatelessWidget {
                         if (profilePage != null &&
                             profilePage is Map<String, dynamic>) {
                           var profile = ProfileModel.fromJson(profilePage);
-
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -238,8 +237,7 @@ class MyProfile extends StatelessWidget {
                                               ),
                                               Spacer(),
                                               Text(
-                                                profile.data?.username ??
-                                                    "N/A",
+                                                profile.data?.username ?? "N/A",
                                                 style: AppTextStyles.label,
                                               )
                                             ],
@@ -302,8 +300,7 @@ class MyProfile extends StatelessWidget {
                                               Spacer(),
                                               Container(
                                                 width: 200,
-                                                color: Colors
-                                                    .grey.shade50,
+                                                color: Colors.grey.shade50,
                                                 child: Text(
                                                   profile.data?.description ??
                                                       'N/A',
@@ -328,8 +325,7 @@ class MyProfile extends StatelessWidget {
                                               Spacer(),
                                               Container(
                                                 width: 200,
-                                                color: Colors
-                                                    .grey.shade50,
+                                                color: Colors.grey.shade50,
                                                 child: Text(
                                                   profile.data?.address ??
                                                       'N/A',
