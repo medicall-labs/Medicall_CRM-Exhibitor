@@ -202,33 +202,33 @@ class _LoginPageState extends State<LoginPage> {
                   );
                 }),
                 AppSpaces.verticalSpace40,
-                Center(
-                    child: Text(
-                  'Don\'t have Account?',
-                  style: AppTextStyles.textBody2,
-                )),
-                AppSpaces.verticalSpace20,
-                GestureDetector(
-                  onTap: () {},
-                  child: Card(
-                    elevation: 5,
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColor.secondary,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Create Account',
-                          style: AppTextStyles.textButton2,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
+                // Center(
+                //     child: Text(
+                //   'Don\'t have Account?',
+                //   style: AppTextStyles.textBody2,
+                // )),
+                // AppSpaces.verticalSpace20,
+                // GestureDetector(
+                //   onTap: () {},
+                //   child: Card(
+                //     elevation: 5,
+                //     child: Container(
+                //       height: 50,
+                //       decoration: BoxDecoration(
+                //         border: Border.all(
+                //           color: AppColor.secondary,
+                //         ),
+                //         borderRadius: BorderRadius.circular(10),
+                //       ),
+                //       child: Center(
+                //         child: Text(
+                //           'Create Account',
+                //           style: AppTextStyles.textButton2,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // )
               ],
             ),
           ),
