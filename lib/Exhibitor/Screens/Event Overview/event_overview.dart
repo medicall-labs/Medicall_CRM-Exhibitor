@@ -73,7 +73,6 @@ class _EventOverviewState extends State<EventOverview> {
                     if (eventInsightsPage != null &&
                         eventInsightsPage is Map<String, dynamic>) {
                       var insights = eventInsightsPage['data'];
-                      print('.5400..............$insights');
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -234,19 +233,22 @@ class _EventOverviewState extends State<EventOverview> {
                                           _showBottomSheet(context, 'Scheduled',
                                               localData.eventId);
                                         },
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              'Scheduled',
-                                              style: AppTextStyles.label2,
-                                            ),
-                                            AppSpaces.verticalSpace5,
-                                            Text(
-                                              insights['scheduled_count']
-                                                  .toString(),
-                                              style: AppTextStyles.label4,
-                                            ),
-                                          ],
+                                        child: Container(
+                                          width: double.infinity,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'Scheduled',
+                                                style: AppTextStyles.label2,
+                                              ),
+                                              AppSpaces.verticalSpace5,
+                                              Text(
+                                                insights['scheduled_count']
+                                                    .toString(),
+                                                style: AppTextStyles.label4,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       Divider(height: 20),
@@ -255,19 +257,22 @@ class _EventOverviewState extends State<EventOverview> {
                                           _showBottomSheet(context, 'Completed',
                                               localData.eventId);
                                         },
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              'Completed',
-                                              style: AppTextStyles.label2,
-                                            ),
-                                            AppSpaces.verticalSpace5,
-                                            Text(
-                                              insights['completed_count']
-                                                  .toString(),
-                                              style: AppTextStyles.label4,
-                                            ),
-                                          ],
+                                        child: Container(
+                                          width: double.infinity,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'Completed',
+                                                style: AppTextStyles.label2,
+                                              ),
+                                              AppSpaces.verticalSpace5,
+                                              Text(
+                                                insights['completed_count']
+                                                    .toString(),
+                                                style: AppTextStyles.label4,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       Divider(height: 20),
@@ -276,19 +281,22 @@ class _EventOverviewState extends State<EventOverview> {
                                           _showBottomSheet(context,
                                               'Rescheduled', localData.eventId);
                                         },
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              'Rescheduled',
-                                              style: AppTextStyles.label2,
-                                            ),
-                                            AppSpaces.verticalSpace5,
-                                            Text(
-                                              insights['rescheduled_count']
-                                                  .toString(),
-                                              style: AppTextStyles.label4,
-                                            ),
-                                          ],
+                                        child: Container(
+                                          width: double.infinity,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'Rescheduled',
+                                                style: AppTextStyles.label2,
+                                              ),
+                                              AppSpaces.verticalSpace5,
+                                              Text(
+                                                insights['rescheduled_count']
+                                                    .toString(),
+                                                style: AppTextStyles.label4,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       Divider(height: 20),
@@ -297,19 +305,22 @@ class _EventOverviewState extends State<EventOverview> {
                                           _showBottomSheet(context, 'No-show',
                                               localData.eventId);
                                         },
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              'No Show',
-                                              style: AppTextStyles.label2,
-                                            ),
-                                            AppSpaces.verticalSpace5,
-                                            Text(
-                                              insights['lapsed_count']
-                                                  .toString(),
-                                              style: AppTextStyles.label4,
-                                            ),
-                                          ],
+                                        child: Container(
+                                          width: double.infinity,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'No Show',
+                                                style: AppTextStyles.label2,
+                                              ),
+                                              AppSpaces.verticalSpace5,
+                                              Text(
+                                                insights['lapsed_count']
+                                                    .toString(),
+                                                style: AppTextStyles.label4,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       Divider(height: 20),
@@ -318,19 +329,22 @@ class _EventOverviewState extends State<EventOverview> {
                                           _showBottomSheet(context, 'Cancelled',
                                               localData.eventId);
                                         },
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              'Cancelled',
-                                              style: AppTextStyles.label2,
-                                            ),
-                                            AppSpaces.verticalSpace5,
-                                            Text(
-                                              insights['cancelled_count']
-                                                  .toString(),
-                                              style: AppTextStyles.label4,
-                                            ),
-                                          ],
+                                        child: Container(
+                                          width: double.infinity,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'Cancelled',
+                                                style: AppTextStyles.label2,
+                                              ),
+                                              AppSpaces.verticalSpace5,
+                                              Text(
+                                                insights['cancelled_count']
+                                                    .toString(),
+                                                style: AppTextStyles.label4,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       Divider(height: 20),
@@ -463,7 +477,10 @@ class _EventOverviewState extends State<EventOverview> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(8))),
                               child: ListTile(
-                                title: Text('Hall Layout',
+                                title: Text(
+                                    insights['stall_no'].isNotEmpty
+                                        ? 'Stall no : ${insights['stall_no']}'
+                                        : 'Hall Layout',
                                     style: AppTextStyles.textBody),
                                 onTap: () {
                                   if (insights['hall_layout'] != "")
