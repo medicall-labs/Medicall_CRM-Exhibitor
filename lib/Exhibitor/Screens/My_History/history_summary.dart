@@ -69,9 +69,9 @@ class HistorySummary extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 10),
                           child:
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.4,
+                            width: MediaQuery.of(context).size.width * 0.5,
                             child: FittedBox(
-                              child: Text('Event History',
+                              child: Text('Completed Appointments',
                                   style: AppTextStyles.header2),
                             ),
                           ),
