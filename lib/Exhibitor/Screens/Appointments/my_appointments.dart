@@ -93,8 +93,14 @@ class _AppointmentState extends State<Appointment> {
                                         )
                                       : Container()),
                               AppSpaces.horizontalSpace10,
-                              Text('Appointments',
-                                  style: AppTextStyles.header2),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                child: FittedBox(
+                                  child: Text('Appointments',
+                                      style: AppTextStyles.header2),
+                                ),
+                              ),
+
                               Spacer(),
                               CustomTextWidget(),
                               PopupMenuButton(
@@ -217,10 +223,17 @@ class _AppointmentState extends State<Appointment> {
                         AppSpaces.verticalSpace10,
                         Align(
                           alignment: Alignment.center,
-                          child: Text(
-                            appointments[0]['event_title'],
-                            style: AppTextStyles.header3,
+                          child:
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            child: FittedBox(
+                              child:  Text(
+                                appointments[0]['event_title'],
+                                style: AppTextStyles.header3,
+                              ),
+                            ),
                           ),
+
                         ),
                         Container(
                           height: MediaQuery.of(context).size.height - 200,
@@ -276,16 +289,16 @@ class _AppointmentState extends State<Appointment> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.5,
-                                                    child: Text(
-                                                      appointments[index]
+                                                    height: 25,
+                                                    width: MediaQuery.of(context).size.width * 0.5,
+                                                    child: FittedBox(
+                                                        alignment: Alignment.centerLeft,
+                                                        child:  Text(
+                                                          appointments[index]
                                                           ['visitor_name'],
-                                                      style:
+                                                          style:
                                                           AppTextStyles.label,
+                                                        ),
                                                     ),
                                                   ),
                                                   AppSpaces.verticalSpace5,
@@ -433,7 +446,7 @@ class _AppointmentState extends State<Appointment> {
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width *
-                                                            0.55,
+                                                            0.5,
                                                     decoration: BoxDecoration(
                                                       color: Colors.grey
                                                           .withOpacity(0.2),
@@ -454,9 +467,15 @@ class _AppointmentState extends State<Appointment> {
                                                           ),
                                                           AppSpaces
                                                               .horizontalSpace10,
-                                                          Text(appointments[
-                                                                  index]
+                                                          Container(
+                                                            width: MediaQuery.of(context).size.width * 0.35,
+                                                            child: FittedBox(
+                                                              child:  Text(appointments[
+                                                              index]
                                                               ['scheduled_on']),
+                                                            ),
+                                                          ),
+
                                                         ],
                                                       ),
                                                     ),
@@ -566,42 +585,50 @@ class _AppointmentState extends State<Appointment> {
                                               bottomRight: Radius.circular(8)),
                                         ),
                                         child: Center(
-                                          child: Text(
-                                            appointments[index]['status'],
-                                            style: GoogleFonts.lato(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                              color: appointments[index]
-                                                          ['status'] ==
+                                          child:
+                                          Container(
+                                            height:20,
+                                            width: MediaQuery.of(context).size.width * 0.2,
+                                            child: FittedBox(
+                                              child:  Text(
+                                                appointments[index]['status'],
+                                                style: GoogleFonts.lato(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: appointments[index]
+                                                  ['status'] ==
                                                       'Scheduled'
-                                                  ? Colors.blue
-                                                  : appointments[index]
-                                                              ['status'] ==
-                                                          'Rescheduled'
+                                                      ? Colors.blue
+                                                      : appointments[index]
+                                                  ['status'] ==
+                                                      'Rescheduled'
                                                       ? Colors.grey
                                                       : appointments[index]
-                                                                  ['status'] ==
-                                                              'Completed'
-                                                          ? Colors.green
-                                                          : appointments[index][
-                                                                      'status'] ==
-                                                                  'Confirmed'
-                                                              ? Colors.green
-                                                              : appointments[index]
-                                                                          [
-                                                                          'status'] ==
-                                                                      'No-show'
-                                                                  ? Colors.red
-                                                                  : appointments[index]
-                                                                              [
-                                                                              'status'] ==
-                                                                          'Cancelled'
-                                                                      ? Colors
-                                                                          .red
-                                                                      : AppColor
-                                                                          .bgColor,
+                                                  ['status'] ==
+                                                      'Completed'
+                                                      ? Colors.green
+                                                      : appointments[index][
+                                                  'status'] ==
+                                                      'Confirmed'
+                                                      ? Colors.green
+                                                      : appointments[index]
+                                                  [
+                                                  'status'] ==
+                                                      'No-show'
+                                                      ? Colors.red
+                                                      : appointments[index]
+                                                  [
+                                                  'status'] ==
+                                                      'Cancelled'
+                                                      ? Colors
+                                                      .red
+                                                      : AppColor
+                                                      .bgColor,
+                                                ),
+                                              ),
                                             ),
                                           ),
+
                                         ),
                                       ),
                                     )

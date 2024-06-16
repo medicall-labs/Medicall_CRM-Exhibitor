@@ -92,9 +92,14 @@ class _EventOverviewState extends State<EventOverview> {
                                                 fit: BoxFit.cover),
                                           )
                                         : Container()),
-                              Text(
-                                insights['current_event_title'],
-                                style: AppTextStyles.header3,
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.7,
+                                child: FittedBox(
+                                  child: Text(
+                                    insights['current_event_title'],
+                                    style: AppTextStyles.header3,
+                                  ),
+                                ),
                               ),
                               PopupMenuButton(
                                 icon: ColorFiltered(
@@ -241,9 +246,17 @@ class _EventOverviewState extends State<EventOverview> {
                                           width: double.infinity,
                                           child: Column(
                                             children: [
-                                              Text(
-                                                'Scheduled',
-                                                style: AppTextStyles.label2,
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.15,
+                                                child: FittedBox(
+                                                  child: Text(
+                                                    'Scheduled',
+                                                    style: AppTextStyles.label2,
+                                                  ),
+                                                ),
                                               ),
                                               AppSpaces.verticalSpace5,
                                               Text(
@@ -265,9 +278,17 @@ class _EventOverviewState extends State<EventOverview> {
                                           width: double.infinity,
                                           child: Column(
                                             children: [
-                                              Text(
-                                                'Completed',
-                                                style: AppTextStyles.label2,
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.15,
+                                                child: FittedBox(
+                                                  child: Text(
+                                                    'Completed',
+                                                    style: AppTextStyles.label2,
+                                                  ),
+                                                ),
                                               ),
                                               AppSpaces.verticalSpace5,
                                               Text(
@@ -289,9 +310,17 @@ class _EventOverviewState extends State<EventOverview> {
                                           width: double.infinity,
                                           child: Column(
                                             children: [
-                                              Text(
-                                                'Rescheduled',
-                                                style: AppTextStyles.label2,
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.165,
+                                                child: FittedBox(
+                                                  child: Text(
+                                                    'Rescheduled',
+                                                    style: AppTextStyles.label2,
+                                                  ),
+                                                ),
                                               ),
                                               AppSpaces.verticalSpace5,
                                               Text(
@@ -313,9 +342,17 @@ class _EventOverviewState extends State<EventOverview> {
                                           width: double.infinity,
                                           child: Column(
                                             children: [
-                                              Text(
-                                                'No Show',
-                                                style: AppTextStyles.label2,
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.11,
+                                                child: FittedBox(
+                                                  child: Text(
+                                                    'No Show',
+                                                    style: AppTextStyles.label2,
+                                                  ),
+                                                ),
                                               ),
                                               AppSpaces.verticalSpace5,
                                               Text(
@@ -337,9 +374,17 @@ class _EventOverviewState extends State<EventOverview> {
                                           width: double.infinity,
                                           child: Column(
                                             children: [
-                                              Text(
-                                                'Cancelled',
-                                                style: AppTextStyles.label2,
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.13,
+                                                child: FittedBox(
+                                                  child: Text(
+                                                    'Cancelled',
+                                                    style: AppTextStyles.label2,
+                                                  ),
+                                                ),
                                               ),
                                               AppSpaces.verticalSpace5,
                                               Text(
@@ -352,9 +397,16 @@ class _EventOverviewState extends State<EventOverview> {
                                         ),
                                       ),
                                       Divider(height: 20),
-                                      Text(
-                                        'Total Appointments',
-                                        style: AppTextStyles.label2,
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.25,
+                                        child: FittedBox(
+                                          child: Text(
+                                            'Total Appointments',
+                                            style: AppTextStyles.label2,
+                                          ),
+                                        ),
                                       ),
                                       Text(
                                         insights['total_appointments_count']
@@ -389,7 +441,7 @@ class _EventOverviewState extends State<EventOverview> {
                                       ]),
                                     ),
                                     Container(
-                                      width: 75,
+                                      width: 80,
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -402,10 +454,16 @@ class _EventOverviewState extends State<EventOverview> {
                                                 color: Color(0xff3abfaf),
                                               ),
                                               AppSpaces.horizontalSpace5,
-                                              Text(
-                                                'Scheduled',
-                                                style: AppTextStyles.textBody3,
-                                              )
+                                              Container(
+                                                width: MediaQuery.of(context).size.width * 0.125,
+                                                child: FittedBox(
+                                                  child:  Text(
+                                                    'Scheduled',
+                                                    style: AppTextStyles.textBody3,
+                                                  )
+                                                ),
+                                              ),
+
                                             ],
                                           ),
                                           Row(
@@ -416,10 +474,16 @@ class _EventOverviewState extends State<EventOverview> {
                                                 color: Color(0xff8dbf3a),
                                               ),
                                               AppSpaces.horizontalSpace5,
-                                              Text(
-                                                'Completed',
-                                                style: AppTextStyles.textBody3,
-                                              )
+                                              Container(
+                                                width: MediaQuery.of(context).size.width * 0.125,
+                                                child: FittedBox(
+                                                    child: Text(
+                                                      'Completed',
+                                                      style: AppTextStyles.textBody3,
+                                                    )
+                                                ),
+                                              ),
+
                                             ],
                                           ),
                                           Row(
@@ -430,10 +494,16 @@ class _EventOverviewState extends State<EventOverview> {
                                                 color: Color(0xffbf3a4a),
                                               ),
                                               AppSpaces.horizontalSpace5,
-                                              Text(
-                                                'Rescheduled',
-                                                style: AppTextStyles.textBody3,
-                                              )
+                                              Container(
+                                                width: MediaQuery.of(context).size.width * 0.14,
+                                                child: FittedBox(
+                                                    child: Text(
+                                                      'Rescheduled',
+                                                      style: AppTextStyles.textBody3,
+                                                    )
+                                                ),
+                                              ),
+
                                             ],
                                           ),
                                           Row(
@@ -444,10 +514,16 @@ class _EventOverviewState extends State<EventOverview> {
                                                 color: Color(0xff6c3abf),
                                               ),
                                               AppSpaces.horizontalSpace5,
-                                              Text(
-                                                'No Show',
-                                                style: AppTextStyles.textBody3,
-                                              )
+                                              Container(
+                                                width: MediaQuery.of(context).size.width * 0.1,
+                                                child: FittedBox(
+                                                    child: Text(
+                                                      'No Show',
+                                                      style: AppTextStyles.textBody3,
+                                                    )
+                                                ),
+                                              ),
+
                                             ],
                                           ),
                                           Row(
@@ -458,10 +534,16 @@ class _EventOverviewState extends State<EventOverview> {
                                                 color: Color(0xff3abf6c),
                                               ),
                                               AppSpaces.horizontalSpace5,
-                                              Text(
-                                                'Cancelled',
-                                                style: AppTextStyles.textBody3,
-                                              )
+                                              Container(
+                                                width: MediaQuery.of(context).size.width * 0.115,
+                                                child: FittedBox(
+                                                    child: Text(
+                                                      'Cancelled',
+                                                      style: AppTextStyles.textBody3,
+                                                    )
+                                                ),
+                                              ),
+
                                             ],
                                           ),
                                         ],

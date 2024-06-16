@@ -86,7 +86,13 @@ class _DashboardState extends State<Dashboard> {
                                       )
                                     : Container()),
                             AppSpaces.horizontalSpace10,
-                            Text('Dashboard', style: AppTextStyles.header2),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: FittedBox(
+                                child: Text('Dashboard', style: AppTextStyles.header2),
+                              ),
+                            ),
+
                             Spacer(),
                             CustomTextWidget(),
                             PopupMenuButton(
@@ -112,7 +118,7 @@ class _DashboardState extends State<Dashboard> {
                                         child: Icon(
                                           Icons.person,
                                           color:
-                                          AppColor.black.withOpacity(0.5),
+                                              AppColor.black.withOpacity(0.5),
                                           size: 20,
                                         ),
                                       ),
@@ -134,7 +140,7 @@ class _DashboardState extends State<Dashboard> {
                                         child: Icon(
                                           Icons.shopping_cart_outlined,
                                           color:
-                                          AppColor.black.withOpacity(0.5),
+                                              AppColor.black.withOpacity(0.5),
                                           size: 20,
                                         ),
                                       ),
@@ -156,7 +162,7 @@ class _DashboardState extends State<Dashboard> {
                                         child: Icon(
                                           Icons.history_rounded,
                                           color:
-                                          AppColor.black.withOpacity(0.5),
+                                              AppColor.black.withOpacity(0.5),
                                           size: 20,
                                         ),
                                       ),
@@ -178,7 +184,7 @@ class _DashboardState extends State<Dashboard> {
                                         child: Icon(
                                           Icons.logout,
                                           color:
-                                          AppColor.black.withOpacity(0.5),
+                                              AppColor.black.withOpacity(0.5),
                                           size: 20,
                                         ),
                                       ),
@@ -206,10 +212,16 @@ class _DashboardState extends State<Dashboard> {
                           ],
                         ),
                         AppSpaces.verticalSpace20,
-                        Text(
-                          'Current Event',
-                          style: AppTextStyles.header4,
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          child: FittedBox(
+                            child: Text(
+                              'Current Event',
+                              style: AppTextStyles.header4,
+                            ),
+                          ),
                         ),
+
                         AppSpaces.verticalSpace10,
                         GestureDetector(
                           onTap: () {
@@ -275,10 +287,17 @@ class _DashboardState extends State<Dashboard> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        registerEventPage['data']
-                                            ['currentEvent']['title'],
-                                        style: AppTextStyles.label6,
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.6,
+                                        child: FittedBox(
+                                          child: Text(
+                                            registerEventPage['data']
+                                                ['currentEvent']['title'],
+                                            style: AppTextStyles.label6,
+                                          ),
+                                        ),
                                       ),
                                       if (registerEventPage['data']
                                                   ['currentEvent']
@@ -306,10 +325,18 @@ class _DashboardState extends State<Dashboard> {
                                                       BorderRadius.circular(8),
                                                   color: Colors.green),
                                               child: Center(
-                                                child: Text(
-                                                  'Register',
-                                                  style:
-                                                      AppTextStyles.whitelabel,
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.15,
+                                                  child: FittedBox(
+                                                    child: Text(
+                                                      'Register',
+                                                      style: AppTextStyles
+                                                          .whitelabel,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -327,9 +354,18 @@ class _DashboardState extends State<Dashboard> {
                                                   BorderRadius.circular(8),
                                               color: Colors.blue),
                                           child: Center(
-                                            child: Text(
-                                              'Registered',
-                                              style: AppTextStyles.whitelabel,
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.15,
+                                              child: FittedBox(
+                                                child: Text(
+                                                  'Registered',
+                                                  style:
+                                                      AppTextStyles.whitelabel,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         )
@@ -341,10 +377,16 @@ class _DashboardState extends State<Dashboard> {
                           ),
                         ),
                         AppSpaces.verticalSpace40,
-                        Text(
-                          'Upcoming Event',
-                          style: AppTextStyles.header4,
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          child: FittedBox(
+                            child: Text(
+                              'Upcoming Event',
+                              style: AppTextStyles.header4,
+                            ),
+                          ),
                         ),
+
                         Expanded(
                           child: ListView.builder(
                             itemCount: registerEventPage['data']
@@ -388,11 +430,19 @@ class _DashboardState extends State<Dashboard> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         children: [
-                                          Text(
-                                            registerEventPage['data']
-                                                    ['upcomingEvents'][index]
-                                                ['title'],
-                                            style: AppTextStyles.label6,
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.6,
+                                            child: FittedBox(
+                                              child: Text(
+                                                registerEventPage['data']
+                                                        ['upcomingEvents']
+                                                    [index]['title'],
+                                                style: AppTextStyles.label6,
+                                              ),
+                                            ),
                                           ),
                                           if (registerEventPage['data']
                                                       ['upcomingEvents'][index]
@@ -422,10 +472,19 @@ class _DashboardState extends State<Dashboard> {
                                                               8),
                                                       color: Colors.green),
                                                   child: Center(
-                                                    child: Text(
-                                                      'Register',
-                                                      style: AppTextStyles
-                                                          .whitelabel,
+                                                    child: Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.15,
+                                                      child: FittedBox(
+                                                        child: Text(
+                                                          'Register',
+                                                          style: AppTextStyles
+                                                              .whitelabel,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -443,10 +502,18 @@ class _DashboardState extends State<Dashboard> {
                                                       BorderRadius.circular(8),
                                                   color: Colors.blue),
                                               child: Center(
-                                                child: Text(
-                                                  'Registered',
-                                                  style:
-                                                      AppTextStyles.whitelabel,
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.15,
+                                                  child: FittedBox(
+                                                    child: Text(
+                                                      'Registered',
+                                                      style: AppTextStyles
+                                                          .whitelabel,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             )
