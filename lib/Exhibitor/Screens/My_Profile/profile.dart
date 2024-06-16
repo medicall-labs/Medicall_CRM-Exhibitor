@@ -376,11 +376,19 @@ class MyProfile extends StatelessWidget {
                                                       color: AppColor.grey,
                                                     ),
                                                     AppSpaces.horizontalSpace5,
-                                                    Text(
-                                                      event.name ?? 'N/A',
-                                                      style:
+                                                    Container(
+                                                      height:20,
+                                                      width: MediaQuery.of(context).size.width * 0.5,
+                                                      child: FittedBox(
+                                                        alignment: Alignment.centerLeft,
+                                                        child: Text(
+                                                          event.name ?? 'N/A',
+                                                          style:
                                                           AppTextStyles.label7,
+                                                        ),
+                                                      ),
                                                     ),
+
                                                     Spacer(),
                                                     Text(
                                                       event.stallNo ?? 'N/A',
@@ -418,12 +426,19 @@ class MyProfile extends StatelessWidget {
                                                                 ),
                                                                 AppSpaces
                                                                     .horizontalSpace5,
-                                                                Text(
-                                                                  eventProduct
+                                                                Container(
+                                                                  height:20,
+                                                                  width: MediaQuery.of(context).size.width * 0.7,
+                                                                  child: FittedBox(
+                                                                    alignment: Alignment.centerLeft,
+                                                                    child: Text(
+                                                                      eventProduct
                                                                           .name ??
-                                                                      'N/A',
-                                                                  style: AppTextStyles
-                                                                      .textBody,
+                                                                          'N/A',
+                                                                      style: AppTextStyles
+                                                                          .textBody,
+                                                                    ),
+                                                                  ),
                                                                 ),
                                                               ],
                                                             ),

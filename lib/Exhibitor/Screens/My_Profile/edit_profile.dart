@@ -771,11 +771,19 @@ class _EditProfileState extends State<EditProfile> {
                                       color: AppColor.grey,
                                     ),
                                     AppSpaces.horizontalSpace5,
-                                    Text(
-                                      profileDetails['data']['events'][i]
-                                              ['name'] ??
-                                          'N/A',
-                                      style: AppTextStyles.label7,
+                                    Container(
+                                      height: 20,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.7,
+                                      child: FittedBox(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          profileDetails['data']['events'][i]
+                                                  ['name'] ??
+                                              'N/A',
+                                          style: AppTextStyles.label7,
+                                        ),
+                                      ),
                                     ),
                                     Spacer(),
                                     IconButton(
@@ -839,26 +847,42 @@ class _EditProfileState extends State<EditProfile> {
                                                   onTap: () {
                                                     showDialog(
                                                       context: context,
-                                                      builder: (BuildContext context) {
+                                                      builder: (BuildContext
+                                                          context) {
                                                         return AlertDialog(
-                                                          title: Text('Confirm Delete'),
-                                                          content: Text('Are you sure you want to delete ${eventProduct['name']}?'),
+                                                          title: Text(
+                                                              'Confirm Delete'),
+                                                          content: Text(
+                                                              'Are you sure you want to delete ${eventProduct['name']}?'),
                                                           actions: <Widget>[
                                                             TextButton(
-                                                              child: Text('Cancel'),
+                                                              child: Text(
+                                                                  'Cancel'),
                                                               onPressed: () {
-                                                                Navigator.of(context).pop();
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
                                                               },
                                                             ),
                                                             TextButton(
-                                                              child: Text('Delete'),
+                                                              child: Text(
+                                                                  'Delete'),
                                                               onPressed: () {
-                                                                Navigator.of(context).pop(); // Close the dialog
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop(); // Close the dialog
                                                                 setState(() {
-                                                                  if (productId.contains(eventProduct['id'])) {
-                                                                    productId.remove(eventProduct['id']);
-                                                                    ProductsProvider().addProductstoCurrentEvent(
-                                                                      localData.eventId,
+                                                                  if (productId
+                                                                      .contains(
+                                                                          eventProduct[
+                                                                              'id'])) {
+                                                                    productId.remove(
+                                                                        eventProduct[
+                                                                            'id']);
+                                                                    ProductsProvider()
+                                                                        .addProductstoCurrentEvent(
+                                                                      localData
+                                                                          .eventId,
                                                                       productId,
                                                                     );
                                                                   }
@@ -876,7 +900,6 @@ class _EditProfileState extends State<EditProfile> {
                                                     color: AppColor.grey,
                                                   ),
                                                 ),
-
                                               ],
                                             ),
                                           ),

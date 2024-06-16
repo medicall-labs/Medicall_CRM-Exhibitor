@@ -26,9 +26,14 @@ Widget customButton(
           ),
         ),
         width: MediaQuery.of(context!).size.width,
-        child: Text(
-          status == false ? text! : 'Please wait...',
-          style: AppTextStyles.textButton1,
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.2,
+          child: FittedBox(
+            child: Text(
+              status == false ? text! : 'Please wait...',
+              style: AppTextStyles.textButton1,
+            ),
+          ),
         ),
       ),
     ),

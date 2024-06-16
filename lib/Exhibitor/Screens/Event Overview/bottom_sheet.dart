@@ -87,10 +87,20 @@ class AppointmentStatus {
                                                     ),
                                             ),
                                             AppSpaces.horizontalSpace10,
-                                            Text(
-                                              '${data[index]['visitor_name'].toString()}',
-                                              style: AppTextStyles.label,
-                                            )
+                                            Container(
+                                              height: 25,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.6,
+                                              child: FittedBox(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(
+                                                    '${data[index]['visitor_name'].toString()}',
+                                                    style: AppTextStyles.label,
+                                                  )),
+                                            ),
                                           ],
                                         ),
                                         AppSpaces.verticalSpace5,
@@ -122,7 +132,7 @@ class AppointmentStatus {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.55,
+                                              0.75,
                                           decoration: BoxDecoration(
                                             color: Colors.grey.withOpacity(0.2),
                                             borderRadius: BorderRadius.all(
@@ -138,13 +148,23 @@ class AppointmentStatus {
                                                   size: 20,
                                                 ),
                                                 AppSpaces.horizontalSpace10,
-                                                Text(
-                                                  data[index]['scheduled_on'],
-                                                  style: GoogleFonts.lato(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 14,
-                                                      color: AppColor.primary),
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.4,
+                                                  child: FittedBox(
+                                                    child: Text(
+                                                      data[index]
+                                                          ['scheduled_on'],
+                                                      style: GoogleFonts.lato(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 14,
+                                                          color:
+                                                              AppColor.primary),
+                                                    ),
+                                                  ),
                                                 ),
                                               ],
                                             ),

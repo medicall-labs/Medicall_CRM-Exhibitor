@@ -71,8 +71,15 @@ class _MyHistoryState extends State<MyHistory> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 10),
-                                child: Text('My History',
-                                    style: AppTextStyles.header2),
+                                child:
+                                Container(
+                                  width: MediaQuery.of(context).size.width * 0.3,
+                                  child: FittedBox(
+                                    child:  Text('My History',
+                                        style: AppTextStyles.header2),
+                                  ),
+                                ),
+
                               ),
                               Container(
                                 height:
@@ -101,11 +108,20 @@ class _MyHistoryState extends State<MyHistory> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(8)),
                                           ),
-                                          child: Text(
-                                            myHistory[index]['event_title']
-                                                .toString(),
-                                            style: AppTextStyles.label3,
+                                          child:
+                                          Container(
+                                            height: 20,
+                                            width: MediaQuery.of(context).size.width * 0.7,
+                                            child: FittedBox(
+                                              alignment: Alignment.centerLeft,
+                                              child:  Text(
+                                                myHistory[index]['event_title']
+                                                    .toString(),
+                                                style: AppTextStyles.label3,
+                                              ),
+                                            ),
                                           ),
+
                                         ),
                                       ),
                                     );

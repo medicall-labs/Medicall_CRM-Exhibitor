@@ -166,20 +166,35 @@ class _AllProductsState extends State<AllProducts> {
                                                       ),
                                                     ),
                                                     Center(
-                                                      child: Text(
-                                                        'Add Image',
-                                                        style: AppTextStyles
-                                                            .whitelabel1,
+                                                      child:
+                                                      Container(
+                                                        width: MediaQuery.of(context).size.width * 0.2,
+                                                        child: FittedBox(
+                                                          child:  Text(
+                                                            'Add Image',
+                                                            style: AppTextStyles
+                                                                .whitelabel1,
+                                                          ),
+                                                        ),
                                                       ),
+
                                                     ),
                                                   ],
                                                 ),
                                               ),
                                               AppSpaces.horizontalSpace10,
-                                              Text(
-                                                allProducts[index]['name'],
-                                                style: AppTextStyles.textBody,
-                                              )
+                                              Container(
+                                                height:20,
+                                                width: MediaQuery.of(context).size.width * 0.5,
+                                                child: FittedBox(
+                                                    alignment: Alignment.centerLeft,
+                                                  child: Text(
+                                                    allProducts[index]['name'],
+                                                    style: AppTextStyles.textBody,
+                                                  )
+                                                ),
+                                              ),
+
                                             ],
                                           ),
                                         );
@@ -311,12 +326,21 @@ class _AllProductsState extends State<AllProducts> {
                                               ),
                                               AppSpaces.horizontalSpace10,
                                               Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(
-                                                    allProducts[index]['name'],
-                                                    style:
+                                                  Container(
+                                                    height:20,
+                                                    width: MediaQuery.of(context).size.width * 0.6,
+                                                    child: FittedBox(
+                                                      alignment: Alignment.centerLeft,
+                                                      child:   Text(
+                                                        allProducts[index]['name'],
+                                                        style:
                                                         AppTextStyles.textBody,
+                                                      ),
+                                                    ),
                                                   ),
+
                                                   AppSpaces.verticalSpace10,
                                                   GestureDetector(
                                                       onTap: () {
@@ -336,11 +360,18 @@ class _AllProductsState extends State<AllProducts> {
                                                                   BorderRadius
                                                                       .circular(
                                                                           5)),
-                                                          child: Text(
-                                                            'Add more',
-                                                            style: AppTextStyles
-                                                                .whitelabel,
+                                                          child:
+                                                          Container(
+                                                            width: MediaQuery.of(context).size.width * 0.1,
+                                                            child: FittedBox(
+                                                              child:  Text(
+                                                                'Add more',
+                                                                style: AppTextStyles
+                                                                    .whitelabel,
+                                                              ),
+                                                            ),
                                                           ),
+
                                                         ),
                                                       ))
                                                 ],
@@ -485,11 +516,17 @@ class _AllProductsState extends State<AllProducts> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Text(
-                                                          allProducts[index]
-                                                              ['name'],
-                                                          style: AppTextStyles
-                                                              .textBody,
+                                                        Container(
+                                                          height:20,
+                                                          width: MediaQuery.of(context).size.width * 0.5,
+                                                          child: FittedBox(
+                                                            alignment: Alignment.centerLeft,
+                                                            child:   Text(
+                                                              allProducts[index]['name'],
+                                                              style:
+                                                              AppTextStyles.textBody,
+                                                            ),
+                                                          ),
                                                         ),
                                                         AppSpaces
                                                             .verticalSpace10,
@@ -515,10 +552,15 @@ class _AllProductsState extends State<AllProducts> {
                                                                         .circular(
                                                                             5),
                                                               ),
-                                                              child: Text(
-                                                                'Add more',
-                                                                style: AppTextStyles
-                                                                    .whitelabel,
+                                                              child: Container(
+                                                                width: MediaQuery.of(context).size.width * 0.1,
+                                                                child: FittedBox(
+                                                                  child:  Text(
+                                                                    'Add more',
+                                                                    style: AppTextStyles
+                                                                        .whitelabel,
+                                                                  ),
+                                                                ),
                                                               ),
                                                             ),
                                                           ),

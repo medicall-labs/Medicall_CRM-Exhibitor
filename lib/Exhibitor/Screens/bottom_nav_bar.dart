@@ -49,8 +49,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         elevation: 1,
-        height: 70,
-        color: Colors.white,
+        height: 60,
+        color: Colors.black,
         shape: const CircularNotchedRectangle(),
         notchMargin: 10,
         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -68,18 +68,24 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   },
                   child: Icon(
                     Icons.app_registration_outlined,
-                    size: 30,
+                    size: 25,
                     color: currentIndex == 0
                         ? AppColor.primary
                         : Colors.grey.shade400,
                   ),
                 ),
-                Text(
-                  'Appointments',
-                  style: currentIndex == 0
-                      ? AppTextStyles.label2
-                      : AppTextStyles.menu,
-                )
+                Container(
+                  height: 10,
+                  child: FittedBox(
+                      child: Text(
+                        'Appointments',
+                        style: currentIndex == 0
+                            ? AppTextStyles.buttomMenu
+                            : AppTextStyles.menu,
+                      )
+                  ),
+                ),
+
               ],
             ),
             const SizedBox(
@@ -95,18 +101,24 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   },
                   child: Icon(
                     Icons.event,
-                    size: 30,
+                    size: 25,
                     color: currentIndex == 2
                         ? AppColor.primary
                         : Colors.grey.shade400,
                   ),
                 ),
-                Text(
-                  'Dashboard',
-                  style: currentIndex == 2
-                      ? AppTextStyles.label2
-                      : AppTextStyles.menu,
-                )
+                Container(
+                  height: 10,
+                  child: FittedBox(
+                      child:Text(
+                        'Dashboard',
+                        style: currentIndex == 2
+                            ? AppTextStyles.buttomMenu
+                            : AppTextStyles.menu,
+                      )
+                  ),
+                ),
+
               ],
             ),
           ],

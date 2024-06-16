@@ -67,16 +67,30 @@ class HistorySummary extends StatelessWidget {
                         AppSpaces.verticalSpace40,
                         Padding(
                           padding: const EdgeInsets.only(left: 10),
-                          child: Text('Event History',
-                              style: AppTextStyles.header2),
+                          child:
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            child: FittedBox(
+                              child: Text('Completed Appointments',
+                                  style: AppTextStyles.header2),
+                            ),
+                          ),
+
                         ),
                         AppSpaces.verticalSpace10,
                         Align(
                           alignment: Alignment.center,
-                          child: Text(
-                            completedHistory[0]['event_title'],
-                            style: AppTextStyles.header3,
+                          child:
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            child: FittedBox(
+                              child: Text(
+                                completedHistory[0]['event_title'],
+                                style: AppTextStyles.header3,
+                              ),
+                            ),
                           ),
+
                         ),
                         Container(
                           height: MediaQuery.of(context).size.height - 150,
@@ -126,45 +140,53 @@ class HistorySummary extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Container(
+                                                height: 25,
                                                 width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
+                                                    .size
+                                                    .width *
                                                     0.5,
-                                                child: Text(
-                                                  completedHistory[index]
+                                                child: FittedBox(
+                                                    alignment:
+                                                    Alignment.centerLeft,
+                                                    child:Text(
+                                                      completedHistory[index]
                                                       ['visitor_name'],
-                                                  style: AppTextStyles.label,
-                                                ),
+                                                      style: AppTextStyles.label,
+                                                    ),),
                                               ),
                                               AppSpaces.verticalSpace5,
                                               Container(
                                                 height: 30,
                                                 width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
+                                                    .size
+                                                    .width *
                                                     0.55,
                                                 decoration: BoxDecoration(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.2),
-                                                  borderRadius:
-                                                      BorderRadius.all(
+                                                  color: Colors.grey.withOpacity(0.2),
+                                                  borderRadius: BorderRadius.all(
                                                     Radius.circular(5),
                                                   ),
                                                 ),
                                                 child: Center(
                                                   child: Row(
                                                     children: [
-                                                      AppSpaces
-                                                          .horizontalSpace10,
+                                                      AppSpaces.horizontalSpace10,
                                                       Icon(
                                                         Icons.calendar_month,
                                                         size: 20,
                                                       ),
-                                                      AppSpaces
-                                                          .horizontalSpace10,
-                                                      Text(completedHistory[
-                                                              index]
+                                                      AppSpaces.horizontalSpace10,
+                                                      Container(
+                                                        width: MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                            0.4,
+                                                        child: FittedBox(
+                                                          child:  Text(completedHistory[
+                                                          index]
                                                           ['scheduled_on']),
+                                                        ),
+                                                      ),
                                                     ],
                                                   ),
                                                 ),

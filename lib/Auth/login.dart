@@ -46,9 +46,14 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Login to Continue...',
-                      style: AppTextStyles.header1,
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: FittedBox(
+                        child: Text(
+                          'Login to Continue...',
+                          style: AppTextStyles.header1,
+                        ),
+                      ),
                     ),
                     CustomTextWidget(),
                   ],
@@ -152,11 +157,17 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         } catch (e) {}
                       },
-                      child: Text(
-                        isOtpRequested && _userIdController.text.length == 10
-                            ? "Sign in using Password"
-                            : "Sign in using Whatsapp OTP",
-                        style: AppTextStyles.textButton,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: FittedBox(
+                          child: Text(
+                            isOtpRequested &&
+                                    _userIdController.text.length == 10
+                                ? "Sign in using Password"
+                                : "Sign in using Whatsapp OTP",
+                            style: AppTextStyles.textButton,
+                          ),
+                        ),
                       ),
                     ),
                   ],
