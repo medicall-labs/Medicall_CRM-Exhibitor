@@ -100,7 +100,6 @@ class _AppointmentState extends State<Appointment> {
                                       style: AppTextStyles.header2),
                                 ),
                               ),
-
                               Spacer(),
                               CustomTextWidget(),
                               PopupMenuButton(
@@ -126,7 +125,7 @@ class _AppointmentState extends State<Appointment> {
                                           child: Icon(
                                             Icons.person,
                                             color:
-                                            AppColor.black.withOpacity(0.5),
+                                                AppColor.black.withOpacity(0.5),
                                             size: 20,
                                           ),
                                         ),
@@ -148,7 +147,7 @@ class _AppointmentState extends State<Appointment> {
                                           child: Icon(
                                             Icons.shopping_cart_outlined,
                                             color:
-                                            AppColor.black.withOpacity(0.5),
+                                                AppColor.black.withOpacity(0.5),
                                             size: 20,
                                           ),
                                         ),
@@ -170,7 +169,7 @@ class _AppointmentState extends State<Appointment> {
                                           child: Icon(
                                             Icons.history_rounded,
                                             color:
-                                            AppColor.black.withOpacity(0.5),
+                                                AppColor.black.withOpacity(0.5),
                                             size: 20,
                                           ),
                                         ),
@@ -192,7 +191,7 @@ class _AppointmentState extends State<Appointment> {
                                           child: Icon(
                                             Icons.logout,
                                             color:
-                                            AppColor.black.withOpacity(0.5),
+                                                AppColor.black.withOpacity(0.5),
                                             size: 20,
                                           ),
                                         ),
@@ -223,17 +222,15 @@ class _AppointmentState extends State<Appointment> {
                         AppSpaces.verticalSpace10,
                         Align(
                           alignment: Alignment.center,
-                          child:
-                          Container(
+                          child: Container(
                             width: MediaQuery.of(context).size.width * 0.7,
                             child: FittedBox(
-                              child:  Text(
+                              child: Text(
                                 appointments[0]['event_title'],
                                 style: AppTextStyles.header3,
                               ),
                             ),
                           ),
-
                         ),
                         Container(
                           height: MediaQuery.of(context).size.height - 200,
@@ -290,15 +287,20 @@ class _AppointmentState extends State<Appointment> {
                                                 children: [
                                                   Container(
                                                     height: 25,
-                                                    width: MediaQuery.of(context).size.width * 0.5,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.5,
                                                     child: FittedBox(
-                                                        alignment: Alignment.centerLeft,
-                                                        child:  Text(
-                                                          appointments[index]
-                                                          ['visitor_name'],
-                                                          style:
-                                                          AppTextStyles.label,
-                                                        ),
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Text(
+                                                        appointments[index]
+                                                            ['visitor_name'],
+                                                        style:
+                                                            AppTextStyles.label,
+                                                      ),
                                                     ),
                                                   ),
                                                   AppSpaces.verticalSpace5,
@@ -338,8 +340,12 @@ class _AppointmentState extends State<Appointment> {
                                                                         'appointment_id'],
                                                                   );
                                                                 },
-                                                                tooltip:
-                                                                    'Completed',
+                                                                tooltip: appointments[index]
+                                                                            [
+                                                                            'status'] ==
+                                                                        'Completed'
+                                                                    ? 'Feedback'
+                                                                    : 'Completed',
                                                                 icon: Icon(
                                                                     appointments[index]['status'] ==
                                                                             'Completed'
@@ -468,14 +474,19 @@ class _AppointmentState extends State<Appointment> {
                                                           AppSpaces
                                                               .horizontalSpace10,
                                                           Container(
-                                                            width: MediaQuery.of(context).size.width * 0.35,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.35,
                                                             child: FittedBox(
-                                                              child:  Text(appointments[
-                                                              index]
-                                                              ['scheduled_on']),
+                                                              child: Text(
+                                                                  appointments[
+                                                                          index]
+                                                                      [
+                                                                      'scheduled_on']),
                                                             ),
                                                           ),
-
                                                         ],
                                                       ),
                                                     ),
@@ -585,50 +596,51 @@ class _AppointmentState extends State<Appointment> {
                                               bottomRight: Radius.circular(8)),
                                         ),
                                         child: Center(
-                                          child:
-                                          Container(
-                                            height:20,
-                                            width: MediaQuery.of(context).size.width * 0.2,
+                                          child: Container(
+                                            height: 20,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.2,
                                             child: FittedBox(
-                                              child:  Text(
+                                              child: Text(
                                                 appointments[index]['status'],
                                                 style: GoogleFonts.lato(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.bold,
                                                   color: appointments[index]
-                                                  ['status'] ==
-                                                      'Scheduled'
+                                                              ['status'] ==
+                                                          'Scheduled'
                                                       ? Colors.blue
                                                       : appointments[index]
-                                                  ['status'] ==
-                                                      'Rescheduled'
-                                                      ? Colors.grey
-                                                      : appointments[index]
-                                                  ['status'] ==
-                                                      'Completed'
-                                                      ? Colors.green
-                                                      : appointments[index][
-                                                  'status'] ==
-                                                      'Confirmed'
-                                                      ? Colors.green
-                                                      : appointments[index]
-                                                  [
-                                                  'status'] ==
-                                                      'No-show'
-                                                      ? Colors.red
-                                                      : appointments[index]
-                                                  [
-                                                  'status'] ==
-                                                      'Cancelled'
-                                                      ? Colors
-                                                      .red
-                                                      : AppColor
-                                                      .bgColor,
+                                                                  ['status'] ==
+                                                              'Rescheduled'
+                                                          ? Colors.grey
+                                                          : appointments[index][
+                                                                      'status'] ==
+                                                                  'Completed'
+                                                              ? Colors.green
+                                                              : appointments[index]
+                                                                          [
+                                                                          'status'] ==
+                                                                      'Confirmed'
+                                                                  ? Colors.green
+                                                                  : appointments[index]
+                                                                              [
+                                                                              'status'] ==
+                                                                          'No-show'
+                                                                      ? Colors
+                                                                          .red
+                                                                      : appointments[index]['status'] ==
+                                                                              'Cancelled'
+                                                                          ? Colors
+                                                                              .red
+                                                                          : AppColor
+                                                                              .bgColor,
                                                 ),
                                               ),
                                             ),
                                           ),
-
                                         ),
                                       ),
                                     )
