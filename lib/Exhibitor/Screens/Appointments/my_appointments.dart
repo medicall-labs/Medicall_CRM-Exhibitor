@@ -652,8 +652,11 @@ class _AppointmentState extends State<Appointment> {
                         ),
                       ],
                     );
-                  } else {
-                    return const Center(child: Text('No data available.'));
+                  }
+                  else {
+                    return Container(
+                        height: MediaQuery.of(context).size.height,
+                        child: const Center(child: Text('No data available.')));
                   }
                 }
               },
