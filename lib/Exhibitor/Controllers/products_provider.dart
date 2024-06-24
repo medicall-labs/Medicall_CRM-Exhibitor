@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:medicall_exhibitor/Exhibitor/Screens/My_Profile/profile.dart';
 import '../../Constants/api_collection.dart';
 import '../Screens/Products/products.dart';
 import '../Screens/bottom_nav_bar.dart';
@@ -62,10 +63,11 @@ class ProductsProvider extends ChangeNotifier {
       var productResponse = await RemoteService()
           .postDataToApi('$requestBaseUrl/events/$id/products', bodyContent);
       var result = jsonDecode(productResponse.body);
+      print('5400----$result');
       if (result["status"] == 'success') {
         GetStorage().remove("profileData");
         Get.offAll(BottomNavBar());
-        Get.to(AllProducts());
+        Get.to(MyProfile());
         return result;
       }
     } catch (err) {

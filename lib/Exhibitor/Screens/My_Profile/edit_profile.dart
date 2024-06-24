@@ -742,173 +742,163 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
                   const SizedBox(height: 8),
+                  Text(
+                    'Products',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: AppColor.primary),
+                  ),
                   for (int i = 0;
                       i < profileDetails['data']['events'].length;
                       i++)
-                    if (profileDetails['data']['events'][i]['id'] ==
+                    if (profileDetails['data']['events'][i]['id'] >=
                         localData.eventId)
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Products',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColor.primary),
-                            ),
-                            const SizedBox(height: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Row(
                               children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.event,
-                                      size: 15,
-                                      color: AppColor.grey,
-                                    ),
-                                    AppSpaces.horizontalSpace5,
-                                    Container(
-                                      height: 20,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.7,
-                                      child: FittedBox(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          profileDetails['data']['events'][i]
-                                                  ['name'] ??
-                                              'N/A',
-                                          style: AppTextStyles.label7,
-                                        ),
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    IconButton(
-                                        onPressed: () {
-                                          showModalBottomSheet(
-                                            context: context,
-                                            isScrollControlled: true,
-                                            builder: (context) {
-                                              return ProductSearchBottomSheet(
-                                                eventName:
-                                                    profileDetails['data']
-                                                        ['events'][i]['name'],
-                                                eventId: profileDetails['data']
-                                                    ['events'][i]['id'],
-                                              );
-                                            },
-                                          );
-                                        },
-                                        icon: Icon(
-                                          Icons.add,
-                                          size: 20,
-                                        ))
-                                  ],
+                                Icon(
+                                  Icons.event,
+                                  size: 15,
+                                  color: AppColor.grey,
                                 ),
-                                // Display event products if available
-                                if (profileDetails['data']['events'][i]
-                                        ['products'] !=
-                                    null)
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 20, top: 5),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        for (var eventProduct
-                                            in profileDetails['data']['events']
-                                                    [i]['products'] ??
-                                                [])
-                                          Container(
-                                            color: Colors.grey.shade50,
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.arrow_right,
-                                                  size: 10,
-                                                  color: AppColor.grey,
-                                                ),
-                                                AppSpaces.horizontalSpace5,
-                                                Container(
-                                                  width: 150,
-                                                  child: Text(
-                                                    eventProduct['name'] ??
-                                                        'N/A',
-                                                    style:
-                                                        AppTextStyles.textBody,
-                                                  ),
-                                                ),
-                                                AppSpaces.horizontalSpace10,
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (BuildContext
-                                                          context) {
-                                                        return AlertDialog(
-                                                          title: Text(
-                                                              'Confirm Delete'),
-                                                          content: Text(
-                                                              'Are you sure you want to delete ${eventProduct['name']}?'),
-                                                          actions: <Widget>[
-                                                            TextButton(
-                                                              child: Text(
-                                                                  'Cancel'),
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                              },
-                                                            ),
-                                                            TextButton(
-                                                              child: Text(
-                                                                  'Delete'),
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop(); // Close the dialog
-                                                                setState(() {
-                                                                  if (productId
-                                                                      .contains(
-                                                                          eventProduct[
-                                                                              'id'])) {
-                                                                    productId.remove(
-                                                                        eventProduct[
-                                                                            'id']);
-                                                                    ProductsProvider()
-                                                                        .addProductstoCurrentEvent(
-                                                                      localData
-                                                                          .eventId,
-                                                                      productId,
-                                                                    );
-                                                                  }
-                                                                });
-                                                              },
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    );
-                                                  },
-                                                  child: Icon(
-                                                    Icons.delete,
-                                                    size: 20,
-                                                    color: AppColor.grey,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                      ],
+                                AppSpaces.horizontalSpace5,
+                                Container(
+                                  height: 20,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.7,
+                                  child: FittedBox(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      profileDetails['data']['events'][i]
+                                              ['name'] ??
+                                          'N/A',
+                                      style: AppTextStyles.label7,
                                     ),
                                   ),
-                                Divider(),
+                                ),
+                                Spacer(),
+                                IconButton(
+                                    onPressed: () {
+                                      showModalBottomSheet(
+                                        context: context,
+                                        isScrollControlled: true,
+                                        builder: (context) {
+                                          return ProductSearchBottomSheet(
+                                            eventName: profileDetails['data']
+                                                ['events'][i]['name'],
+                                            eventId: profileDetails['data']
+                                                ['events'][i]['id'],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    icon: Icon(
+                                      Icons.add,
+                                      size: 20,
+                                    ))
                               ],
                             ),
+                            // Display event products if available
+                            if (profileDetails['data']['events'][i]
+                                    ['products'] !=
+                                null)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 20, top: 5),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for (var eventProduct
+                                        in profileDetails['data']['events'][i]
+                                                ['products'] ??
+                                            [])
+                                      Container(
+                                        color: Colors.grey.shade50,
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.arrow_right,
+                                              size: 10,
+                                              color: AppColor.grey,
+                                            ),
+                                            AppSpaces.horizontalSpace5,
+                                            Container(
+                                              width: 150,
+                                              child: Text(
+                                                eventProduct['name'] ?? 'N/A',
+                                                style: AppTextStyles.textBody,
+                                              ),
+                                            ),
+                                            AppSpaces.horizontalSpace10,
+                                            GestureDetector(
+                                              onTap: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          'Confirm Delete'),
+                                                      content: Text(
+                                                          'Are you sure you want to delete ${eventProduct['name']}?'),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          child: Text('Cancel'),
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                        ),
+                                                        TextButton(
+                                                          child: Text('Delete'),
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop(); // Close the dialog
+                                                            setState(() {
+                                                              print('...$productId......${eventProduct[
+                                                              'id']}................');
+                                                              if (productId.contains(
+                                                                  eventProduct[
+                                                                      'id'])) {
+                                                                productId.remove(
+                                                                    eventProduct[
+                                                                        'id']);
+
+                                                                ProductsProvider()
+                                                                    .addProductstoCurrentEvent(
+                                                                  profileDetails['data']
+                                                                  ['events'][i]['id'],
+                                                                  productId,
+                                                                );
+                                                              }
+                                                            });
+                                                          },
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                              child: Icon(
+                                                Icons.delete,
+                                                size: 20,
+                                                color: AppColor.grey,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            Divider(),
                           ],
                         ),
                       ),
