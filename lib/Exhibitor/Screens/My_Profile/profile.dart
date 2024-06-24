@@ -264,11 +264,16 @@ class MyProfile extends StatelessWidget {
                                                 style: AppTextStyles.label7,
                                               ),
                                               Spacer(),
-                                              Text(
-                                                profile.data?.categoryName ??
-                                                    "N/A",
-                                                style: AppTextStyles.label,
+                                              Container(
+                                                width: 200,
+                                                child:  Text(
+                                                  profile.data?.categoryName ??
+                                                      "N/A",
+                                                  textAlign: TextAlign.right,
+                                                  style: AppTextStyles.label,
+                                                )
                                               )
+
                                             ],
                                           ),
                                           AppSpaces.verticalSpace5,
