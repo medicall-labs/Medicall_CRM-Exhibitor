@@ -265,15 +265,14 @@ class MyProfile extends StatelessWidget {
                                               ),
                                               Spacer(),
                                               Container(
-                                                width: 200,
-                                                child:  Text(
-                                                  profile.data?.categoryName ??
-                                                      "N/A",
-                                                  textAlign: TextAlign.right,
-                                                  style: AppTextStyles.label,
-                                                )
-                                              )
-
+                                                  width: 200,
+                                                  child: Text(
+                                                    profile.data
+                                                            ?.categoryName ??
+                                                        "N/A",
+                                                    textAlign: TextAlign.right,
+                                                    style: AppTextStyles.label,
+                                                  ))
                                             ],
                                           ),
                                           AppSpaces.verticalSpace5,
@@ -382,24 +381,30 @@ class MyProfile extends StatelessWidget {
                                                     ),
                                                     AppSpaces.horizontalSpace5,
                                                     Container(
-                                                      height:20,
-                                                      width: MediaQuery.of(context).size.width * 0.5,
+                                                      height: 20,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.5,
                                                       child: FittedBox(
-                                                        alignment: Alignment.centerLeft,
+                                                        alignment: Alignment
+                                                            .centerLeft,
                                                         child: Text(
                                                           event.name ?? 'N/A',
-                                                          style:
-                                                          AppTextStyles.label7,
+                                                          style: AppTextStyles
+                                                              .label7,
                                                         ),
                                                       ),
                                                     ),
-
                                                     Spacer(),
-                                                    Text(
-                                                      event.stallNo ?? 'N/A',
-                                                      style:
-                                                          AppTextStyles.label,
-                                                    ),
+                                                    if (event
+                                                        .stallNo.isNotEmpty)
+                                                      Text(
+                                                        'Stall no : ${event.stallNo ?? 'N/A'}',
+                                                        style: AppTextStyles
+                                                            .label7,
+                                                      ),
                                                   ],
                                                 ),
                                                 // Display event products if available
@@ -432,13 +437,20 @@ class MyProfile extends StatelessWidget {
                                                                 AppSpaces
                                                                     .horizontalSpace5,
                                                                 Container(
-                                                                  height:20,
-                                                                  width: MediaQuery.of(context).size.width * 0.7,
-                                                                  child: FittedBox(
-                                                                    alignment: Alignment.centerLeft,
+                                                                  height: 20,
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      0.7,
+                                                                  child:
+                                                                      FittedBox(
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .centerLeft,
                                                                     child: Text(
                                                                       eventProduct
-                                                                          .name ??
+                                                                              .name ??
                                                                           'N/A',
                                                                       style: AppTextStyles
                                                                           .textBody,
