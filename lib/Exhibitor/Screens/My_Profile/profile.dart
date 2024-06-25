@@ -46,6 +46,8 @@ class MyProfile extends StatelessWidget {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       } else {
                         var profilePage = snapshot.data;
+                        print('....................');
+                        print('profile api---- ${profilePage}');
                         if (profilePage != null &&
                             profilePage is Map<String, dynamic>) {
                           var profile = ProfileModel.fromJson(profilePage);

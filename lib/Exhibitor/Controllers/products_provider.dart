@@ -63,7 +63,6 @@ class ProductsProvider extends ChangeNotifier {
       var productResponse = await RemoteService()
           .postDataToApi('$requestBaseUrl/events/$id/products', bodyContent);
       var result = jsonDecode(productResponse.body);
-      print('5400----$result');
       if (result["status"] == 'success') {
         GetStorage().remove("profileData");
         Get.offAll(BottomNavBar());
