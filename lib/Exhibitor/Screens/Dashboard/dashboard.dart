@@ -75,16 +75,16 @@ class _DashboardState extends State<Dashboard> {
                         AppSpaces.verticalSpace40,
                         Row(
                           children: [
-                            CircleAvatar(
-                                radius: 15,
-                                backgroundColor: Colors.grey[200],
-                                child: profileLogo['data']['logo'] != ''
-                                    ? ClipOval(
-                                        child: Image.network(
-                                            profileLogo['data']['logo'],
-                                            fit: BoxFit.cover),
-                                      )
-                                    : Container()),
+                            // CircleAvatar(
+                            //     radius: 15,
+                            //     backgroundColor: Colors.grey[200],
+                            //     child: profileLogo['data']['logo'] != ''
+                            //         ? ClipOval(
+                            //             child: Image.network(
+                            //                 profileLogo['data']['logo'],
+                            //                 fit: BoxFit.cover),
+                            //           )
+                            //         : Container()),
                             AppSpaces.horizontalSpace10,
                             Container(
                               width: MediaQuery.of(context).size.width * 0.3,
