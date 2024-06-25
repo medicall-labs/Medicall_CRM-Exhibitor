@@ -48,7 +48,7 @@ class _LabelledFormInputState extends State<LabelledFormInput> {
           controller: widget.controller,
           style: AppTextStyles.label,
           onTap: () {},
-          keyboardType: widget.label != "Password"
+          keyboardType: widget.keyboardType != "Password"
               ? TextInputType.number
               : TextInputType.text,
           obscureText: _obscureText,

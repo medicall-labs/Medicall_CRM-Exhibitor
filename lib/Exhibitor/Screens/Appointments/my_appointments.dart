@@ -18,6 +18,7 @@ import '../../Controllers/local_data.dart';
 import '../My_History/history.dart';
 import '../My_Profile/profile.dart';
 import '../Products/products.dart';
+import '../popup_menu.dart';
 
 class Appointment extends StatefulWidget {
   const Appointment({super.key});
@@ -83,15 +84,19 @@ class _AppointmentState extends State<Appointment> {
                           child: Row(
                             children: [
                               CircleAvatar(
-                                  radius: 15,
-                                  backgroundColor: Colors.grey[200],
-                                  child: profileLogo['data']['logo'] != ''
-                                      ? ClipOval(
-                                          child: Image.network(
-                                              profileLogo['data']['logo'],
-                                              fit: BoxFit.cover),
-                                        )
-                                      : Container()),
+                                radius: 15,
+                                backgroundColor: Colors.grey[200],
+                                child: (profileLogo != null &&
+                                        profileLogo['data'] != null &&
+                                        profileLogo['data']['logo'] != '')
+                                    ? ClipOval(
+                                        child: Image.network(
+                                          profileLogo['data']['logo'],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    : Container(),
+                              ),
                               AppSpaces.horizontalSpace10,
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.3,
@@ -102,120 +107,7 @@ class _AppointmentState extends State<Appointment> {
                               ),
                               Spacer(),
                               CustomTextWidget(),
-                              PopupMenuButton(
-                                icon: ColorFiltered(
-                                  colorFilter: ColorFilter.mode(
-                                    AppColor.secondary,
-                                    BlendMode.modulate,
-                                  ),
-                                  child: Container(
-                                      height: 30,
-                                      child: Lottie.asset(
-                                          'assets/lottie/menu.json')),
-                                ),
-                                color: Colors.white,
-                                itemBuilder: (BuildContext context) => [
-                                  PopupMenuItem(
-                                    value: 1,
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 15,
-                                          backgroundColor: Colors.grey[200],
-                                          child: Icon(
-                                            Icons.person,
-                                            color:
-                                                AppColor.black.withOpacity(0.5),
-                                            size: 20,
-                                          ),
-                                        ),
-                                        AppSpaces.horizontalSpace20,
-                                        Text(
-                                          'My Profile',
-                                          style: AppTextStyles.label,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  PopupMenuItem(
-                                    value: 2,
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 15,
-                                          backgroundColor: Colors.grey[200],
-                                          child: Icon(
-                                            Icons.shopping_cart_outlined,
-                                            color:
-                                                AppColor.black.withOpacity(0.5),
-                                            size: 20,
-                                          ),
-                                        ),
-                                        AppSpaces.horizontalSpace20,
-                                        Text(
-                                          'Products',
-                                          style: AppTextStyles.label,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  PopupMenuItem(
-                                    value: 3,
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 15,
-                                          backgroundColor: Colors.grey[200],
-                                          child: Icon(
-                                            Icons.history_rounded,
-                                            color:
-                                                AppColor.black.withOpacity(0.5),
-                                            size: 20,
-                                          ),
-                                        ),
-                                        AppSpaces.horizontalSpace20,
-                                        Text(
-                                          'My History',
-                                          style: AppTextStyles.label,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  PopupMenuItem(
-                                    value: 4,
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 15,
-                                          backgroundColor: Colors.grey[200],
-                                          child: Icon(
-                                            Icons.logout,
-                                            color:
-                                                AppColor.black.withOpacity(0.5),
-                                            size: 20,
-                                          ),
-                                        ),
-                                        AppSpaces.horizontalSpace20,
-                                        Text(
-                                          'Logout',
-                                          style: AppTextStyles.label,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                                onSelected: (value) {
-                                  if (value == 1) {
-                                    Get.to(() => MyProfile());
-                                  } else if (value == 2) {
-                                    Get.to(AllProducts());
-                                  } else if (value == 3) {
-                                    Get.to(() => MyHistory());
-                                  } else if (value == 4) {
-                                    AuthenticationProvider().logout();
-                                  }
-                                },
-                              ),
+                              CustomPopupMenu(),
                             ],
                           ),
                         ),
@@ -652,8 +544,7 @@ class _AppointmentState extends State<Appointment> {
                         ),
                       ],
                     );
-                  }
-                  else {
+                  } else {
                     return Container(
                         height: MediaQuery.of(context).size.height,
                         child: const Center(child: Text('No data available.')));

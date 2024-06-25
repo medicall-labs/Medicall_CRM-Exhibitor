@@ -200,8 +200,8 @@ class _ProductSearchBottomSheetState extends State<ProductSearchBottomSheet> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Error in Adding Product"),
-            content: Text('Product ${product.name ?? ''} is already added.'),
+            title: Text("Product ${product.name ?? ''} is already added."),
+            // content: Text('Product ${product.name ?? ''} is already added.'),
             actions: [
               TextButton(
                 onPressed: () {
