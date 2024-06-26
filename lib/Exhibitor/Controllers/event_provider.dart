@@ -8,8 +8,8 @@ class EventProvider extends ChangeNotifier {
 
   eventData(eventId) async {
     try {
-      var eventResponse = await RemoteService().getDataFromApi(
-          '${requestBaseUrl}/exhibitors/${eventId}/dashboard');
+      var eventResponse = await RemoteService()
+          .getDataFromApi('${requestBaseUrl}/exhibitors/${eventId}/dashboard');
       if (eventResponse["status"] == 'success') {
         return eventResponse;
       }
@@ -20,4 +20,17 @@ class EventProvider extends ChangeNotifier {
     }
   }
 
+  announcements() async {
+    try {
+      var eventResponse = await RemoteService()
+          .getDataFromApi('${requestBaseUrl}/announcements');
+      if (eventResponse["status"] == 'success') {
+        return eventResponse['data'];
+      }
+      return {};
+    } catch (err) {
+      print(err);
+      return {};
+    }
+  }
 }

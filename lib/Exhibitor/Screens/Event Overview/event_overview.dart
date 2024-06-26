@@ -6,6 +6,7 @@ import 'package:medicall_exhibitor/Constants/app_color.dart';
 import 'package:medicall_exhibitor/Constants/spacing.dart';
 import 'package:medicall_exhibitor/Constants/styles.dart';
 import 'package:medicall_exhibitor/Exhibitor/Controllers/event_provider.dart';
+import 'package:medicall_exhibitor/Exhibitor/Screens/Event%20Overview/announcements.dart';
 import 'package:medicall_exhibitor/Exhibitor/Screens/Event%20Overview/stall_image.dart';
 import 'package:medicall_exhibitor/Exhibitor/Screens/My_History/history.dart';
 import 'package:medicall_exhibitor/Utils/Widgets/pie_chart.dart';
@@ -29,6 +30,24 @@ class _EventOverviewState extends State<EventOverview> {
   final profileLogo = GetStorage().read("profileData") != ''
       ? GetStorage().read("profileData")
       : '';
+
+  var announcementsData;
+  bool isAnnouncement = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAnnouncementsData();
+  }
+
+  Future<void> _loadAnnouncementsData() async {
+    final data = await Provider.of<EventProvider>(context, listen: false)
+        .announcements();
+    setState(() {
+      announcementsData = data ?? [];
+      isAnnouncement = (announcementsData.isNotEmpty) ? true : false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +99,6 @@ class _EventOverviewState extends State<EventOverview> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               if (profileLogo != null)
                                 CircleAvatar(
@@ -93,15 +111,33 @@ class _EventOverviewState extends State<EventOverview> {
                                                 fit: BoxFit.cover),
                                           )
                                         : Container()),
+                              AppSpaces.horizontalSpace10,
                               Container(
-                                width: MediaQuery.of(context).size.width * 0.7,
+                                width: MediaQuery.of(context).size.width * 0.6,
                                 child: FittedBox(
+                                  alignment: Alignment.centerLeft,
                                   child: Text(
                                     insights['current_event_title'],
                                     style: AppTextStyles.header3,
                                   ),
                                 ),
                               ),
+                              Spacer(),
+                                Visibility(
+                                  visible: isAnnouncement,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Get.to(Announcements(
+                                        announcementsDetails: announcementsData,
+                                      ));
+                                    },
+                                    child: Icon(
+                                      Icons.notifications_active_outlined,
+                                      color: AppColor.secondary,
+                                    ),
+                                  ),
+                                ),
+                              AppSpaces.horizontalSpace5,
                               CustomPopupMenu(),
                             ],
                           ),
@@ -127,9 +163,9 @@ class _EventOverviewState extends State<EventOverview> {
                                     children: <Widget>[
                                       GestureDetector(
                                         onTap: () {
-                                          if(insights['scheduled_count'] != 0)
-                                          _showBottomSheet(context, 'Scheduled',
-                                              localData.eventId);
+                                          if (insights['scheduled_count'] != 0)
+                                            _showBottomSheet(context,
+                                                'Scheduled', localData.eventId);
                                         },
                                         child: Container(
                                           width: double.infinity,
@@ -159,11 +195,10 @@ class _EventOverviewState extends State<EventOverview> {
                                       ),
                                       Divider(height: 20),
                                       GestureDetector(
-
                                         onTap: () {
-                                          if(insights['completed_count'] != 0)
-                                          _showBottomSheet(context, 'Completed',
-                                              localData.eventId);
+                                          if (insights['completed_count'] != 0)
+                                            _showBottomSheet(context,
+                                                'Completed', localData.eventId);
                                         },
                                         child: Container(
                                           width: double.infinity,
@@ -194,9 +229,12 @@ class _EventOverviewState extends State<EventOverview> {
                                       Divider(height: 20),
                                       GestureDetector(
                                         onTap: () {
-                                          if(insights['rescheduled_count'] != 0)
-                                          _showBottomSheet(context,
-                                              'Rescheduled', localData.eventId);
+                                          if (insights['rescheduled_count'] !=
+                                              0)
+                                            _showBottomSheet(
+                                                context,
+                                                'Rescheduled',
+                                                localData.eventId);
                                         },
                                         child: Container(
                                           width: double.infinity,
@@ -227,9 +265,9 @@ class _EventOverviewState extends State<EventOverview> {
                                       Divider(height: 20),
                                       GestureDetector(
                                         onTap: () {
-                                          if(insights['lapsed_count'] != 0)
-                                          _showBottomSheet(context, 'No-show',
-                                              localData.eventId);
+                                          if (insights['lapsed_count'] != 0)
+                                            _showBottomSheet(context, 'No-show',
+                                                localData.eventId);
                                         },
                                         child: Container(
                                           width: double.infinity,
@@ -260,9 +298,9 @@ class _EventOverviewState extends State<EventOverview> {
                                       Divider(height: 20),
                                       GestureDetector(
                                         onTap: () {
-                                          if(insights['cancelled_count'] != 0)
-                                          _showBottomSheet(context, 'Cancelled',
-                                              localData.eventId);
+                                          if (insights['cancelled_count'] != 0)
+                                            _showBottomSheet(context,
+                                                'Cancelled', localData.eventId);
                                         },
                                         child: Container(
                                           width: double.infinity,
