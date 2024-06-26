@@ -80,7 +80,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       builder: (BuildContext context, _, __) {
                         return _settingsButtonTrigger.value == 0
                             ? EventsProduct()
-                            : AllProducts();
+                            : Placeholder();
                       })
                 ]),
               )),
