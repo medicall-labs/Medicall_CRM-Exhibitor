@@ -578,13 +578,11 @@ Future<void> _showCommentDialog(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    height: 50,
                     child: TextField(
                       decoration: InputDecoration(labelText: 'Comments'),
                       onChanged: (value) {
                         comment = value;
                       },
-                      maxLines: 2,
                       keyboardType: TextInputType.multiline,
                     ),
                   ),

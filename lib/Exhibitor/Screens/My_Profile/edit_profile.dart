@@ -97,8 +97,35 @@ class _EditProfileState extends State<EditProfile> {
                     height: 60,
                     width: double.infinity,
                     color: AppColor.white,
-                    child: Center(
-                      child: Text('Edit Profile', style: AppTextStyles.header3),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: Container(
+                            width: 30,
+                            height: 30,
+                            alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              border: Border.all(
+                                width: 3,
+                                color: AppColor.black,
+                              ),
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.arrow_back,
+                                size: 20,
+                                color: AppColor.secondary,
+                              ),
+                            ),
+                          ),
+                        ),
+                        AppSpaces.horizontalSpace10,
+                        Text('Edit Profile', style: AppTextStyles.header3),
+                      ],
                     ),
                   ),
                   Center(
