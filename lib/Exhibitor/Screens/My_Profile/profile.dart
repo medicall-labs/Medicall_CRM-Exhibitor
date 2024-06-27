@@ -424,7 +424,6 @@ class MyProfile extends StatelessWidget {
                                                     ),
                                                   ],
                                                 ),
-                                                // Display event products if available
                                                 if (event.eventProducts != null)
                                                   Padding(
                                                     padding:
