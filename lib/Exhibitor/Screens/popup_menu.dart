@@ -11,6 +11,7 @@ import '../Controllers/auth_provider.dart';
 import 'My_History/history.dart';
 import 'My_Profile/profile.dart';
 import 'Products/products.dart';
+import 'Products/products_screen.dart';
 
 class CustomPopupMenu extends StatelessWidget {
   final TextEditingController _oldPasscode = TextEditingController();
@@ -141,7 +142,7 @@ class CustomPopupMenu extends StatelessWidget {
         if (value == 1) {
           Get.to(() => MyProfile());
         } else if (value == 2) {
-          Get.to(() => AllProducts());
+          Get.to(() => ProductScreen());
         } else if (value == 3) {
           Get.to(() => MyHistory());
         } else if (value == 4) {

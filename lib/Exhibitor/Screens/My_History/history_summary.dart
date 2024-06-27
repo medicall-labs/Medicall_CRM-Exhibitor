@@ -65,24 +65,45 @@ class HistorySummary extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AppSpaces.verticalSpace40,
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child:
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: FittedBox(
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              icon: Container(
+                                width: 30,
+                                height: 30,
+                                alignment: Alignment.centerLeft,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  border: Border.all(
+                                    width: 3,
+                                    color: AppColor.black,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.arrow_back,
+                                    size: 20,
+                                    color: AppColor.secondary,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            AppSpaces.horizontalSpace5,
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.7,
                               child: Text('Completed Appointments',
                                   style: AppTextStyles.header2),
                             ),
-                          ),
-
+                          ],
                         ),
                         AppSpaces.verticalSpace10,
                         Align(
                           alignment: Alignment.center,
-                          child:
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.6,
                             child: FittedBox(
                               child: Text(
                                 completedHistory[0]['event_title'],
@@ -90,7 +111,6 @@ class HistorySummary extends StatelessWidget {
                               ),
                             ),
                           ),
-
                         ),
                         Container(
                           height: MediaQuery.of(context).size.height - 150,
@@ -142,49 +162,56 @@ class HistorySummary extends StatelessWidget {
                                               Container(
                                                 height: 25,
                                                 width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
+                                                        .size
+                                                        .width *
                                                     0.5,
                                                 child: FittedBox(
-                                                    alignment:
-                                                    Alignment.centerLeft,
-                                                    child:Text(
-                                                      completedHistory[index]
-                                                      ['visitor_name'],
-                                                      style: AppTextStyles.label,
-                                                    ),),
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(
+                                                    completedHistory[index]
+                                                        ['visitor_name'],
+                                                    style: AppTextStyles.label,
+                                                  ),
+                                                ),
                                               ),
                                               AppSpaces.verticalSpace5,
                                               Container(
                                                 height: 30,
                                                 width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
+                                                        .size
+                                                        .width *
                                                     0.55,
                                                 decoration: BoxDecoration(
-                                                  color: Colors.grey.withOpacity(0.2),
-                                                  borderRadius: BorderRadius.all(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.2),
+                                                  borderRadius:
+                                                      BorderRadius.all(
                                                     Radius.circular(5),
                                                   ),
                                                 ),
                                                 child: Center(
                                                   child: Row(
                                                     children: [
-                                                      AppSpaces.horizontalSpace10,
+                                                      AppSpaces
+                                                          .horizontalSpace10,
                                                       Icon(
                                                         Icons.calendar_month,
                                                         size: 20,
                                                       ),
-                                                      AppSpaces.horizontalSpace10,
+                                                      AppSpaces
+                                                          .horizontalSpace10,
                                                       Container(
-                                                        width: MediaQuery.of(context)
-                                                            .size
-                                                            .width *
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
                                                             0.4,
                                                         child: FittedBox(
-                                                          child:  Text(completedHistory[
-                                                          index]
-                                                          ['scheduled_on']),
+                                                          child: Text(
+                                                              completedHistory[
+                                                                      index][
+                                                                  'scheduled_on']),
                                                         ),
                                                       ),
                                                     ],
@@ -287,7 +314,9 @@ class HistorySummary extends StatelessWidget {
                       ],
                     );
                   } else {
-                    return const Center(child: Text('No data available.'));
+                    return Container(
+                        height: MediaQuery.of(context).size.height,
+                        child: const Center(child: Text('No data available.')));
                   }
                 }
               },
