@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBy934nS4HOo77MrUGG7zVWKhxKVz45u-k</string>
+	<key>GCM_SENDER_ID</key>
+	<string>702417938707</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.medicall.exhibitor</string>
+	<key>PROJECT_ID</key>
+	<string>medicall-mobile-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>medicall-mobile-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:702417938707:ios:be0a369df4e59a9a4c12e6</string>
+	<key>DATABASE_URL</key>
+	<string>https://medicall-mobile-app.firebaseio.com</string>
+</dict>
+</plist>
