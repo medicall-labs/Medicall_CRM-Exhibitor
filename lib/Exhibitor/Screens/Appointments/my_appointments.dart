@@ -18,6 +18,7 @@ import '../../Controllers/local_data.dart';
 import '../My_History/history.dart';
 import '../My_Profile/profile.dart';
 import '../Products/products.dart';
+import '../popup_menu.dart';
 
 class Appointment extends StatefulWidget {
   const Appointment({super.key});
@@ -83,15 +84,19 @@ class _AppointmentState extends State<Appointment> {
                           child: Row(
                             children: [
                               CircleAvatar(
-                                  radius: 15,
-                                  backgroundColor: Colors.grey[200],
-                                  child: profileLogo['data']['logo'] != ''
-                                      ? ClipOval(
-                                          child: Image.network(
-                                              profileLogo['data']['logo'],
-                                              fit: BoxFit.cover),
-                                        )
-                                      : Container()),
+                                radius: 15,
+                                backgroundColor: Colors.grey[200],
+                                child: (profileLogo != null &&
+                                        profileLogo['data'] != null &&
+                                        profileLogo['data']['logo'] != '')
+                                    ? ClipOval(
+                                        child: Image.network(
+                                          profileLogo['data']['logo'],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    : Container(),
+                              ),
                               AppSpaces.horizontalSpace10,
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.3,
@@ -100,140 +105,24 @@ class _AppointmentState extends State<Appointment> {
                                       style: AppTextStyles.header2),
                                 ),
                               ),
-
                               Spacer(),
                               CustomTextWidget(),
-                              PopupMenuButton(
-                                icon: ColorFiltered(
-                                  colorFilter: ColorFilter.mode(
-                                    AppColor.secondary,
-                                    BlendMode.modulate,
-                                  ),
-                                  child: Container(
-                                      height: 30,
-                                      child: Lottie.asset(
-                                          'assets/lottie/menu.json')),
-                                ),
-                                color: Colors.white,
-                                itemBuilder: (BuildContext context) => [
-                                  PopupMenuItem(
-                                    value: 1,
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 15,
-                                          backgroundColor: Colors.grey[200],
-                                          child: Icon(
-                                            Icons.person,
-                                            color:
-                                            AppColor.black.withOpacity(0.5),
-                                            size: 20,
-                                          ),
-                                        ),
-                                        AppSpaces.horizontalSpace20,
-                                        Text(
-                                          'My Profile',
-                                          style: AppTextStyles.label,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  PopupMenuItem(
-                                    value: 2,
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 15,
-                                          backgroundColor: Colors.grey[200],
-                                          child: Icon(
-                                            Icons.shopping_cart_outlined,
-                                            color:
-                                            AppColor.black.withOpacity(0.5),
-                                            size: 20,
-                                          ),
-                                        ),
-                                        AppSpaces.horizontalSpace20,
-                                        Text(
-                                          'Products',
-                                          style: AppTextStyles.label,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  PopupMenuItem(
-                                    value: 3,
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 15,
-                                          backgroundColor: Colors.grey[200],
-                                          child: Icon(
-                                            Icons.history_rounded,
-                                            color:
-                                            AppColor.black.withOpacity(0.5),
-                                            size: 20,
-                                          ),
-                                        ),
-                                        AppSpaces.horizontalSpace20,
-                                        Text(
-                                          'My History',
-                                          style: AppTextStyles.label,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  PopupMenuItem(
-                                    value: 4,
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 15,
-                                          backgroundColor: Colors.grey[200],
-                                          child: Icon(
-                                            Icons.logout,
-                                            color:
-                                            AppColor.black.withOpacity(0.5),
-                                            size: 20,
-                                          ),
-                                        ),
-                                        AppSpaces.horizontalSpace20,
-                                        Text(
-                                          'Logout',
-                                          style: AppTextStyles.label,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                                onSelected: (value) {
-                                  if (value == 1) {
-                                    Get.to(() => MyProfile());
-                                  } else if (value == 2) {
-                                    Get.to(AllProducts());
-                                  } else if (value == 3) {
-                                    Get.to(() => MyHistory());
-                                  } else if (value == 4) {
-                                    AuthenticationProvider().logout();
-                                  }
-                                },
-                              ),
+                              CustomPopupMenu(),
                             ],
                           ),
                         ),
                         AppSpaces.verticalSpace10,
                         Align(
                           alignment: Alignment.center,
-                          child:
-                          Container(
+                          child: Container(
                             width: MediaQuery.of(context).size.width * 0.7,
                             child: FittedBox(
-                              child:  Text(
+                              child: Text(
                                 appointments[0]['event_title'],
                                 style: AppTextStyles.header3,
                               ),
                             ),
                           ),
-
                         ),
                         Container(
                           height: MediaQuery.of(context).size.height - 200,
@@ -290,15 +179,20 @@ class _AppointmentState extends State<Appointment> {
                                                 children: [
                                                   Container(
                                                     height: 25,
-                                                    width: MediaQuery.of(context).size.width * 0.5,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.5,
                                                     child: FittedBox(
-                                                        alignment: Alignment.centerLeft,
-                                                        child:  Text(
-                                                          appointments[index]
-                                                          ['visitor_name'],
-                                                          style:
-                                                          AppTextStyles.label,
-                                                        ),
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Text(
+                                                        appointments[index]
+                                                            ['visitor_name'],
+                                                        style:
+                                                            AppTextStyles.label,
+                                                      ),
                                                     ),
                                                   ),
                                                   AppSpaces.verticalSpace5,
@@ -338,8 +232,12 @@ class _AppointmentState extends State<Appointment> {
                                                                         'appointment_id'],
                                                                   );
                                                                 },
-                                                                tooltip:
-                                                                    'Completed',
+                                                                tooltip: appointments[index]
+                                                                            [
+                                                                            'status'] ==
+                                                                        'Completed'
+                                                                    ? 'Feedback'
+                                                                    : 'Completed',
                                                                 icon: Icon(
                                                                     appointments[index]['status'] ==
                                                                             'Completed'
@@ -468,14 +366,19 @@ class _AppointmentState extends State<Appointment> {
                                                           AppSpaces
                                                               .horizontalSpace10,
                                                           Container(
-                                                            width: MediaQuery.of(context).size.width * 0.35,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.35,
                                                             child: FittedBox(
-                                                              child:  Text(appointments[
-                                                              index]
-                                                              ['scheduled_on']),
+                                                              child: Text(
+                                                                  appointments[
+                                                                          index]
+                                                                      [
+                                                                      'scheduled_on']),
                                                             ),
                                                           ),
-
                                                         ],
                                                       ),
                                                     ),
@@ -585,50 +488,51 @@ class _AppointmentState extends State<Appointment> {
                                               bottomRight: Radius.circular(8)),
                                         ),
                                         child: Center(
-                                          child:
-                                          Container(
-                                            height:20,
-                                            width: MediaQuery.of(context).size.width * 0.2,
+                                          child: Container(
+                                            height: 20,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.2,
                                             child: FittedBox(
-                                              child:  Text(
+                                              child: Text(
                                                 appointments[index]['status'],
                                                 style: GoogleFonts.lato(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.bold,
                                                   color: appointments[index]
-                                                  ['status'] ==
-                                                      'Scheduled'
+                                                              ['status'] ==
+                                                          'Scheduled'
                                                       ? Colors.blue
                                                       : appointments[index]
-                                                  ['status'] ==
-                                                      'Rescheduled'
-                                                      ? Colors.grey
-                                                      : appointments[index]
-                                                  ['status'] ==
-                                                      'Completed'
-                                                      ? Colors.green
-                                                      : appointments[index][
-                                                  'status'] ==
-                                                      'Confirmed'
-                                                      ? Colors.green
-                                                      : appointments[index]
-                                                  [
-                                                  'status'] ==
-                                                      'No-show'
-                                                      ? Colors.red
-                                                      : appointments[index]
-                                                  [
-                                                  'status'] ==
-                                                      'Cancelled'
-                                                      ? Colors
-                                                      .red
-                                                      : AppColor
-                                                      .bgColor,
+                                                                  ['status'] ==
+                                                              'Rescheduled'
+                                                          ? Colors.grey
+                                                          : appointments[index][
+                                                                      'status'] ==
+                                                                  'Completed'
+                                                              ? Colors.green
+                                                              : appointments[index]
+                                                                          [
+                                                                          'status'] ==
+                                                                      'Confirmed'
+                                                                  ? Colors.green
+                                                                  : appointments[index]
+                                                                              [
+                                                                              'status'] ==
+                                                                          'No-show'
+                                                                      ? Colors
+                                                                          .red
+                                                                      : appointments[index]['status'] ==
+                                                                              'Cancelled'
+                                                                          ? Colors
+                                                                              .red
+                                                                          : AppColor
+                                                                              .bgColor,
                                                 ),
                                               ),
                                             ),
                                           ),
-
                                         ),
                                       ),
                                     )
@@ -641,7 +545,9 @@ class _AppointmentState extends State<Appointment> {
                       ],
                     );
                   } else {
-                    return const Center(child: Text('No data available.'));
+                    return Container(
+                        height: MediaQuery.of(context).size.height,
+                        child: const Center(child: Text('No data available.')));
                   }
                 }
               },
@@ -672,13 +578,11 @@ Future<void> _showCommentDialog(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    height: 50,
                     child: TextField(
                       decoration: InputDecoration(labelText: 'Comments'),
                       onChanged: (value) {
                         comment = value;
                       },
-                      maxLines: 2,
                       keyboardType: TextInputType.multiline,
                     ),
                   ),

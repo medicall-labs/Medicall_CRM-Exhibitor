@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../Constants/api_collection.dart';
-import '../Screens/Products/products.dart';
+import '../Screens/Products/products_screen.dart';
 import '../Screens/bottom_nav_bar.dart';
 import '../Services/remote_services.dart';
 
@@ -65,7 +65,7 @@ class ProductsProvider extends ChangeNotifier {
       if (result["status"] == 'success') {
         GetStorage().remove("profileData");
         Get.offAll(BottomNavBar());
-        Get.to(AllProducts());
+        Get.to(ProductScreen());
         return result;
       }
     } catch (err) {

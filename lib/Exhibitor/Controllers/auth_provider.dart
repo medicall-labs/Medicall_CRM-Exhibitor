@@ -110,6 +110,42 @@ class AuthenticationProvider extends ChangeNotifier {
     }
   }
 
+  changePassword(oldPwd, newPwd, confirmPwd) async {
+    try {
+      var data = {
+        "current_password": oldPwd,
+        "new_password": newPwd,
+        "confirm_password": confirmPwd,
+        "type" : 'exhibitor'
+      };
+      var response = await RemoteService()
+          .postDataToApi('$requestBaseUrl/change-password', data);
+
+      if (response != null) {
+        var result = jsonDecode(response.body);
+        if (result["status"] == 'success') {
+          GetStorage().erase();
+          Get.offAll(() => const LoginPage());
+          Get.snackbar(
+            'Password Reset',
+            result["message"],
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+          );
+        } else {
+          Get.snackbar(
+            'Password Reset Failed',
+            result["message"],
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+          );
+        }
+      }
+    } catch (err) {
+      print(err);
+    }
+  }
+
   logout() async {
     try {
       final uri = Uri.parse('$requestBaseUrl/logout');

@@ -97,8 +97,35 @@ class _EditProfileState extends State<EditProfile> {
                     height: 60,
                     width: double.infinity,
                     color: AppColor.white,
-                    child: Center(
-                      child: Text('Edit Profile', style: AppTextStyles.header3),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: Container(
+                            width: 30,
+                            height: 30,
+                            alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              border: Border.all(
+                                width: 3,
+                                color: AppColor.black,
+                              ),
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.arrow_back,
+                                size: 20,
+                                color: AppColor.secondary,
+                              ),
+                            ),
+                          ),
+                        ),
+                        AppSpaces.horizontalSpace10,
+                        Text('Edit Profile', style: AppTextStyles.header3),
+                      ],
                     ),
                   ),
                   Center(
@@ -742,176 +769,6 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  for (int i = 0;
-                      i < profileDetails['data']['events'].length;
-                      i++)
-                    if (profileDetails['data']['events'][i]['id'] ==
-                        localData.eventId)
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Products',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColor.primary),
-                            ),
-                            const SizedBox(height: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.event,
-                                      size: 15,
-                                      color: AppColor.grey,
-                                    ),
-                                    AppSpaces.horizontalSpace5,
-                                    Container(
-                                      height: 20,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.7,
-                                      child: FittedBox(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          profileDetails['data']['events'][i]
-                                                  ['name'] ??
-                                              'N/A',
-                                          style: AppTextStyles.label7,
-                                        ),
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    IconButton(
-                                        onPressed: () {
-                                          showModalBottomSheet(
-                                            context: context,
-                                            isScrollControlled: true,
-                                            builder: (context) {
-                                              return ProductSearchBottomSheet(
-                                                eventName:
-                                                    profileDetails['data']
-                                                        ['events'][i]['name'],
-                                                eventId: profileDetails['data']
-                                                    ['events'][i]['id'],
-                                              );
-                                            },
-                                          );
-                                        },
-                                        icon: Icon(
-                                          Icons.add,
-                                          size: 20,
-                                        ))
-                                  ],
-                                ),
-                                // Display event products if available
-                                if (profileDetails['data']['events'][i]
-                                        ['products'] !=
-                                    null)
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 20, top: 5),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        for (var eventProduct
-                                            in profileDetails['data']['events']
-                                                    [i]['products'] ??
-                                                [])
-                                          Container(
-                                            color: Colors.grey.shade50,
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.arrow_right,
-                                                  size: 10,
-                                                  color: AppColor.grey,
-                                                ),
-                                                AppSpaces.horizontalSpace5,
-                                                Container(
-                                                  width: 150,
-                                                  child: Text(
-                                                    eventProduct['name'] ??
-                                                        'N/A',
-                                                    style:
-                                                        AppTextStyles.textBody,
-                                                  ),
-                                                ),
-                                                AppSpaces.horizontalSpace10,
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (BuildContext
-                                                          context) {
-                                                        return AlertDialog(
-                                                          title: Text(
-                                                              'Confirm Delete'),
-                                                          content: Text(
-                                                              'Are you sure you want to delete ${eventProduct['name']}?'),
-                                                          actions: <Widget>[
-                                                            TextButton(
-                                                              child: Text(
-                                                                  'Cancel'),
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                              },
-                                                            ),
-                                                            TextButton(
-                                                              child: Text(
-                                                                  'Delete'),
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop(); // Close the dialog
-                                                                setState(() {
-                                                                  if (productId
-                                                                      .contains(
-                                                                          eventProduct[
-                                                                              'id'])) {
-                                                                    productId.remove(
-                                                                        eventProduct[
-                                                                            'id']);
-                                                                    ProductsProvider()
-                                                                        .addProductstoCurrentEvent(
-                                                                      localData
-                                                                          .eventId,
-                                                                      productId,
-                                                                    );
-                                                                  }
-                                                                });
-                                                              },
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    );
-                                                  },
-                                                  child: Icon(
-                                                    Icons.delete,
-                                                    size: 20,
-                                                    color: AppColor.grey,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                      ],
-                                    ),
-                                  ),
-                                Divider(),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
                   Center(
                     child: ElevatedButton(
                       onPressed: () {

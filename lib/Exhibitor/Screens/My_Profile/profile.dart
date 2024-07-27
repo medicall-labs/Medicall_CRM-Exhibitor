@@ -56,9 +56,36 @@ class MyProfile extends StatelessWidget {
                                 height: 50,
                                 width: double.infinity,
                                 color: AppColor.white,
-                                child: Center(
-                                  child: Text('My Profile',
-                                      style: AppTextStyles.header3),
+                                child: Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      icon: Container(
+                                        width: 30,
+                                        height: 30,
+                                        alignment: Alignment.centerLeft,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10.0),
+                                          border: Border.all(
+                                            width: 3,
+                                            color: AppColor.black,
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.arrow_back,
+                                            size: 20,
+                                            color: AppColor.secondary,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    AppSpaces.horizontalSpace10,
+                                    Text('My Profile',
+                                        style: AppTextStyles.header3),
+                                  ],
                                 ),
                               ),
                               AppSpaces.verticalSpace5,
@@ -75,7 +102,7 @@ class MyProfile extends StatelessWidget {
                                       ),
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           Row(
                                             children: [
@@ -84,18 +111,18 @@ class MyProfile extends StatelessWidget {
                                                   child: CircleAvatar(
                                                     radius: 30,
                                                     backgroundImage:
-                                                        NetworkImage(profile
-                                                            .data!.logo!),
+                                                    NetworkImage(profile
+                                                        .data!.logo!),
                                                   ),
                                                 ),
                                               Padding(
                                                 padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 10,
-                                                        vertical: 8),
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 10,
+                                                    vertical: 8),
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       profile.data?.name ??
@@ -111,7 +138,7 @@ class MyProfile extends StatelessWidget {
                                                     ),
                                                     Text(
                                                       profile.data
-                                                              ?.mobileNumber ??
+                                                          ?.mobileNumber ??
                                                           'N/A',
                                                       style: AppTextStyles
                                                           .profileHead2,
@@ -143,7 +170,7 @@ class MyProfile extends StatelessWidget {
                                       ),
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             'Contact Person Details',
@@ -224,7 +251,7 @@ class MyProfile extends StatelessWidget {
                                       ),
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             'Information',
@@ -355,7 +382,7 @@ class MyProfile extends StatelessWidget {
                                       ),
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             'Events & Products',
@@ -363,10 +390,10 @@ class MyProfile extends StatelessWidget {
                                           ),
                                           AppSpaces.verticalSpace5,
                                           for (var event
-                                              in profile.data?.events ?? [])
+                                          in profile.data?.events ?? [])
                                             Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                               children: [
                                                 Row(
                                                   children: [
@@ -393,24 +420,23 @@ class MyProfile extends StatelessWidget {
                                                     Text(
                                                       event.stallNo ?? 'N/A',
                                                       style:
-                                                          AppTextStyles.label,
+                                                      AppTextStyles.label,
                                                     ),
                                                   ],
                                                 ),
-                                                // Display event products if available
                                                 if (event.eventProducts != null)
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            left: 20, top: 5),
+                                                    const EdgeInsets.only(
+                                                        left: 20, top: 5),
                                                     child: Column(
                                                       crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
+                                                      CrossAxisAlignment
+                                                          .start,
                                                       children: [
                                                         for (var eventProduct
-                                                            in event.eventProducts ??
-                                                                [])
+                                                        in event.eventProducts ??
+                                                            [])
                                                           Container(
                                                             color: Colors
                                                                 .grey.shade50,
@@ -421,8 +447,8 @@ class MyProfile extends StatelessWidget {
                                                                       .arrow_right,
                                                                   size: 10,
                                                                   color:
-                                                                      AppColor
-                                                                          .grey,
+                                                                  AppColor
+                                                                      .grey,
                                                                 ),
                                                                 AppSpaces
                                                                     .horizontalSpace5,

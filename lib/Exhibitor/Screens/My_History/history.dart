@@ -72,12 +72,41 @@ class _MyHistoryState extends State<MyHistory> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 10),
                                 child:
-                                Container(
-                                  width: MediaQuery.of(context).size.width * 0.3,
-                                  child: FittedBox(
-                                    child:  Text('My History',
-                                        style: AppTextStyles.header2),
-                                  ),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      icon: Container(
+                                        width: 30,
+                                        height: 30,
+                                        alignment: Alignment.centerLeft,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10.0),
+                                          border: Border.all(
+                                            width: 3,
+                                            color: AppColor.black,
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.arrow_back,
+                                            size: 20,
+                                            color: AppColor.secondary,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    AppSpaces.horizontalSpace10,
+                                    Container(
+                                      width: MediaQuery.of(context).size.width * 0.3,
+                                      child: FittedBox(
+                                        child:  Text('My History',
+                                            style: AppTextStyles.header2),
+                                      ),
+                                    ),
+                                  ],
                                 ),
 
                               ),

@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                 Visibility(
                   visible: !isOtpRequested,
                   child: LabelledFormInput(
-                      keyboardType: "text",
+                      keyboardType: "Password",
                       controller: _passController,
                       obscureText: true,
                       label: "Password"),
