@@ -9,10 +9,10 @@ class LocalDataProvider extends ChangeNotifier {
     var storedData = GetStorage().read("local_store");
     if (storedData != null && storedData != '') {
       userDetails = storedData;
-      eventId = userDetails['current_event_id'] ?? 0;  // default value if key doesn't exist
+      eventId = userDetails['current_event_id'] ?? 0;
     } else {
       userDetails = {};
-      eventId = 0;  // default value when no stored data is found
+      eventId = 0;
     }
   }
 
