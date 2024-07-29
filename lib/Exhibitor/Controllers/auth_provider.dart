@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:medicall_exhibitor/Auth/login.dart';
 import 'package:medicall_exhibitor/Exhibitor/Screens/bottom_nav_bar.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../Constants/api_collection.dart';
@@ -61,6 +62,7 @@ class AuthenticationProvider extends ChangeNotifier {
       var result = jsonDecode(response.body);
       if (result["status"] == "success") {
         GetStorage().write("local_store", result);
+        OneSignal.login(result['data']['mobile_number']);
         var profileResponse = await RemoteService()
             .getDataFromApi('${requestBaseUrl}/exhibitor/profile');
         if (profileResponse["status"] == 'success') {

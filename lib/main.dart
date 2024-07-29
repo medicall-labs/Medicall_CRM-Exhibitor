@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'firebase_options.dart';
 
 import 'package:flutter/material.dart';
@@ -38,6 +39,16 @@ void main() async {
   };
 
   await GetStorage.init();
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+
+  OneSignal.initialize("2664958b-9dd4-446f-8c59-2fdc083859f0");
+
+// The promptForPushNotificationsWithUserResponse function will show the iOS or Android push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+  OneSignal.Notifications.requestPermission(true);
+  OneSignal.Location.requestPermission();
+  OneSignal.InAppMessages.addTrigger("notification", "notification");
+  OneSignal.InAppMessages.addTrigger("location_prompt", "true");
+  OneSignal.Location.setShared(true);
   runApp(const MyApp());
 }
 
